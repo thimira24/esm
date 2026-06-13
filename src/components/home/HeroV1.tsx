@@ -1,0 +1,231 @@
+import Link from 'next/link'
+
+const CheckIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F8A5B" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20 6L9 17l-5-5" />
+  </svg>
+)
+
+export default function HeroV1() {
+  return (
+    <section style={{ background: '#F2F4F7', overflow: 'hidden' }}>
+      <div
+        style={{
+          width: 'min(1180px, 92%)',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(330px, 1fr))',
+          gap: 'clamp(40px, 5vw, 72px)',
+          alignItems: 'center',
+          padding: 'clamp(56px, 8vw, 104px) 0',
+        }}
+      >
+        {/* Left — copy */}
+        <div>
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              fontFamily: 'var(--font-dm-sans), sans-serif',
+              fontWeight: 600,
+              fontSize: 13,
+              letterSpacing: '1.5px',
+              color: '#D4891A',
+              textTransform: 'uppercase',
+            }}
+          >
+            <span style={{ width: 24, height: 2, background: '#F5A623', display: 'inline-block' }} />
+            British Education · Based in the UAE
+          </span>
+
+          <h1
+            style={{
+              fontFamily: 'var(--font-montserrat), sans-serif',
+              fontWeight: 800,
+              fontSize: 'clamp(2.3rem, 5.2vw, 4rem)',
+              lineHeight: 1.04,
+              letterSpacing: '-1px',
+              color: '#1B2A4A',
+              margin: '18px 0 0',
+              textWrap: 'balance',
+            } as React.CSSProperties}
+          >
+            Accredited British qualifications, built for ambitious professionals.
+          </h1>
+
+          <p
+            style={{
+              fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)',
+              lineHeight: 1.65,
+              color: '#48536B',
+              margin: '22px 0 0',
+              maxWidth: '30em',
+            }}
+          >
+            Internationally recognised diplomas in business, technology and health — delivered flexibly, online or blended, from our home in the UAE.
+          </p>
+
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 34 }}>
+            <Link
+              href="/programmes"
+              style={{
+                background: '#F5A623',
+                color: '#1B2A4A',
+                fontFamily: 'var(--font-dm-sans), sans-serif',
+                fontWeight: 700,
+                fontSize: 16,
+                padding: '15px 28px',
+                borderRadius: 11,
+                boxShadow: '0 10px 26px rgba(245,166,35,0.4)',
+                textDecoration: 'none',
+              }}
+            >
+              Explore Programmes
+            </Link>
+            <Link
+              href="/contact"
+              style={{
+                background: '#fff',
+                color: '#1B2A4A',
+                fontFamily: 'var(--font-dm-sans), sans-serif',
+                fontWeight: 700,
+                fontSize: 16,
+                padding: '15px 28px',
+                borderRadius: 11,
+                border: '1.5px solid #D5DBE6',
+                textDecoration: 'none',
+              }}
+            >
+              Enquire Now
+            </Link>
+          </div>
+
+          {/* Stats */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 26, marginTop: 38 }}>
+            {[
+              { n: '4,200+', l: 'Graduates' },
+              { n: '8', l: 'Partner bodies' },
+              { n: '30+', l: 'Countries' },
+            ].map((stat, i, arr) => (
+              <>
+                <div key={stat.n}>
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-montserrat), sans-serif',
+                      fontWeight: 800,
+                      fontSize: '1.7rem',
+                      color: '#1B2A4A',
+                    }}
+                  >
+                    {stat.n}
+                  </div>
+                  <div style={{ fontSize: 13, color: '#6B7689' }}>{stat.l}</div>
+                </div>
+                {i < arr.length - 1 && (
+                  <div key={`div-${i}`} style={{ width: 1, background: '#D5DBE6' }} />
+                )}
+              </>
+            ))}
+          </div>
+        </div>
+
+        {/* Right — visual card */}
+        <div style={{ position: 'relative', minHeight: 'clamp(340px, 42vw, 480px)' }}>
+          {/* Main gradient card */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              borderRadius: 24,
+              background:
+                'radial-gradient(120% 120% at 80% 12%, rgba(245,166,35,0.45), transparent 52%), radial-gradient(110% 110% at 8% 92%, rgba(42,111,219,0.5), transparent 58%), linear-gradient(135deg, #1B2A4A, #0F1D33)',
+              boxShadow: '0 30px 70px rgba(15,29,51,0.32)',
+            }}
+          />
+          <div className="dot-pattern-sm" style={{ position: 'absolute', inset: 0, borderRadius: 24 }} />
+
+          {/* Floating badge — bottom right */}
+          <div
+            className="animate-float"
+            style={{
+              position: 'absolute',
+              right: -6,
+              bottom: 36,
+              background: '#fff',
+              borderRadius: 16,
+              padding: '18px 22px',
+              boxShadow: '0 20px 45px rgba(15,29,51,0.22)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 14,
+            }}
+          >
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 46,
+                height: 46,
+                borderRadius: 12,
+                background: '#EAF7EF',
+              }}
+            >
+              <CheckIcon />
+            </span>
+            <div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-montserrat), sans-serif',
+                  fontWeight: 700,
+                  fontSize: 15,
+                  color: '#1B2A4A',
+                }}
+              >
+                Regulated UK awards
+              </div>
+              <div style={{ fontSize: 12.5, color: '#6B7689' }}>Recognised worldwide</div>
+            </div>
+          </div>
+
+          {/* Top left chip */}
+          <div
+            style={{
+              position: 'absolute',
+              left: -6,
+              top: 34,
+              background: 'rgba(255,255,255,0.92)',
+              backdropFilter: 'blur(8px)',
+              borderRadius: 14,
+              padding: '14px 18px',
+              boxShadow: '0 16px 36px rgba(15,29,51,0.18)',
+            }}
+          >
+            <div
+              style={{
+                fontFamily: 'var(--font-dm-sans), sans-serif',
+                fontWeight: 600,
+                fontSize: 12,
+                color: '#6B7689',
+                letterSpacing: '0.5px',
+              }}
+            >
+              FLEXIBLE STUDY
+            </div>
+            <div
+              style={{
+                fontFamily: 'var(--font-montserrat), sans-serif',
+                fontWeight: 800,
+                fontSize: '1.35rem',
+                color: '#1B2A4A',
+              }}
+            >
+              100% Online
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

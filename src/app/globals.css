@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  --esm-navy: #1B2A4A;
+  --esm-navy-dark: #0F1D33;
+  --esm-orange: #F5A623;
+  --esm-amber: #D4891A;
+  --esm-grey-bg: #F2F4F7;
+  --esm-border: #E6E9F0;
+  --esm-text: #48536B;
+  --esm-muted: #6B7689;
+  --esm-green: #25D366;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  color: var(--esm-navy);
+  background: #fff;
+}
+
+@keyframes esmFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes esmMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-float {
+  animation: esmFloat 5s ease-in-out infinite;
+}
+
+.animate-marquee {
+  animation: esmMarquee 32s linear infinite;
+}
+
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.dot-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+.dot-pattern-sm {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@media (max-width: 720px) {
+  body {
+    padding-bottom: 76px;
+  }
+}
