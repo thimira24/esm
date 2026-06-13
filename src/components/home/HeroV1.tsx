@@ -1,10 +1,11 @@
 import Link from 'next/link'
+import { CheckIcon } from '@/components/shared/icons'
 
-const CheckIcon = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F8A5B" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 6L9 17l-5-5" />
-  </svg>
-)
+const heroStats = [
+  { n: '4,200+', l: 'Graduates' },
+  { n: '8', l: 'Partner bodies' },
+  { n: '30+', l: 'Countries' },
+]
 
 export default function HeroV1() {
   return (
@@ -103,13 +104,9 @@ export default function HeroV1() {
 
           {/* Stats */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 26, marginTop: 38 }}>
-            {[
-              { n: '4,200+', l: 'Graduates' },
-              { n: '8', l: 'Partner bodies' },
-              { n: '30+', l: 'Countries' },
-            ].map((stat, i, arr) => (
-              <>
-                <div key={stat.n}>
+            {heroStats.map((stat, i) => (
+              <React.Fragment key={stat.n}>
+                <div>
                   <div
                     style={{
                       fontFamily: 'var(--font-montserrat), sans-serif',
@@ -122,17 +119,16 @@ export default function HeroV1() {
                   </div>
                   <div style={{ fontSize: 13, color: '#6B7689' }}>{stat.l}</div>
                 </div>
-                {i < arr.length - 1 && (
-                  <div key={`div-${i}`} style={{ width: 1, background: '#D5DBE6' }} />
+                {i < heroStats.length - 1 && (
+                  <div style={{ width: 1, background: '#D5DBE6' }} />
                 )}
-              </>
+              </React.Fragment>
             ))}
           </div>
         </div>
 
         {/* Right — visual card */}
         <div style={{ position: 'relative', minHeight: 'clamp(340px, 42vw, 480px)' }}>
-          {/* Main gradient card */}
           <div
             style={{
               position: 'absolute',
@@ -145,7 +141,7 @@ export default function HeroV1() {
           />
           <div className="dot-pattern-sm" style={{ position: 'absolute', inset: 0, borderRadius: 24 }} />
 
-          {/* Floating badge — bottom right */}
+          {/* Floating badge */}
           <div
             className="animate-float"
             style={{
@@ -172,7 +168,7 @@ export default function HeroV1() {
                 background: '#EAF7EF',
               }}
             >
-              <CheckIcon />
+              <CheckIcon size={22} color="#1F8A5B" strokeWidth={2.4} />
             </span>
             <div>
               <div
@@ -229,3 +225,5 @@ export default function HeroV1() {
     </section>
   )
 }
+
+import React from 'react'

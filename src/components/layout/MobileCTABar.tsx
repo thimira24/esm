@@ -1,10 +1,5 @@
 import Link from 'next/link'
-
-const WhatsAppIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff">
-    <path d="M12 2a10 10 0 00-8.6 15l-1.3 4.6 4.7-1.2A10 10 0 1012 2z" />
-  </svg>
-)
+import { WhatsAppIcon } from '@/components/shared/icons'
 
 export default function MobileCTABar({ whatsapp }: { whatsapp: string }) {
   return (

@@ -1,11 +1,6 @@
 import Link from 'next/link'
+import { WhatsAppIcon } from '@/components/shared/icons'
 import { contact } from '@/data/site'
-
-const WhatsAppIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="#25D366">
-    <path d="M12 2a10 10 0 00-8.6 15l-1.3 4.6 4.7-1.2A10 10 0 1012 2z" />
-  </svg>
-)
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -61,26 +56,12 @@ export default function Footer() {
         {/* Links */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '36px clamp(40px, 5vw, 72px)' }}>
           <div>
-            <div
-              style={{
-                fontFamily: 'var(--font-montserrat), sans-serif',
-                fontWeight: 700,
-                fontSize: 12,
-                letterSpacing: '0.8px',
-                textTransform: 'uppercase',
-                color: '#7E8AA3',
-                marginBottom: 13,
-              }}
-            >
+            <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: 12, letterSpacing: '0.8px', textTransform: 'uppercase', color: '#7E8AA3', marginBottom: 13 }}>
               Programmes
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9, fontSize: 14 }}>
               {['Business & Management', 'Technology', 'Health & Social Care'].map((label) => (
-                <Link
-                  key={label}
-                  href="/programmes"
-                  style={{ whiteSpace: 'nowrap', color: '#C3CBDB', textDecoration: 'none' }}
-                >
+                <Link key={label} href="/programmes" style={{ whiteSpace: 'nowrap', color: '#C3CBDB', textDecoration: 'none' }}>
                   {label}
                 </Link>
               ))}
@@ -88,17 +69,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <div
-              style={{
-                fontFamily: 'var(--font-montserrat), sans-serif',
-                fontWeight: 700,
-                fontSize: 12,
-                letterSpacing: '0.8px',
-                textTransform: 'uppercase',
-                color: '#7E8AA3',
-                marginBottom: 13,
-              }}
-            >
+            <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: 12, letterSpacing: '0.8px', textTransform: 'uppercase', color: '#7E8AA3', marginBottom: 13 }}>
               Company
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9, fontSize: 14 }}>
@@ -109,17 +80,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <div
-              style={{
-                fontFamily: 'var(--font-montserrat), sans-serif',
-                fontWeight: 700,
-                fontSize: 12,
-                letterSpacing: '0.8px',
-                textTransform: 'uppercase',
-                color: '#7E8AA3',
-                marginBottom: 13,
-              }}
-            >
+            <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: 12, letterSpacing: '0.8px', textTransform: 'uppercase', color: '#7E8AA3', marginBottom: 13 }}>
               Get in touch
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9, fontSize: 14, color: '#9AA6BE' }}>
@@ -129,18 +90,9 @@ export default function Footer() {
                 href={contact.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 7,
-                  whiteSpace: 'nowrap',
-                  color: '#25D366',
-                  textDecoration: 'none',
-                  fontFamily: 'var(--font-dm-sans), sans-serif',
-                  fontWeight: 600,
-                }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 7, whiteSpace: 'nowrap', color: '#25D366', textDecoration: 'none', fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600 }}
               >
-                <WhatsAppIcon /> WhatsApp us
+                <WhatsAppIcon color="#25D366" /> WhatsApp us
               </a>
             </div>
           </div>

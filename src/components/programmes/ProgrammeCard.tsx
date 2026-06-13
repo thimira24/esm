@@ -1,35 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import { ClockIcon, MonitorIcon, ArrowRightIcon, ImagePlaceholderIcon } from '@/components/shared/icons'
 import type { Programme } from '@/data/programmes'
-
-const ClockIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="9" />
-    <path d="M12 7.5V12l3 1.8" />
-  </svg>
-)
-
-const MonitorIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="4" width="18" height="13" rx="2" />
-    <path d="M8 21h8M12 17v4" />
-  </svg>
-)
-
-const ArrowIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M5 12h14M13 6l6 6-6 6" />
-  </svg>
-)
-
-const ImageIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="2" />
-    <circle cx="8.5" cy="8.5" r="1.5" />
-    <path d="M21 15l-5-5L5 21" />
-  </svg>
-)
 
 interface ProgrammeCardProps {
   programme: Programme
@@ -82,7 +55,7 @@ export default function ProgrammeCard({ programme: p, compact = false }: Program
               color: '#AEB8C9',
             }}
           >
-            <ImageIcon />
+            <ImagePlaceholderIcon />
           </span>
           <span
             style={{
@@ -115,7 +88,7 @@ export default function ProgrammeCard({ programme: p, compact = false }: Program
             color: '#1B2A4A',
           }}
         >
-          <ArrowIcon />
+          <ArrowRightIcon />
         </span>
       </span>
 

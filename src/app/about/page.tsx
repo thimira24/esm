@@ -1,12 +1,8 @@
-import Image from 'next/image'
-import { testimonials, whyEsm, partners, aboutTimeline } from '@/data/site'
+import { whyEsm, partners, aboutTimeline } from '@/data/site'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
-
-const ShieldIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z" />
-  </svg>
-)
+import SectionHeader from '@/components/shared/SectionHeader'
+import Testimonials from '@/components/home/Testimonials'
+import { ShieldIcon } from '@/components/shared/icons'
 
 const visionCards = [
   {
@@ -93,20 +89,7 @@ export default function AboutPage() {
         }}
       >
         <div>
-          <span style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 13, letterSpacing: '1.5px', color: '#D4891A', textTransform: 'uppercase' }}>Our story</span>
-          <h2
-            style={{
-              fontFamily: 'var(--font-montserrat), sans-serif',
-              fontWeight: 800,
-              fontSize: 'clamp(1.8rem, 3.4vw, 2.5rem)',
-              lineHeight: 1.12,
-              letterSpacing: '-0.5px',
-              color: '#1B2A4A',
-              margin: '14px 0 0',
-            }}
-          >
-            From a bold idea to a global classroom
-          </h2>
+          <SectionHeader eyebrow="Our story" title="From a bold idea to a global classroom" />
           <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#48536B', margin: '18px 0 0' }}>
             ESM Business School began with a simple frustration: too many capable professionals in the UAE were locked out of recognised British qualifications by rigid timetables, travel and cost.
           </p>
@@ -157,20 +140,7 @@ export default function AboutPage() {
       <section style={{ background: 'radial-gradient(120% 130% at 88% 8%, rgba(245,166,35,0.4), transparent 50%), linear-gradient(140deg, #1B2A4A, #0F1D33)', position: 'relative', overflow: 'hidden' }}>
         <div className="dot-pattern" style={{ position: 'absolute', inset: 0 }} />
         <div style={{ position: 'relative', width: 'min(1000px, 92%)', margin: '0 auto', padding: 'clamp(60px, 8vw, 104px) 0', textAlign: 'center' }}>
-          <span style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 13, letterSpacing: '1.8px', color: '#F5A623', textTransform: 'uppercase' }}>Our vision</span>
-          <h2
-            style={{
-              fontFamily: 'var(--font-montserrat), sans-serif',
-              fontWeight: 800,
-              fontSize: 'clamp(1.8rem, 4vw, 3rem)',
-              lineHeight: 1.2,
-              letterSpacing: '-0.5px',
-              color: '#fff',
-              margin: '18px 0 0',
-            }}
-          >
-            A world where a great career is never limited by where you happen to live.
-          </h2>
+          <SectionHeader eyebrow="Our vision" title="A world where a great career is never limited by where you happen to live." center light />
           <p style={{ fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)', lineHeight: 1.65, color: '#C3CBDB', margin: '18px auto 0', maxWidth: '38em' }}>
             We&apos;re building the most trusted route to recognised qualifications for ambitious people across the UAE and the wider region — flexible, affordable and genuinely human.
           </p>
@@ -190,12 +160,7 @@ export default function AboutPage() {
 
       {/* Why ESM */}
       <section style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(56px, 7vw, 96px) 0' }}>
-        <div style={{ textAlign: 'center', maxWidth: '40em', margin: '0 auto' }}>
-          <span style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 13, letterSpacing: '1.5px', color: '#D4891A', textTransform: 'uppercase' }}>Why choose ESM</span>
-          <h2 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.8rem, 3.4vw, 2.5rem)', lineHeight: 1.12, color: '#1B2A4A', margin: '14px 0 0' }}>
-            What sets us apart
-          </h2>
-        </div>
+        <SectionHeader eyebrow="Why choose ESM" title="What sets us apart" center />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 22, marginTop: 46 }}>
           {whyEsm.map((w) => (
             <div key={w.title} style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 18, padding: '30px 26px' }}>
@@ -209,32 +174,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section style={{ background: '#F2F4F7' }}>
-        <div style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(56px, 7vw, 96px) 0' }}>
-          <div style={{ textAlign: 'center', maxWidth: '40em', margin: '0 auto' }}>
-            <span style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 13, letterSpacing: '1.5px', color: '#D4891A', textTransform: 'uppercase' }}>Student success</span>
-            <h2 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.8rem, 3.4vw, 2.5rem)', lineHeight: 1.12, letterSpacing: '-0.5px', color: '#1B2A4A', margin: '14px 0 0' }}>
-              What our students say
-            </h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: 24, marginTop: 46 }}>
-            {testimonials.map((t) => (
-              <div key={t.name} style={{ background: '#fff', borderRadius: 18, padding: '32px 30px', boxShadow: '0 1px 2px rgba(15,29,51,0.05)' }}>
-                <div style={{ fontSize: 38, lineHeight: 0.6, color: '#F5A623', fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800 }}>&ldquo;</div>
-                <p style={{ fontSize: '1.05rem', lineHeight: 1.62, color: '#33405C', margin: '14px 0 0' }}>{t.quote}</p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 13, marginTop: 24, paddingTop: 20, borderTop: '1px solid #F2F4F7' }}>
-                  <Image src={t.img} alt={t.name} width={46} height={46} style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} />
-                  <span>
-                    <span style={{ display: 'block', fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: 15, color: '#1B2A4A' }}>{t.name}</span>
-                    <span style={{ display: 'block', fontSize: 13, color: '#6B7689' }}>{t.role}</span>
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Testimonials — reuse shared component */}
+      <Testimonials />
 
       {/* Accreditations */}
       <section style={{ background: 'linear-gradient(140deg, #1B2A4A, #0F1D33)', position: 'relative', overflow: 'hidden' }}>

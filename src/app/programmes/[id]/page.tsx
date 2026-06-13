@@ -3,29 +3,12 @@ import Link from 'next/link'
 import { programmes } from '@/data/programmes'
 import ProgrammeCard from '@/components/programmes/ProgrammeCard'
 import FAQAccordion from '@/components/shared/FAQAccordion'
+import { CheckIcon, StarIcon, WhatsAppIcon } from '@/components/shared/icons'
 import { faqs, contact } from '@/data/site'
 
 export function generateStaticParams() {
   return programmes.map((p) => ({ id: p.id }))
 }
-
-const CheckIcon = ({ color = '#1F8A5B' }: { color?: string }) => (
-  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 6L9 17l-5-5" />
-  </svg>
-)
-
-const StarIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A623" stroke="none">
-    <path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.8 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z" />
-  </svg>
-)
-
-const WhatsAppIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff">
-    <path d="M12 2a10 10 0 00-8.6 15l-1.3 4.6 4.7-1.2A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.8.7.7-2.7-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.6 6.6 0 01-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2c0 1.3 1 2.6 1.1 2.8s1.9 2.9 4.6 4c1.7.7 2.3.8 3.1.7.5-.1 1.4-.6 1.6-1.1s.2-1 .1-1.1z" />
-  </svg>
-)
 
 const studyMethods = [
   {

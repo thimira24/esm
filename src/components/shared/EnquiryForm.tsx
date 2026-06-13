@@ -13,6 +13,7 @@ const inputStyle: React.CSSProperties = {
   background: '#fff',
   fontFamily: 'var(--font-open-sans), sans-serif',
   outline: 'none',
+  boxSizing: 'border-box',
 }
 
 const labelStyle: React.CSSProperties = {
