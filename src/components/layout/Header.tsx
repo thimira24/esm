@@ -24,6 +24,15 @@ export default function Header() {
         borderBottom: '1px solid #E6E9F0',
       }}
     >
+      <style>{`
+        .esm-nav-desktop { display: none; }
+        .esm-burger { display: flex; }
+        @media (min-width: 768px) {
+          .esm-nav-desktop { display: flex; }
+          .esm-burger { display: none; }
+        }
+      `}</style>
+
       <div
         style={{
           width: 'min(1180px, 92%)',
@@ -68,8 +77,8 @@ export default function Header() {
 
         {/* Desktop nav */}
         <nav
-          style={{ display: 'flex', alignItems: 'center', gap: 34 }}
-          className="esm-nav-desktop hidden md:flex"
+          className="esm-nav-desktop"
+          style={{ alignItems: 'center', gap: 34 }}
         >
           {nav.map((item) => (
             <Link
@@ -119,12 +128,11 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Burger */}
+        {/* Burger — mobile only */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden"
+          className="esm-burger"
           style={{
-            display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             width: 44,
