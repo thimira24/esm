@@ -1,6 +1,6 @@
 import EnquiryForm from '@/components/shared/EnquiryForm'
 import SectionHeader from '@/components/shared/SectionHeader'
-import { CheckIcon, WhatsAppIcon } from '@/components/shared/icons'
+import { CheckIcon } from '@/components/shared/icons'
 import { getAllProgrammeTitles, getSiteSettings } from '@/sanity/queries'
 
 const perks = [
@@ -75,28 +75,7 @@ export default async function EnquiryBlock() {
             ))}
           </div>
 
-          <a
-            href={contact.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 9,
-              marginTop: 28,
-              background: '#25D366',
-              color: '#fff',
-              fontFamily: 'var(--font-dm-sans), sans-serif',
-              fontWeight: 700,
-              fontSize: 15,
-              padding: '13px 22px',
-              borderRadius: 11,
-              textDecoration: 'none',
-              boxShadow: '0 10px 24px rgba(37,211,102,0.3)',
-            }}
-          >
-            <WhatsAppIcon /> Prefer WhatsApp? Chat now
-          </a>
+
         </div>
 
         {/* Right — form */}
