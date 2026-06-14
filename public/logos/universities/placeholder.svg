@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="56" viewBox="0 0 160 56">
+  <rect width="160" height="56" rx="8" fill="#F2F4F7"/>
+  <rect x="1" y="1" width="158" height="54" rx="7" fill="none" stroke="#D5DBE6" stroke-width="1.5" stroke-dasharray="6 3"/>
+  <text x="80" y="24" font-family="sans-serif" font-size="10" font-weight="600" fill="#9AA6BE" text-anchor="middle">UNIVERSITY</text>
+  <text x="80" y="38" font-family="sans-serif" font-size="10" font-weight="600" fill="#9AA6BE" text-anchor="middle">LOGO</text>
+</svg>

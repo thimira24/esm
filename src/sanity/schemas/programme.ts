@@ -25,9 +25,9 @@ export const programme = defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Business & Management', value: 'business' },
-          { title: 'Technology', value: 'technology' },
-          { title: 'Health & Social Care', value: 'health' },
+          { title: 'MBA Programmes', value: 'mba' },
+          { title: 'Undergraduate', value: 'undergraduate' },
+          { title: 'Postgraduate', value: 'postgraduate' },
         ],
         layout: 'radio',
       },

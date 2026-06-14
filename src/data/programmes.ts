@@ -1,4 +1,4 @@
-export type ProgrammeCategory = 'business' | 'technology' | 'health'
+export type ProgrammeCategory = 'mba' | 'undergraduate' | 'postgraduate'
 
 export interface Programme {
   id: string

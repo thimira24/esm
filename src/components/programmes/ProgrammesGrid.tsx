@@ -5,13 +5,13 @@ import Link from 'next/link'
 import type { Programme } from '@/data/programmes'
 import ProgrammeCard from './ProgrammeCard'
 
-type Filter = 'all' | 'business' | 'technology' | 'health'
+type Filter = 'all' | 'mba' | 'undergraduate' | 'postgraduate'
 
 const categories: { label: string; value: Filter }[] = [
   { label: 'All Programmes', value: 'all' },
-  { label: 'Business & Management', value: 'business' },
-  { label: 'Technology', value: 'technology' },
-  { label: 'Health & Social Care', value: 'health' },
+  { label: 'MBA Programmes', value: 'mba' },
+  { label: 'Undergraduate', value: 'undergraduate' },
+  { label: 'Postgraduate', value: 'postgraduate' },
 ]
 
 export default function ProgrammesGrid({ programmes }: { programmes: Programme[] }) {
