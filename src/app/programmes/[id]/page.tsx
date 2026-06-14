@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { programmes } from '@/data/programmes'
 import ProgrammeCard from '@/components/programmes/ProgrammeCard'
 import FAQAccordion from '@/components/shared/FAQAccordion'
@@ -361,6 +362,16 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                 <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: 15, color: '#1B2A4A' }}>Accredited award</div>
                 <div style={{ fontSize: 13, color: '#6B7689' }}>{programme.awarding}</div>
               </div>
+            </div>
+            {/* University logo */}
+            <div style={{ marginTop: 18, padding: '14px 16px', background: '#F4F6FA', borderRadius: 12, border: '1px solid #E6E9F0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Image
+                src={programme.uniLogo}
+                alt={programme.uniName}
+                width={160}
+                height={48}
+                style={{ objectFit: 'contain', width: '100%', height: 48 }}
+              />
             </div>
             <p style={{ fontSize: '0.98rem', lineHeight: 1.6, color: '#5A647A', margin: '18px 0 0' }}>
               Speak to an advisor about start dates, payment plans and the fastest route to enrol.
