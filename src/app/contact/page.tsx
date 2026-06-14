@@ -55,17 +55,6 @@ export default async function ContactPage() {
       >
         {/* Form */}
         <div>
-          <h2
-            style={{
-              fontFamily: 'var(--font-montserrat), sans-serif',
-              fontWeight: 800,
-              fontSize: '1.5rem',
-              color: '#1B2A4A',
-              margin: '0 0 24px',
-            }}
-          >
-            Enquiry form
-          </h2>
           <EnquiryForm programmes={programmes} formspree={contact.formspree} />
         </div>
 
