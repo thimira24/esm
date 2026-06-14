@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { WhatsAppIcon } from '@/components/shared/icons'
 import { contact } from '@/data/site'
 
 export default function Footer() {
@@ -86,14 +85,6 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9, fontSize: 14, color: '#9AA6BE' }}>
               <span style={{ whiteSpace: 'nowrap' }}>UAE · {contact.website}</span>
               <span style={{ whiteSpace: 'nowrap' }}>{contact.email}</span>
-              <a
-                href={contact.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 7, whiteSpace: 'nowrap', color: '#25D366', textDecoration: 'none', fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600 }}
-              >
-                <WhatsAppIcon color="#25D366" /> WhatsApp us
-              </a>
             </div>
           </div>
         </div>
@@ -115,7 +106,11 @@ export default function Footer() {
           }}
         >
           <span>© {year} ESM Business School. All rights reserved.</span>
-          <span>Privacy · Terms · A brand of ESM Global</span>
+          <span style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
+            <Link href="/privacy" style={{ color: '#7E8AA3', textDecoration: 'none' }}>Privacy Policy</Link>
+            <Link href="/terms" style={{ color: '#7E8AA3', textDecoration: 'none' }}>Terms & Conditions</Link>
+            <span>A brand of ESM Global</span>
+          </span>
         </div>
       </div>
     </footer>
