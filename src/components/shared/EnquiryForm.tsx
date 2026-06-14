@@ -81,6 +81,9 @@ export default function EnquiryForm() {
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
+          {/* Formspree helpers — improve deliverability */}
+          <input type="hidden" name="_subject" value="New enquiry from ESM website" />
+          <input type="text" name="_gotcha" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
           <div
             style={{
               display: 'grid',
