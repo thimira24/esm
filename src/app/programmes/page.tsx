@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { getAllProgrammes } from '@/sanity/queries'
 import ProgrammesGrid from '@/components/programmes/ProgrammesGrid'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
@@ -51,7 +52,9 @@ export default async function ProgrammesPage() {
         </div>
       </section>
 
-      <ProgrammesGrid programmes={programmes} />
+      <Suspense fallback={<div style={{ padding: '60px 0', textAlign: 'center', color: '#9AA6BE' }}>Loading…</div>}>
+        <ProgrammesGrid programmes={programmes} />
+      </Suspense>
 
       <EnquiryBlock />
     </>

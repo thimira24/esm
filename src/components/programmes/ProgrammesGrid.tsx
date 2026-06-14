@@ -1,12 +1,19 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import type { Programme } from '@/data/programmes'
 import ProgrammeCard from './ProgrammeCard'
 
 export default function ProgrammesGrid({ programmes }: { programmes: Programme[] }) {
+  const searchParams = useSearchParams()
   const [filter, setFilter] = useState('all')
+
+  useEffect(() => {
+    const cat = searchParams.get('cat')
+    if (cat) setFilter(cat)
+  }, [searchParams])
 
   const categories = [
     'all',
