@@ -1,6 +1,5 @@
 import EnquiryForm from '@/components/shared/EnquiryForm'
 import FAQAccordion from '@/components/shared/FAQAccordion'
-import { WhatsAppIcon } from '@/components/shared/icons'
 import ContactMap from '@/components/contact/ContactMap'
 import { getAllProgrammeTitles, getSiteSettings, getFaqs } from '@/sanity/queries'
 
@@ -70,49 +69,8 @@ export default async function ContactPage() {
           <EnquiryForm programmes={programmes} formspree={contact.formspree} />
         </div>
 
-        {/* Right — WhatsApp + address + map */}
+        {/* Right — address + map */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-          {/* WhatsApp CTA */}
-          <a
-            href={contact.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 15,
-              background: '#25D366',
-              borderRadius: 18,
-              padding: '24px 26px',
-              textDecoration: 'none',
-              boxShadow: '0 12px 30px rgba(37,211,102,0.32)',
-            }}
-          >
-            <span
-              style={{
-                flexShrink: 0,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 50,
-                height: 50,
-                borderRadius: '50%',
-                background: 'rgba(255,255,255,0.2)',
-              }}
-            >
-              <WhatsAppIcon size={26} />
-            </span>
-            <span>
-              <span style={{ display: 'block', fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.1rem', color: '#fff' }}>
-                Chat on WhatsApp
-              </span>
-              <span style={{ display: 'block', fontSize: 14, color: 'rgba(255,255,255,0.9)' }}>
-                Fastest way to reach an advisor
-              </span>
-            </span>
-          </a>
-
-          {/* Address + map */}
           <div style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 18, padding: 26 }}>
             <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.1rem', color: '#1B2A4A', margin: '0 0 14px' }}>
               Visit us
