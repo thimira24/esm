@@ -21,8 +21,8 @@ const CATEGORY_META: Record<string, {
         <path d="M6 12v5c3 3 9 3 12 0v-5" />
       </svg>
     ),
-    accent: '#F5A623',
-    accentLight: '#FFF3DE',
+    accent: '#1B2A4A',
+    accentLight: '#EEF1F6',
     order: 1,
   },
   undergraduate: {
@@ -35,8 +35,8 @@ const CATEGORY_META: Record<string, {
         <path d="M8 7h8M8 11h6" />
       </svg>
     ),
-    accent: '#2A6FDB',
-    accentLight: '#EBF2FF',
+    accent: '#1B2A4A',
+    accentLight: '#EEF1F6',
     order: 2,
   },
   postgraduate: {
@@ -47,8 +47,8 @@ const CATEGORY_META: Record<string, {
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
       </svg>
     ),
-    accent: '#1F8A5B',
-    accentLight: '#E8F7F0',
+    accent: '#1B2A4A',
+    accentLight: '#EEF1F6',
     order: 3,
   },
 }
