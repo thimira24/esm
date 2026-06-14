@@ -1,11 +1,10 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getAllProgrammes, getProgrammeById } from '@/sanity/queries'
+import { getAllProgrammes, getProgrammeById, getSiteSettings, getFaqs } from '@/sanity/queries'
 import ProgrammeCard from '@/components/programmes/ProgrammeCard'
 import FAQAccordion from '@/components/shared/FAQAccordion'
 import { CheckIcon, StarIcon, WhatsAppIcon } from '@/components/shared/icons'
-import { faqs, contact } from '@/data/site'
 
 export const revalidate = 60
 
@@ -63,10 +62,14 @@ const partnerFacts = [
 
 export default async function ProgrammeDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const [programme, allProgrammes] = await Promise.all([
+  const [programme, allProgrammes, settings, sanityFaqs] = await Promise.all([
     getProgrammeById(id),
     getAllProgrammes(),
+    getSiteSettings().catch(() => null),
+    getFaqs().catch(() => []),
   ])
+  const contact = settings?.contact ?? {}
+  const faqs = (sanityFaqs ?? []).map((f: { question: string; answer: string }) => ({ q: f.question, a: f.answer }))
   if (!programme) notFound()
 
   const similar = allProgrammes

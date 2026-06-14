@@ -5,7 +5,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import FloatingWhatsApp from '@/components/layout/FloatingWhatsApp'
 import MobileCTABar from '@/components/layout/MobileCTABar'
-import { contact } from '@/data/site'
+import { getSiteSettings } from '@/sanity/queries'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -34,7 +34,10 @@ export const metadata: Metadata = {
     'Internationally recognised diplomas in business, technology and health — delivered flexibly, online or blended, from our home in the UAE.',
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const settings = await getSiteSettings().catch(() => null)
+  const whatsapp = settings?.contact?.whatsapp ?? ''
+
   return (
     <html
       lang="en"
@@ -44,8 +47,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
-        <FloatingWhatsApp href={contact.whatsapp} />
-        <MobileCTABar whatsapp={contact.whatsapp} />
+        <FloatingWhatsApp href={whatsapp} />
+        <MobileCTABar whatsapp={whatsapp} />
       </body>
     </html>
   )

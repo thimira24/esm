@@ -1,5 +1,4 @@
 import { getSiteSettings } from '@/sanity/queries'
-import { values as fallbackValues } from '@/data/site'
 import SectionHeader from '@/components/shared/SectionHeader'
 import { ShieldIcon } from '@/components/shared/icons'
 
@@ -7,7 +6,7 @@ export const revalidate = 60
 
 export default async function ValueProps() {
   const settings = await getSiteSettings()
-  const values = settings?.values?.length ? settings.values : fallbackValues
+  const values: { title: string; desc: string }[] = settings?.values ?? []
 
   return (
     <section style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(64px, 8vw, 108px) 0' }}>
@@ -21,7 +20,7 @@ export default async function ValueProps() {
           marginTop: 50,
         }}
       >
-        {values.map((v: { title: string; desc: string }) => (
+        {values.map((v) => (
           <div
             key={v.title}
             style={{

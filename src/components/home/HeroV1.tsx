@@ -1,16 +1,45 @@
+import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { CheckIcon } from '@/components/shared/icons'
+import { getSiteSettings } from '@/sanity/queries'
 
-const heroStats = [
-  { n: '4,200+', l: 'Graduates' },
-  { n: '8', l: 'Partner bodies' },
-  { n: '30+', l: 'Countries' },
+const FALLBACK = {
+  eyebrow: 'British Education · Based in the UAE',
+  heading: 'Accredited British qualifications, built for ambitious professionals.',
+  subtext: 'Internationally recognised diplomas in business, technology and health — delivered flexibly, online or blended, from our home in the UAE.',
+  primaryCta: { label: 'Explore Programmes', href: '/programmes' },
+  secondaryCta: { label: 'Enquire Now', href: '/contact' },
+  imageUrl: null,
+  badgeTitle: 'Regulated UK awards',
+  badgeSubtitle: 'Recognised worldwide',
+  chipLabel: 'FLEXIBLE STUDY',
+  chipValue: '100% Online',
+}
+
+const FALLBACK_STATS = [
+  { number: '4,200+', label: 'Graduates' },
+  { number: '8', label: 'Partner bodies' },
+  { number: '30+', label: 'Countries' },
 ]
 
-export default function HeroV1() {
+export default async function HeroV1() {
+  const settings = await getSiteSettings().catch(() => null)
+  const h = { ...FALLBACK, ...settings?.hero }
+  const heroStats = settings?.stats?.length ? settings.stats : FALLBACK_STATS
+
+  const imgSrc = h.imageUrl ?? '/hero-graduate.png'
+
   return (
-    <section style={{ background: '#F2F4F7', overflow: 'hidden' }}>
+    <section style={{
+        background: [
+          'radial-gradient(ellipse 70% 90% at 100% 0%, rgba(245,166,35,0.18) 0%, transparent 55%)',
+          'radial-gradient(ellipse 55% 70% at 0% 100%, rgba(27,42,74,0.08) 0%, transparent 50%)',
+          'linear-gradient(135deg, #EDF0F7 0%, #F5F3EF 100%)',
+        ].join(', '),
+        overflow: 'hidden',
+        position: 'relative',
+      }}>
       <div
         style={{
           width: 'min(1180px, 92%)',
@@ -38,7 +67,7 @@ export default function HeroV1() {
             }}
           >
             <span style={{ width: 24, height: 2, background: '#F5A623', display: 'inline-block' }} />
-            British Education · Based in the UAE
+            {h.eyebrow}
           </span>
 
           <h1
@@ -53,7 +82,7 @@ export default function HeroV1() {
               textWrap: 'balance',
             } as React.CSSProperties}
           >
-            Accredited British qualifications, built for ambitious professionals.
+            {h.heading}
           </h1>
 
           <p
@@ -65,12 +94,12 @@ export default function HeroV1() {
               maxWidth: '30em',
             }}
           >
-            Internationally recognised diplomas in business, technology and health — delivered flexibly, online or blended, from our home in the UAE.
+            {h.subtext}
           </p>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 34 }}>
             <Link
-              href="/programmes"
+              href={h.primaryCta?.href ?? '/programmes'}
               style={{
                 background: '#F5A623',
                 color: '#1B2A4A',
@@ -83,10 +112,10 @@ export default function HeroV1() {
                 textDecoration: 'none',
               }}
             >
-              Explore Programmes
+              {h.primaryCta?.label ?? 'Explore Programmes'}
             </Link>
             <Link
-              href="/contact"
+              href={h.secondaryCta?.href ?? '/contact'}
               style={{
                 background: '#fff',
                 color: '#1B2A4A',
@@ -99,14 +128,14 @@ export default function HeroV1() {
                 textDecoration: 'none',
               }}
             >
-              Enquire Now
+              {h.secondaryCta?.label ?? 'Enquire Now'}
             </Link>
           </div>
 
           {/* Stats */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 26, marginTop: 38 }}>
             {heroStats.map((stat, i) => (
-              <React.Fragment key={stat.n}>
+              <React.Fragment key={stat.number}>
                 <div>
                   <div
                     style={{
@@ -116,9 +145,9 @@ export default function HeroV1() {
                       color: '#1B2A4A',
                     }}
                   >
-                    {stat.n}
+                    {stat.number}
                   </div>
-                  <div style={{ fontSize: 13, color: '#6B7689' }}>{stat.l}</div>
+                  <div style={{ fontSize: 13, color: '#6B7689' }}>{stat.label}</div>
                 </div>
                 {i < heroStats.length - 1 && (
                   <div style={{ width: 1, background: '#D5DBE6' }} />
@@ -130,15 +159,14 @@ export default function HeroV1() {
 
         {/* Right — visual card */}
         <div style={{ position: 'relative', minHeight: 'clamp(340px, 42vw, 480px)' }}>
-          {/* Photo */}
           <Image
-            src="/hero-graduate.png"
-            alt="ESM graduate in cap and gown holding diploma"
+            src={imgSrc}
+            alt={h.heading ?? 'ESM graduate'}
             fill
             priority
+            unoptimized={imgSrc.startsWith('https://cdn.sanity.io')}
             style={{ objectFit: 'cover', objectPosition: 'center top', borderRadius: 24 }}
           />
-          {/* Overlay to darken bottom for text legibility */}
           <div
             style={{
               position: 'absolute',
@@ -187,9 +215,9 @@ export default function HeroV1() {
                   color: '#1B2A4A',
                 }}
               >
-                Regulated UK awards
+                {h.badgeTitle}
               </div>
-              <div style={{ fontSize: 12.5, color: '#6B7689' }}>Recognised worldwide</div>
+              <div style={{ fontSize: 12.5, color: '#6B7689' }}>{h.badgeSubtitle}</div>
             </div>
           </div>
 
@@ -215,7 +243,7 @@ export default function HeroV1() {
                 letterSpacing: '0.5px',
               }}
             >
-              FLEXIBLE STUDY
+              {h.chipLabel}
             </div>
             <div
               style={{
@@ -225,7 +253,7 @@ export default function HeroV1() {
                 color: '#1B2A4A',
               }}
             >
-              100% Online
+              {h.chipValue}
             </div>
           </div>
         </div>
@@ -233,5 +261,3 @@ export default function HeroV1() {
     </section>
   )
 }
-
-import React from 'react'

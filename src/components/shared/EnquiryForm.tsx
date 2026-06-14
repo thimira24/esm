@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { contact } from '@/data/site'
 
 const inputStyle: React.CSSProperties = {
   width: '100%',
@@ -25,8 +24,15 @@ const labelStyle: React.CSSProperties = {
   marginBottom: 7,
 }
 
-export default function EnquiryForm({ programmes = [] }: { programmes?: { id: string; title: string; uniName: string }[] }) {
+export default function EnquiryForm({
+  programmes = [],
+  formspree,
+}: {
+  programmes?: { id: string; title: string; uniName: string }[]
+  formspree?: string
+}) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const formspreeUrl = formspree ?? ''
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -35,7 +41,7 @@ export default function EnquiryForm({ programmes = [] }: { programmes?: { id: st
     const data = new FormData(form)
 
     try {
-      const res = await fetch(contact.formspree, {
+      const res = await fetch(formspreeUrl, {
         method: 'POST',
         body: data,
         headers: { Accept: 'application/json' },

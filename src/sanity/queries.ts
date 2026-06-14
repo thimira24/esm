@@ -73,7 +73,37 @@ export async function getProgrammeCategories() {
 }
 
 export async function getSiteSettings() {
-  return client.fetch(`*[_type == "siteSettings"][0]`)
+  return client.fetch(`*[_type == "siteSettings"][0]{
+    stats,
+    values,
+    whyEsm,
+    contact,
+    hero {
+      eyebrow,
+      heading,
+      subtext,
+      primaryCta,
+      secondaryCta,
+      badgeTitle,
+      badgeSubtitle,
+      chipLabel,
+      chipValue,
+      "imageUrl": image.asset->url
+    },
+    about {
+      heading,
+      body1,
+      body2,
+      "imageUrl": image.asset->url,
+      storyHeading,
+      storyBody1,
+      storyBody2,
+      timeline,
+      visionHeading,
+      visionSubtext,
+      visionCards
+    }
+  }`)
 }
 
 export async function getTestimonials() {

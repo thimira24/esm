@@ -1,34 +1,43 @@
 import Image from 'next/image'
-import { aboutTimeline, whyEsm as fallbackWhyEsm } from '@/data/site'
 import { getSiteSettings } from '@/sanity/queries'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 import SectionHeader from '@/components/shared/SectionHeader'
 import Testimonials from '@/components/home/Testimonials'
 import { ShieldIcon } from '@/components/shared/icons'
 
-const visionCards = [
-  {
-    icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M2 12h20M12 3a15 15 0 010 18M12 3a15 15 0 000 18" /></svg>,
-    title: 'Access',
-    desc: 'Removing the barriers of cost, location and rigid schedules.',
-  },
-  {
-    icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l2.4 6.9H22l-6 4.4 2.3 7-6.3-4.4L5.7 20l2.3-7-6-4.4h7.6z" /></svg>,
-    title: 'Excellence',
-    desc: 'Only qualifications that are genuinely recognised and respected.',
-  },
-  {
-    icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><path d="M22 4L12 14.01l-3-3" /></svg>,
-    title: 'Impact',
-    desc: 'Real outcomes — promotions, new roles and life-changing progress.',
-  },
-]
-
 export const revalidate = 60
 
+const VISION_ICONS = [
+  <svg key="globe" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M2 12h20M12 3a15 15 0 010 18M12 3a15 15 0 000 18" /></svg>,
+  <svg key="star" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l2.4 6.9H22l-6 4.4 2.3 7-6.3-4.4L5.7 20l2.3-7-6-4.4h7.6z" /></svg>,
+  <svg key="check" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><path d="M22 4L12 14.01l-3-3" /></svg>,
+  <svg key="heart" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" /></svg>,
+]
+
+const FALLBACK_ABOUT = {
+  heading: '',
+  body1: '',
+  body2: '',
+  imageUrl: null as string | null,
+  storyHeading: '',
+  storyBody1: '',
+  storyBody2: '',
+  timeline: [] as { year: string; desc: string; current?: boolean }[],
+  visionHeading: '',
+  visionSubtext: '',
+  visionCards: [] as { title: string; desc: string }[],
+}
+
 export default async function AboutPage() {
-  const settings = await getSiteSettings()
-  const whyEsm = settings?.whyEsm?.length ? settings.whyEsm : fallbackWhyEsm
+  const settings = await getSiteSettings().catch(() => null)
+
+  const a = { ...FALLBACK_ABOUT, ...settings?.about }
+  const timeline: { year: string; desc: string; current?: boolean }[] = a.timeline ?? []
+  const visionCards: { title: string; desc: string }[] = a.visionCards ?? []
+  const whyEsm: { title: string; desc: string }[] = settings?.whyEsm ?? []
+  const stats: { number: string; label: string }[] = settings?.stats ?? []
+
+  const imgSrc = a.imageUrl ?? '/hero-graduate.png'
 
   return (
     <>
@@ -60,14 +69,16 @@ export default async function AboutPage() {
                 margin: '14px 0 0',
               }}
             >
-              British education, rooted in the UAE
+              {a.heading}
             </h1>
             <p style={{ fontSize: 'clamp(1.05rem, 1.4vw, 1.18rem)', lineHeight: 1.65, color: '#48536B', margin: '18px 0 0' }}>
-              ESM Business School is the student-facing brand of ESM Global, an internationally operating education and business services company headquartered in the UAE. We bring recognised British qualifications to professionals across the region and around the world.
+              {a.body1}
             </p>
-            <p style={{ fontSize: '1.05rem', lineHeight: 1.65, color: '#48536B', margin: '16px 0 0' }}>
-              Our mission is simple: make accredited, career-changing education flexible, affordable and genuinely supported — wherever our students happen to be.
-            </p>
+            {a.body2 && (
+              <p style={{ fontSize: '1.05rem', lineHeight: 1.65, color: '#48536B', margin: '16px 0 0' }}>
+                {a.body2}
+              </p>
+            )}
           </div>
           <div
             style={{
@@ -79,11 +90,12 @@ export default async function AboutPage() {
             }}
           >
             <Image
-              src="/hero-graduate.png"
-              alt="ESM graduate in cap and gown"
+              src={imgSrc}
+              alt={a.heading}
               fill
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
+              unoptimized={imgSrc.startsWith('https://cdn.sanity.io')}
               style={{ objectFit: 'cover', objectPosition: 'center top' }}
             />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,29,51,0.45) 0%, transparent 60%)' }} />
@@ -104,18 +116,20 @@ export default async function AboutPage() {
         }}
       >
         <div>
-          <SectionHeader eyebrow="Our story" title="From a bold idea to a global classroom" />
+          <SectionHeader eyebrow="Our story" title={a.storyHeading} />
           <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#48536B', margin: '18px 0 0' }}>
-            ESM Business School began with a simple frustration: too many capable professionals in the UAE were locked out of recognised British qualifications by rigid timetables, travel and cost.
+            {a.storyBody1}
           </p>
-          <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#48536B', margin: '16px 0 0' }}>
-            So we built the alternative — accredited diplomas delivered flexibly, supported by real people, and rooted locally. What started with a handful of learners is now a community of thousands across the region and beyond.
-          </p>
+          {a.storyBody2 && (
+            <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#48536B', margin: '16px 0 0' }}>
+              {a.storyBody2}
+            </p>
+          )}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 30 }}>
-            {[{ n: '4,200+', l: 'Graduates' }, { n: '30+', l: 'Countries' }].map((s) => (
-              <div key={s.n} style={{ flex: '1 1 130px', background: '#F2F4F7', borderRadius: 14, padding: '18px 20px' }}>
-                <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: '1.7rem', color: '#1B2A4A' }}>{s.n}</div>
-                <div style={{ fontSize: 13, color: '#6B7689', marginTop: 2 }}>{s.l}</div>
+            {stats.slice(0, 2).map((s) => (
+              <div key={s.number} style={{ flex: '1 1 130px', background: '#F2F4F7', borderRadius: 14, padding: '18px 20px' }}>
+                <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: '1.7rem', color: '#1B2A4A' }}>{s.number}</div>
+                <div style={{ fontSize: 13, color: '#6B7689', marginTop: 2 }}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -123,7 +137,7 @@ export default async function AboutPage() {
 
         {/* Timeline */}
         <div style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 20, padding: 'clamp(26px, 3.5vw, 38px)', boxShadow: '0 14px 40px rgba(15,29,51,0.06)' }}>
-          {aboutTimeline.map((item, i) => (
+          {timeline.map((item, i) => (
             <div key={i} style={{ display: 'flex', gap: 18 }}>
               <div style={{ flexShrink: 0, width: 18, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <span
@@ -136,11 +150,11 @@ export default async function AboutPage() {
                     display: 'block',
                   }}
                 />
-                {i < aboutTimeline.length - 1 && (
+                {i < timeline.length - 1 && (
                   <span style={{ flex: 1, width: 2, background: '#EEF1F6', marginTop: 6 }} />
                 )}
               </div>
-              <div style={{ paddingBottom: i < aboutTimeline.length - 1 ? 26 : 0 }}>
+              <div style={{ paddingBottom: i < timeline.length - 1 ? 26 : 0 }}>
                 <div style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 700, fontSize: 13, letterSpacing: '0.5px', color: item.current ? '#1B2A4A' : '#D4891A' }}>
                   {item.year}
                 </div>
@@ -155,15 +169,15 @@ export default async function AboutPage() {
       <section style={{ background: 'radial-gradient(120% 130% at 88% 8%, rgba(245,166,35,0.4), transparent 50%), linear-gradient(140deg, #1B2A4A, #0F1D33)', position: 'relative', overflow: 'hidden' }}>
         <div className="dot-pattern" style={{ position: 'absolute', inset: 0 }} />
         <div style={{ position: 'relative', width: 'min(1000px, 92%)', margin: '0 auto', padding: 'clamp(60px, 8vw, 104px) 0', textAlign: 'center' }}>
-          <SectionHeader eyebrow="Our vision" title="A world where a great career is never limited by where you happen to live." center light />
+          <SectionHeader eyebrow="Our vision" title={a.visionHeading} center light />
           <p style={{ fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)', lineHeight: 1.65, color: '#C3CBDB', margin: '18px auto 0', maxWidth: '38em' }}>
-            We&apos;re building the most trusted route to recognised qualifications for ambitious people across the UAE and the wider region — flexible, affordable and genuinely human.
+            {a.visionSubtext}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 18, marginTop: 46, textAlign: 'left' }}>
-            {visionCards.map((card) => (
+            {visionCards.map((card, i) => (
               <div key={card.title} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 16, padding: 26 }}>
                 <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 46, height: 46, borderRadius: 12, background: 'rgba(245,166,35,0.18)' }}>
-                  {card.icon}
+                  {VISION_ICONS[i % VISION_ICONS.length]}
                 </span>
                 <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.15rem', color: '#fff', margin: '18px 0 0' }}>{card.title}</h3>
                 <p style={{ fontSize: '0.97rem', lineHeight: 1.6, color: '#A9B3C7', margin: '8px 0 0' }}>{card.desc}</p>
@@ -189,9 +203,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Testimonials — reuse shared component */}
       <Testimonials />
-
       <EnquiryBlock />
     </>
   )

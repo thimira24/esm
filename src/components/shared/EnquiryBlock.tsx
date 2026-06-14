@@ -1,8 +1,7 @@
 import EnquiryForm from '@/components/shared/EnquiryForm'
 import SectionHeader from '@/components/shared/SectionHeader'
 import { CheckIcon, WhatsAppIcon } from '@/components/shared/icons'
-import { contact } from '@/data/site'
-import { getAllProgrammeTitles } from '@/sanity/queries'
+import { getAllProgrammeTitles, getSiteSettings } from '@/sanity/queries'
 
 const perks = [
   'Free, no-obligation programme advice',
@@ -11,7 +10,8 @@ const perks = [
 ]
 
 export default async function EnquiryBlock() {
-  const programmes = await getAllProgrammeTitles()
+  const [programmes, settings] = await Promise.all([getAllProgrammeTitles(), getSiteSettings().catch(() => null)])
+  const contact = settings?.contact ?? {}
 
   return (
     <section style={{ background: '#F2F4F7', borderTop: '1px solid #E6E9F0' }}>
@@ -100,7 +100,7 @@ export default async function EnquiryBlock() {
         </div>
 
         {/* Right — form */}
-        <EnquiryForm programmes={programmes} />
+        <EnquiryForm programmes={programmes} formspree={contact.formspree} />
       </div>
     </section>
   )

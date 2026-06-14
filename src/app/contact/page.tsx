@@ -1,12 +1,19 @@
 import EnquiryForm from '@/components/shared/EnquiryForm'
 import FAQAccordion from '@/components/shared/FAQAccordion'
 import { WhatsAppIcon } from '@/components/shared/icons'
-import { faqs, contact } from '@/data/site'
 import ContactMap from '@/components/contact/ContactMap'
-import { getAllProgrammeTitles } from '@/sanity/queries'
+import { getAllProgrammeTitles, getSiteSettings, getFaqs } from '@/sanity/queries'
+
+export const revalidate = 60
 
 export default async function ContactPage() {
-  const programmes = await getAllProgrammeTitles()
+  const [programmes, settings, sanityFaqs] = await Promise.all([
+    getAllProgrammeTitles(),
+    getSiteSettings().catch(() => null),
+    getFaqs().catch(() => []),
+  ])
+  const contact = settings?.contact ?? {}
+  const faqs = (sanityFaqs ?? []).map((f: { question: string; answer: string }) => ({ q: f.question, a: f.answer }))
 
   return (
     <>
@@ -60,7 +67,7 @@ export default async function ContactPage() {
           >
             Enquiry form
           </h2>
-          <EnquiryForm programmes={programmes} />
+          <EnquiryForm programmes={programmes} formspree={contact.formspree} />
         </div>
 
         {/* Right — WhatsApp + address + map */}

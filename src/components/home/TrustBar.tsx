@@ -1,7 +1,11 @@
 import Image from 'next/image'
-import { universities } from '@/data/site'
+import { getPartners } from '@/sanity/queries'
 
-export default function TrustBar() {
+export const revalidate = 60
+
+export default async function TrustBar() {
+  const partners = await getPartners().catch(() => [])
+  const universities = partners.filter((p: { type: string }) => p.type === 'university')
   const doubled = [...universities, ...universities]
 
   return (
@@ -47,7 +51,7 @@ export default function TrustBar() {
                 }}
               >
                 <Image
-                  src={u.logo}
+                  src={u.logoPath}
                   alt={u.name}
                   width={140}
                   height={48}

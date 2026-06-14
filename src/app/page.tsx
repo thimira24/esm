@@ -7,15 +7,12 @@ import Testimonials from '@/components/home/Testimonials'
 import FAQAccordion from '@/components/shared/FAQAccordion'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 import { getFaqs } from '@/sanity/queries'
-import { faqs as fallbackFaqs } from '@/data/site'
 
 export const revalidate = 60
 
 export default async function HomePage() {
   const faqData = await getFaqs()
-  const faqs = faqData?.length
-    ? faqData.map((f: { question: string; answer: string }) => ({ q: f.question, a: f.answer }))
-    : fallbackFaqs
+  const faqs = (faqData ?? []).map((f: { question: string; answer: string }) => ({ q: f.question, a: f.answer }))
   return (
     <>
       <HeroV1 />

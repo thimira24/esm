@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { contact } from '@/data/site'
-import { getProgrammeCategories } from '@/sanity/queries'
+import { getProgrammeCategories, getSiteSettings } from '@/sanity/queries'
 
 const CATEGORY_LABELS: Record<string, string> = {
   mba: 'MBA Programmes',
@@ -9,7 +8,8 @@ const CATEGORY_LABELS: Record<string, string> = {
 }
 
 export default async function Footer() {
-  const categories = await getProgrammeCategories()
+  const [categories, settings] = await Promise.all([getProgrammeCategories(), getSiteSettings().catch(() => null)])
+  const contact = settings?.contact ?? {}
   const year = new Date().getFullYear()
 
   return (

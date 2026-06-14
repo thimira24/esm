@@ -1,5 +1,4 @@
 import { getTestimonials } from '@/sanity/queries'
-import { testimonials as fallbackTestimonials } from '@/data/site'
 import SectionHeader from '@/components/shared/SectionHeader'
 import TestimonialCard from '@/components/shared/TestimonialCard'
 
@@ -7,14 +6,12 @@ export const revalidate = 60
 
 export default async function Testimonials() {
   const data = await getTestimonials()
-  const testimonials = data?.length
-    ? data.map((t: { name: string; role: string; quote: string; imageUrl: string }) => ({
-        name: t.name,
-        role: t.role,
-        quote: t.quote,
-        img: t.imageUrl,
-      }))
-    : fallbackTestimonials.map(t => ({ name: t.name, role: t.role, quote: t.quote, img: t.img }))
+  const testimonials = (data ?? []).map((t: { name: string; role: string; quote: string; imageUrl: string }) => ({
+    name: t.name,
+    role: t.role,
+    quote: t.quote,
+    img: t.imageUrl,
+  }))
 
   return (
     <section style={{ background: '#F2F4F7' }}>
