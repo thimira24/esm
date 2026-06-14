@@ -46,3 +46,19 @@ export async function getProgrammesByCategory(cat: ProgrammeCategory): Promise<P
     { cat }
   )
 }
+
+export async function getSiteSettings() {
+  return client.fetch(`*[_type == "siteSettings"][0]`)
+}
+
+export async function getTestimonials() {
+  return client.fetch(`*[_type == "testimonial"] | order(order asc) { name, role, quote, imageUrl }`)
+}
+
+export async function getFaqs() {
+  return client.fetch(`*[_type == "faq"] | order(order asc) { question, answer }`)
+}
+
+export async function getPartners() {
+  return client.fetch(`*[_type == "partner"] | order(order asc) { name, type, logoPath }`)
+}

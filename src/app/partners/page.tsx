@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { partnerGroups, universities, awardingOrgs, profBodies, deliveryPartners } from '@/data/site'
+import { getPartners } from '@/sanity/queries'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 
 const LogoPlaceholder = () => (
@@ -29,7 +30,25 @@ const LogoPlaceholder = () => (
   </div>
 )
 
-export default function PartnersPage() {
+export const revalidate = 60
+
+type Partner = { name: string; type: string; logoPath: string }
+
+export default async function PartnersPage() {
+  const partnerData: Partner[] = await getPartners()
+
+  const getGroup = (type: string, fallback: { name: string; logo: string }[]) => {
+    const fromSanity = partnerData?.filter(p => p.type === type)
+    return fromSanity?.length
+      ? fromSanity.map(p => ({ name: p.name, logo: p.logoPath }))
+      : fallback
+  }
+
+  const univs = getGroup('university', universities)
+  const awarding = getGroup('awarding', awardingOrgs)
+  const prof = getGroup('professional', profBodies)
+  const delivery = getGroup('delivery', deliveryPartners)
+
   return (
     <>
       {/* Hero */}
@@ -77,7 +96,7 @@ export default function PartnersPage() {
         }}
       >
         {partnerGroups.map((g, gi) => {
-          const realLogos = gi === 0 ? universities : gi === 1 ? awardingOrgs : gi === 2 ? profBodies : gi === 3 ? deliveryPartners : null
+          const realLogos = gi === 0 ? univs : gi === 1 ? awarding : gi === 2 ? prof : gi === 3 ? delivery : null
           const hasRealLogos = realLogos !== null
           return (
             <div key={g.title}>

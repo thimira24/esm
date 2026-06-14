@@ -1,6 +1,12 @@
-import { stats } from '@/data/site'
+import { getSiteSettings } from '@/sanity/queries'
+import { stats as fallbackStats } from '@/data/site'
 
-export default function StatsStrip() {
+export const revalidate = 60
+
+export default async function StatsStrip() {
+  const settings = await getSiteSettings()
+  const stats = settings?.stats?.length ? settings.stats : fallbackStats.map(s => ({ number: s.n, label: s.l }))
+
   return (
     <section
       style={{
@@ -22,8 +28,8 @@ export default function StatsStrip() {
           textAlign: 'center',
         }}
       >
-        {stats.map((s) => (
-          <div key={s.n}>
+        {stats.map((s: { number?: string; n?: string; label?: string; l?: string }) => (
+          <div key={s.number ?? s.n}>
             <div
               style={{
                 fontFamily: 'var(--font-montserrat), sans-serif',
@@ -33,10 +39,10 @@ export default function StatsStrip() {
                 lineHeight: 1,
               }}
             >
-              {s.n}
+              {s.number ?? s.n}
             </div>
             <div style={{ fontSize: 14, color: '#B8C1D4', marginTop: 10, letterSpacing: '0.3px' }}>
-              {s.l}
+              {s.label ?? s.l}
             </div>
           </div>
         ))}

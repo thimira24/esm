@@ -1,8 +1,14 @@
-import { values } from '@/data/site'
+import { getSiteSettings } from '@/sanity/queries'
+import { values as fallbackValues } from '@/data/site'
 import SectionHeader from '@/components/shared/SectionHeader'
 import { ShieldIcon } from '@/components/shared/icons'
 
-export default function ValueProps() {
+export const revalidate = 60
+
+export default async function ValueProps() {
+  const settings = await getSiteSettings()
+  const values = settings?.values?.length ? settings.values : fallbackValues
+
   return (
     <section style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(64px, 8vw, 108px) 0' }}>
       <SectionHeader eyebrow="Why ESM" title="Recognised qualifications, on your terms" center />
@@ -15,7 +21,7 @@ export default function ValueProps() {
           marginTop: 50,
         }}
       >
-        {values.map((v) => (
+        {values.map((v: { title: string; desc: string }) => (
           <div
             key={v.title}
             style={{

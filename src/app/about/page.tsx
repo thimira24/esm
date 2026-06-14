@@ -1,5 +1,6 @@
 import Image from 'next/image'
-import { whyEsm, aboutTimeline } from '@/data/site'
+import { aboutTimeline, whyEsm as fallbackWhyEsm } from '@/data/site'
+import { getSiteSettings } from '@/sanity/queries'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 import SectionHeader from '@/components/shared/SectionHeader'
 import Testimonials from '@/components/home/Testimonials'
@@ -23,7 +24,12 @@ const visionCards = [
   },
 ]
 
-export default function AboutPage() {
+export const revalidate = 60
+
+export default async function AboutPage() {
+  const settings = await getSiteSettings()
+  const whyEsm = settings?.whyEsm?.length ? settings.whyEsm : fallbackWhyEsm
+
   return (
     <>
       {/* Hero */}
