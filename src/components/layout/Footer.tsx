@@ -1,7 +1,15 @@
 import Link from 'next/link'
 import { contact } from '@/data/site'
+import { getProgrammeCategories } from '@/sanity/queries'
 
-export default function Footer() {
+const CATEGORY_LABELS: Record<string, string> = {
+  mba: 'MBA Programmes',
+  undergraduate: 'Undergraduate',
+  postgraduate: 'Postgraduate',
+}
+
+export default async function Footer() {
+  const categories = await getProgrammeCategories()
   const year = new Date().getFullYear()
 
   return (
@@ -59,11 +67,14 @@ export default function Footer() {
               Programmes
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9, fontSize: 14 }}>
-              {['Business & Management', 'Technology', 'Health & Social Care'].map((label) => (
-                <Link key={label} href="/programmes" style={{ whiteSpace: 'nowrap', color: '#C3CBDB', textDecoration: 'none' }}>
-                  {label}
-                </Link>
-              ))}
+              {categories.map(({ cat }) => {
+                const label = CATEGORY_LABELS[cat] ?? cat.charAt(0).toUpperCase() + cat.slice(1)
+                return (
+                  <Link key={cat} href={`/programmes?cat=${encodeURIComponent(cat)}`} style={{ whiteSpace: 'nowrap', color: '#C3CBDB', textDecoration: 'none' }}>
+                    {label}
+                  </Link>
+                )
+              })}
             </div>
           </div>
 
