@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { CheckIcon } from '@/components/shared/icons'
 import { getSiteSettings } from '@/sanity/queries'
+import HeroBackground from './HeroBackground'
 
 const FALLBACK = {
   eyebrow: 'British Education · Based in the UAE',
@@ -40,8 +41,11 @@ export default async function HeroV1() {
         overflow: 'hidden',
         position: 'relative',
       }}>
+      <HeroBackground />
       <div
         style={{
+          position: 'relative',
+          zIndex: 1,
           width: 'min(1180px, 92%)',
           margin: '0 auto',
           display: 'grid',
