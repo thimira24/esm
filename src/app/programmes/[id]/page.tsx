@@ -353,25 +353,19 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
         <aside style={{ position: 'sticky', top: 96 }}>
           <div style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 20, padding: 28, boxShadow: '0 14px 40px rgba(15,29,51,0.08)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 13 }}>
-              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 48, height: 48, borderRadius: 12, background: 'linear-gradient(135deg, #FFF3DE, #FCE3B5)' }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z" />
-                </svg>
+              <span style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 64, height: 48, borderRadius: 12, background: '#F4F6FA', border: '1px solid #E6E9F0', padding: '6px 10px' }}>
+                <Image
+                  src={programme.uniLogo}
+                  alt={programme.uniName}
+                  width={56}
+                  height={36}
+                  style={{ objectFit: 'contain', width: '100%', height: 36 }}
+                />
               </span>
               <div>
                 <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: 15, color: '#1B2A4A' }}>Accredited award</div>
                 <div style={{ fontSize: 13, color: '#6B7689' }}>{programme.awarding}</div>
               </div>
-            </div>
-            {/* University logo */}
-            <div style={{ marginTop: 18, padding: '14px 16px', background: '#F4F6FA', borderRadius: 12, border: '1px solid #E6E9F0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Image
-                src={programme.uniLogo}
-                alt={programme.uniName}
-                width={160}
-                height={48}
-                style={{ objectFit: 'contain', width: '100%', height: 48 }}
-              />
             </div>
             <p style={{ fontSize: '0.98rem', lineHeight: 1.6, color: '#5A647A', margin: '18px 0 0' }}>
               Speak to an advisor about start dates, payment plans and the fastest route to enrol.
