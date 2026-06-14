@@ -23,14 +23,7 @@ export const programme = defineType({
       name: 'cat',
       title: 'Category',
       type: 'string',
-      options: {
-        list: [
-          { title: 'MBA Programmes', value: 'mba' },
-          { title: 'Undergraduate', value: 'undergraduate' },
-          { title: 'Postgraduate', value: 'postgraduate' },
-        ],
-        layout: 'radio',
-      },
+      description: 'Type a category name e.g. "MBA Programmes", "Undergraduate", "Postgraduate". Use the exact same spelling for all programmes in the same category.',
       validation: (r) => r.required(),
     }),
     defineField({

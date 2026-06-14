@@ -5,17 +5,14 @@ import Link from 'next/link'
 import type { Programme } from '@/data/programmes'
 import ProgrammeCard from './ProgrammeCard'
 
-type Filter = 'all' | 'mba' | 'undergraduate' | 'postgraduate'
-
-const categories: { label: string; value: Filter }[] = [
-  { label: 'All Programmes', value: 'all' },
-  { label: 'MBA Programmes', value: 'mba' },
-  { label: 'Undergraduate', value: 'undergraduate' },
-  { label: 'Postgraduate', value: 'postgraduate' },
-]
-
 export default function ProgrammesGrid({ programmes }: { programmes: Programme[] }) {
-  const [filter, setFilter] = useState<Filter>('all')
+  const [filter, setFilter] = useState('all')
+
+  const categories = [
+    'all',
+    ...Array.from(new Set(programmes.map((p) => p.cat).filter(Boolean))),
+  ]
+
   const filtered = filter === 'all' ? programmes : programmes.filter((p) => p.cat === filter)
 
   return (
@@ -23,11 +20,12 @@ export default function ProgrammesGrid({ programmes }: { programmes: Programme[]
       {/* Category tabs */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 38 }}>
         {categories.map((cat) => {
-          const active = filter === cat.value
+          const active = filter === cat
+          const label = cat === 'all' ? 'All Programmes' : cat
           return (
             <button
-              key={cat.value}
-              onClick={() => setFilter(cat.value)}
+              key={cat}
+              onClick={() => setFilter(cat)}
               style={{
                 fontFamily: 'var(--font-dm-sans), sans-serif',
                 fontWeight: 600,
@@ -42,7 +40,7 @@ export default function ProgrammesGrid({ programmes }: { programmes: Programme[]
                 transition: 'all 0.15s',
               }}
             >
-              {cat.label}
+              {label}
             </button>
           )
         })}

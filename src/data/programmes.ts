@@ -1,4 +1,4 @@
-export type ProgrammeCategory = 'mba' | 'undergraduate' | 'postgraduate'
+export type ProgrammeCategory = string
 
 export interface Programme {
   id: string
