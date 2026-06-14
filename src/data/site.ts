@@ -94,11 +94,19 @@ export const profBodies = [
   { name: 'Study Group', logo: '/logos/prof-bodies/studygroup.svg' },
 ]
 
+export const deliveryPartners = [
+  { name: 'Cerwise Education', logo: '/logos/delivery-partners/cerwise.webp' },
+  { name: 'Edvoro', logo: '/logos/delivery-partners/edvoro.webp' },
+  { name: 'ExeJapan Business School', logo: '/logos/delivery-partners/exejapan.webp' },
+  { name: 'Kai Hui International Education', logo: '/logos/delivery-partners/kaihui.webp' },
+  { name: 'TSCFM', logo: '/logos/delivery-partners/tscfm.webp' },
+]
+
 export const partnerGroups = [
   { title: 'University Partners', desc: 'Degree-awarding UK universities whose programmes we represent and deliver across the region.', count: 8 },
   { title: 'Awarding Organisations', desc: 'Regulated UK awarding bodies that certify and quality-assure our diplomas.', count: 2 },
   { title: 'Professional Bodies', desc: 'Industry institutes offering recognition, membership and chartered progression.', count: 2 },
-  { title: 'Delivery & Employer Partners', desc: 'Delivery, employer and ecosystem partners that support our students and graduates.', count: 6 },
+  { title: 'Delivery & Employer Partners', desc: 'Delivery, employer and ecosystem partners that support our students and graduates.', count: 5 },
 ]
 
 export const nav = [

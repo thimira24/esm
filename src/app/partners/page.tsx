@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { partnerGroups, universities, awardingOrgs, profBodies } from '@/data/site'
+import { partnerGroups, universities, awardingOrgs, profBodies, deliveryPartners } from '@/data/site'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 
 const LogoPlaceholder = () => (
@@ -78,7 +78,7 @@ export default function PartnersPage() {
         }}
       >
         {partnerGroups.map((g, gi) => {
-          const realLogos = gi === 0 ? universities : gi === 1 ? awardingOrgs : gi === 2 ? profBodies : null
+          const realLogos = gi === 0 ? universities : gi === 1 ? awardingOrgs : gi === 2 ? profBodies : gi === 3 ? deliveryPartners : null
           const hasRealLogos = realLogos !== null
           return (
             <div key={g.title}>
