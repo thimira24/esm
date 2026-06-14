@@ -47,6 +47,25 @@ export async function getProgrammesByCategory(cat: ProgrammeCategory): Promise<P
   )
 }
 
+export async function getProgrammeCategories() {
+  const programmes = await client.fetch(
+    `*[_type == "programme"] | order(order asc) { "id": id.current, title, cat, level }`
+  )
+  // Group by category
+  const map: Record<string, { titles: string[]; levels: string[] }> = {}
+  for (const p of programmes) {
+    if (!p.cat) continue
+    if (!map[p.cat]) map[p.cat] = { titles: [], levels: [] }
+    map[p.cat].titles.push(p.title)
+    map[p.cat].levels.push(p.level)
+  }
+  return Object.entries(map).map(([cat, data]) => ({
+    cat,
+    count: data.titles.length,
+    examples: data.titles.slice(0, 3),
+  }))
+}
+
 export async function getSiteSettings() {
   return client.fetch(`*[_type == "siteSettings"][0]`)
 }
