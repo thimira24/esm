@@ -15,6 +15,8 @@ const inputStyle: React.CSSProperties = {
   boxSizing: 'border-box',
 }
 
+const INPUT_CLASS = 'esm-input'
+
 const labelStyle: React.CSSProperties = {
   display: 'block',
   fontFamily: 'var(--font-dm-sans), sans-serif',
@@ -101,19 +103,19 @@ export default function EnquiryForm({
           >
             <label style={{ display: 'block' }}>
               <span style={labelStyle}>Full name</span>
-              <input type="text" name="name" placeholder="Your name" required style={inputStyle} />
+              <input type="text" name="name" placeholder="Your name" required style={inputStyle} className={INPUT_CLASS} />
             </label>
             <label style={{ display: 'block' }}>
               <span style={labelStyle}>Email</span>
-              <input type="email" name="email" placeholder="you@email.com" required style={inputStyle} />
+              <input type="email" name="email" placeholder="you@email.com" required style={inputStyle} className={INPUT_CLASS} />
             </label>
             <label style={{ display: 'block' }}>
               <span style={labelStyle}>Phone / WhatsApp</span>
-              <input type="tel" name="phone" placeholder="+971 ..." style={inputStyle} />
+              <input type="tel" name="phone" placeholder="+971 ..." style={inputStyle} className={INPUT_CLASS} />
             </label>
             <label style={{ display: 'block' }}>
               <span style={labelStyle}>Programme of interest</span>
-              <select name="programme" style={inputStyle}>
+              <select name="programme" style={inputStyle} className={INPUT_CLASS}>
                 <option value="">Select a programme…</option>
                 {programmes.map((p) => (
                   <option key={p.id} value={`${p.title} — ${p.uniName}`}>
@@ -130,7 +132,7 @@ export default function EnquiryForm({
               name="message"
               rows={3}
               placeholder="Tell us about your goals..."
-              style={{ ...inputStyle, resize: 'vertical' }}
+              style={{ ...inputStyle, resize: 'vertical' }} className={INPUT_CLASS}
             />
           </label>
           <button

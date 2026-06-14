@@ -59,6 +59,19 @@ body {
   background-size: 22px 22px;
 }
 
+.esm-input {
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.esm-input:hover {
+  border-color: #A0ABBE;
+}
+
+.esm-input:focus {
+  border-color: #1B2A4A;
+  box-shadow: 0 0 0 3px rgba(27,42,74,0.1);
+}
+
 @media (max-width: 720px) {
   body {
     padding-bottom: 76px;
