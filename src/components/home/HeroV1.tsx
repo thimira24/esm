@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { CheckIcon } from '@/components/shared/icons'
 
 const heroStats = [
@@ -129,17 +130,24 @@ export default function HeroV1() {
 
         {/* Right — visual card */}
         <div style={{ position: 'relative', minHeight: 'clamp(340px, 42vw, 480px)' }}>
+          {/* Photo */}
+          <Image
+            src="/hero-graduate.png"
+            alt="ESM graduate in cap and gown holding diploma"
+            fill
+            priority
+            style={{ objectFit: 'cover', objectPosition: 'center top', borderRadius: 24 }}
+          />
+          {/* Overlay to darken bottom for text legibility */}
           <div
             style={{
               position: 'absolute',
               inset: 0,
               borderRadius: 24,
-              background:
-                'radial-gradient(120% 120% at 80% 12%, rgba(245,166,35,0.45), transparent 52%), radial-gradient(110% 110% at 8% 92%, rgba(42,111,219,0.5), transparent 58%), linear-gradient(135deg, #1B2A4A, #0F1D33)',
+              background: 'linear-gradient(to top, rgba(15,29,51,0.55) 0%, rgba(15,29,51,0.08) 55%, transparent 100%)',
               boxShadow: '0 30px 70px rgba(15,29,51,0.32)',
             }}
           />
-          <div className="dot-pattern-sm" style={{ position: 'absolute', inset: 0, borderRadius: 24 }} />
 
           {/* Floating badge */}
           <div
