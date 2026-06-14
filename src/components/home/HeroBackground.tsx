@@ -72,7 +72,7 @@ export default function HeroBackground() {
           width: 420,
           height: 420,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(220,50,50,0.2) 0%, rgba(200,30,30,0.06) 55%, transparent 75%)',
+          background: 'radial-gradient(circle, rgba(170,20,20,0.28) 0%, rgba(140,10,10,0.09) 55%, transparent 75%)',
           filter: 'blur(52px)',
           opacity: 0.45,
           willChange: 'transform, opacity',
