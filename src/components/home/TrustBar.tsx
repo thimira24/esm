@@ -1,13 +1,16 @@
-import { partners } from '@/data/site'
+import Image from 'next/image'
+import { universities } from '@/data/site'
 
 export default function TrustBar() {
+  const doubled = [...universities, ...universities]
+
   return (
     <section style={{ borderBottom: '1px solid #E6E9F0', overflow: 'hidden' }}>
       <div
         style={{
           width: 'min(1180px, 92%)',
           margin: '0 auto',
-          padding: '24px 0',
+          padding: '20px 0',
           display: 'flex',
           alignItems: 'center',
           gap: 'clamp(16px, 2.5vw, 28px)',
@@ -22,60 +25,41 @@ export default function TrustBar() {
             letterSpacing: '1.5px',
             color: '#8A93A6',
             textTransform: 'uppercase',
+            whiteSpace: 'nowrap',
           }}
         >
           Awarded &amp; accredited by
         </span>
-        <div
-          className="marquee-mask"
-          style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}
-        >
-          <div
-            className="animate-marquee"
-            style={{ display: 'flex', width: 'max-content' }}
-          >
-            {/* Doubled list for seamless loop */}
-            {[...partners, ...partners].map((p, i) => (
+
+        <div className="marquee-mask" style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
+          <div className="animate-marquee" style={{ display: 'flex', alignItems: 'center', width: 'max-content', gap: 0 }}>
+            {doubled.map((u, i) => (
               <div
                 key={i}
-                aria-hidden={i >= partners.length}
+                aria-hidden={i >= universities.length}
                 style={{
                   flexShrink: 0,
-                  marginRight: 'clamp(28px, 4vw, 56px)',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 10,
-                  opacity: 0.85,
+                  justifyContent: 'center',
+                  marginRight: 'clamp(32px, 4.5vw, 60px)',
+                  height: 48,
                 }}
               >
-                <span
+                <Image
+                  src={u.logo}
+                  alt={u.name}
+                  width={140}
+                  height={48}
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: 38,
-                    height: 38,
-                    borderRadius: 9,
-                    background: '#F2F4F7',
-                    fontFamily: 'var(--font-montserrat), sans-serif',
-                    fontWeight: 800,
-                    fontSize: 13,
-                    color: '#1B2A4A',
+                    objectFit: 'contain',
+                    objectPosition: 'center',
+                    maxHeight: 44,
+                    width: 'auto',
+                    filter: 'grayscale(1)',
+                    opacity: 0.65,
                   }}
-                >
-                  {p.m}
-                </span>
-                <span
-                  style={{
-                    whiteSpace: 'nowrap',
-                    fontFamily: 'var(--font-dm-sans), sans-serif',
-                    fontWeight: 600,
-                    fontSize: 13,
-                    color: '#6B7689',
-                  }}
-                >
-                  {p.l}
-                </span>
+                />
               </div>
             ))}
           </div>

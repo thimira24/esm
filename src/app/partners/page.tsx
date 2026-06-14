@@ -1,4 +1,5 @@
-import { partnerGroups } from '@/data/site'
+import Image from 'next/image'
+import { partnerGroups, universities } from '@/data/site'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 
 const LogoPlaceholder = () => (
@@ -60,8 +61,7 @@ export default function PartnersPage() {
               maxWidth: '42em',
             }}
           >
-            We work alongside universities, awarding organisations, professional bodies and delivery partners to bring you recognised qualifications.{' '}
-            <span style={{ color: '#D4891A', fontWeight: 600 }}>Partner logos to be added by the ESM team.</span>
+            We work alongside universities, awarding organisations, professional bodies and delivery partners to bring you recognised qualifications.
           </p>
         </div>
       </section>
@@ -77,78 +77,120 @@ export default function PartnersPage() {
           gap: 'clamp(48px, 6vw, 72px)',
         }}
       >
-        {partnerGroups.map((g) => (
-          <div key={g.title}>
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: 12,
-                paddingBottom: 18,
-                borderBottom: '2px solid #F2F4F7',
-              }}
-            >
-              <div style={{ maxWidth: '46em' }}>
-                <h2
-                  style={{
-                    fontFamily: 'var(--font-montserrat), sans-serif',
-                    fontWeight: 800,
-                    fontSize: 'clamp(1.4rem, 2.6vw, 1.9rem)',
-                    letterSpacing: '-0.4px',
-                    color: '#1B2A4A',
-                    margin: 0,
-                  }}
-                >
-                  {g.title}
-                </h2>
-                <p style={{ fontSize: '1rem', lineHeight: 1.55, color: '#5A647A', margin: '7px 0 0' }}>{g.desc}</p>
-              </div>
-              <span
+        {partnerGroups.map((g, gi) => {
+          const isUniversities = gi === 0
+          return (
+            <div key={g.title}>
+              {/* Group header */}
+              <div
                 style={{
-                  flexShrink: 0,
-                  fontFamily: 'var(--font-dm-sans), sans-serif',
-                  fontWeight: 700,
-                  fontSize: 12.5,
-                  letterSpacing: '0.4px',
-                  color: '#D4891A',
-                  background: '#FFF3DE',
-                  padding: '7px 14px',
-                  borderRadius: 100,
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 12,
+                  paddingBottom: 18,
+                  borderBottom: '2px solid #F2F4F7',
                 }}
               >
-                {g.count} logos to add
-              </span>
-            </div>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
-                gap: 16,
-                marginTop: 24,
-              }}
-            >
-              {Array.from({ length: g.count }).map((_, i) => (
-                <div
-                  key={i}
+                <div style={{ maxWidth: '46em' }}>
+                  <h2
+                    style={{
+                      fontFamily: 'var(--font-montserrat), sans-serif',
+                      fontWeight: 800,
+                      fontSize: 'clamp(1.4rem, 2.6vw, 1.9rem)',
+                      letterSpacing: '-0.4px',
+                      color: '#1B2A4A',
+                      margin: 0,
+                    }}
+                  >
+                    {g.title}
+                  </h2>
+                  <p style={{ fontSize: '1rem', lineHeight: 1.55, color: '#5A647A', margin: '7px 0 0' }}>{g.desc}</p>
+                </div>
+                <span
                   style={{
-                    background: '#fff',
-                    border: '1px solid #E6E9F0',
-                    borderRadius: 16,
-                    padding: 18,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    minHeight: 118,
+                    flexShrink: 0,
+                    fontFamily: 'var(--font-dm-sans), sans-serif',
+                    fontWeight: 700,
+                    fontSize: 12.5,
+                    letterSpacing: '0.4px',
+                    color: isUniversities ? '#1F8A5B' : '#D4891A',
+                    background: isUniversities ? '#EAF7EF' : '#FFF3DE',
+                    padding: '7px 14px',
+                    borderRadius: 100,
                   }}
                 >
-                  <LogoPlaceholder />
+                  {isUniversities ? `${universities.length} partners` : `${g.count} logos to add`}
+                </span>
+              </div>
+
+              {/* University group — show real logos */}
+              {isUniversities ? (
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+                    gap: 16,
+                    marginTop: 24,
+                  }}
+                >
+                  {universities.map((u) => (
+                    <div
+                      key={u.name}
+                      style={{
+                        background: '#fff',
+                        border: '1px solid #E6E9F0',
+                        borderRadius: 16,
+                        padding: '24px 20px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        minHeight: 110,
+                      }}
+                    >
+                      <Image
+                        src={u.logo}
+                        alt={u.name}
+                        width={160}
+                        height={70}
+                        style={{ objectFit: 'contain', maxHeight: 60, width: 'auto' }}
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
+              ) : (
+                /* Other groups — placeholder grid */
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+                    gap: 16,
+                    marginTop: 24,
+                  }}
+                >
+                  {Array.from({ length: g.count }).map((_, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        background: '#fff',
+                        border: '1px solid #E6E9F0',
+                        borderRadius: 16,
+                        padding: 18,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        minHeight: 118,
+                      }}
+                    >
+                      <LogoPlaceholder />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-        ))}
+          )
+        })}
       </section>
 
       <EnquiryBlock />

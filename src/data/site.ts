@@ -70,20 +70,25 @@ export const faqs = [
   },
 ]
 
-export const partners = [
-  { m: 'UA', l: 'University Partner' },
-  { m: 'BQ', l: 'Awarding Body' },
-  { m: 'IC', l: 'Industry Council' },
-  { m: 'PA', l: 'Professional Academy' },
-  { m: 'GE', l: 'Global Education' },
-  { m: 'QA', l: 'Quality Assured' },
+export const universities = [
+  { name: 'Arden University',                          logo: '/logos/universities/arden.svg',            ext: 'svg'  },
+  { name: 'University of Derby',                       logo: '/logos/universities/derby.svg',            ext: 'svg'  },
+  { name: 'University of Lancashire',                  logo: '/logos/universities/lancashire.webp',      ext: 'webp' },
+  { name: 'The University of Law',                     logo: '/logos/universities/law.svg',              ext: 'svg'  },
+  { name: 'University of Leicester',                   logo: '/logos/universities/leicester.svg',        ext: 'svg'  },
+  { name: 'University of Wolverhampton',               logo: '/logos/universities/wolverhampton.svg',    ext: 'svg'  },
+  { name: 'Anglia Ruskin University',                  logo: '/logos/universities/anglia-ruskin.svg',    ext: 'svg'  },
+  { name: 'UE — University of Europe for Applied Sciences', logo: '/logos/universities/ue-applied-sciences.png', ext: 'png' },
 ]
 
+// Legacy short-form used by the About page accreditations grid
+export const partners = universities.map((u) => ({ m: u.name.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase(), l: u.name }))
+
 export const partnerGroups = [
-  { title: 'Universities Represented', desc: 'Degree-awarding university partners whose programmes we represent and deliver across the region.', count: 6 },
+  { title: 'University Partners', desc: 'Degree-awarding UK universities whose programmes we represent and deliver across the region.', count: 8 },
   { title: 'Awarding Organisations', desc: 'Regulated UK awarding bodies that certify and quality-assure our diplomas.', count: 4 },
   { title: 'Professional Bodies', desc: 'Industry institutes offering recognition, membership and chartered progression.', count: 4 },
-  { title: 'Partners', desc: 'Delivery, employer and ecosystem partners that support our students and graduates.', count: 8 },
+  { title: 'Delivery & Employer Partners', desc: 'Delivery, employer and ecosystem partners that support our students and graduates.', count: 6 },
 ]
 
 export const nav = [
