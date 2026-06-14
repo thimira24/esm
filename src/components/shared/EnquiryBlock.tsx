@@ -2,7 +2,7 @@ import EnquiryForm from '@/components/shared/EnquiryForm'
 import SectionHeader from '@/components/shared/SectionHeader'
 import { CheckIcon, WhatsAppIcon } from '@/components/shared/icons'
 import { contact } from '@/data/site'
-import { getProgrammeCategories } from '@/sanity/queries'
+import { getAllProgrammeTitles } from '@/sanity/queries'
 
 const perks = [
   'Free, no-obligation programme advice',
@@ -10,15 +10,8 @@ const perks = [
   'We reply within 24 hours',
 ]
 
-const CATEGORY_LABELS: Record<string, string> = {
-  mba: 'MBA Programmes',
-  undergraduate: 'Undergraduate',
-  postgraduate: 'Postgraduate',
-}
-
 export default async function EnquiryBlock() {
-  const raw = await getProgrammeCategories()
-  const categories = raw.map(({ cat }) => CATEGORY_LABELS[cat] ?? cat.charAt(0).toUpperCase() + cat.slice(1))
+  const programmes = await getAllProgrammeTitles()
 
   return (
     <section style={{ background: '#F2F4F7', borderTop: '1px solid #E6E9F0' }}>
@@ -107,7 +100,7 @@ export default async function EnquiryBlock() {
         </div>
 
         {/* Right — form */}
-        <EnquiryForm categories={categories} />
+        <EnquiryForm programmes={programmes} />
       </div>
     </section>
   )

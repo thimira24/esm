@@ -25,7 +25,7 @@ const labelStyle: React.CSSProperties = {
   marginBottom: 7,
 }
 
-export default function EnquiryForm({ categories = [] }: { categories?: string[] }) {
+export default function EnquiryForm({ programmes = [] }: { programmes?: { id: string; title: string; uniName: string }[] }) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -106,9 +106,11 @@ export default function EnquiryForm({ categories = [] }: { categories?: string[]
             <label style={{ display: 'block' }}>
               <span style={labelStyle}>Programme of interest</span>
               <select name="programme" style={inputStyle}>
-                <option value="">Select a category…</option>
-                {categories.map((cat) => (
-                  <option key={cat} value={cat}>{cat}</option>
+                <option value="">Select a programme…</option>
+                {programmes.map((p) => (
+                  <option key={p.id} value={`${p.title} — ${p.uniName}`}>
+                    {p.title} — {p.uniName}
+                  </option>
                 ))}
                 <option value="Not sure yet">Not sure yet</option>
               </select>

@@ -3,17 +3,10 @@ import FAQAccordion from '@/components/shared/FAQAccordion'
 import { WhatsAppIcon } from '@/components/shared/icons'
 import { faqs, contact } from '@/data/site'
 import ContactMap from '@/components/contact/ContactMap'
-import { getProgrammeCategories } from '@/sanity/queries'
-
-const CATEGORY_LABELS: Record<string, string> = {
-  mba: 'MBA Programmes',
-  undergraduate: 'Undergraduate',
-  postgraduate: 'Postgraduate',
-}
+import { getAllProgrammeTitles } from '@/sanity/queries'
 
 export default async function ContactPage() {
-  const raw = await getProgrammeCategories()
-  const categories = raw.map(({ cat }) => CATEGORY_LABELS[cat] ?? cat.charAt(0).toUpperCase() + cat.slice(1))
+  const programmes = await getAllProgrammeTitles()
 
   return (
     <>
@@ -67,7 +60,7 @@ export default async function ContactPage() {
           >
             Enquiry form
           </h2>
-          <EnquiryForm categories={categories} />
+          <EnquiryForm programmes={programmes} />
         </div>
 
         {/* Right — WhatsApp + address + map */}

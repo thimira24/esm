@@ -47,6 +47,12 @@ export async function getProgrammesByCategory(cat: ProgrammeCategory): Promise<P
   )
 }
 
+export async function getAllProgrammeTitles(): Promise<{ id: string; title: string; uniName: string }[]> {
+  return client.fetch(
+    `*[_type == "programme"] | order(cat asc, order asc, title asc) { "id": id.current, title, uniName }`
+  )
+}
+
 export async function getProgrammeCategories() {
   const programmes = await client.fetch(
     `*[_type == "programme"] | order(order asc) { "id": id.current, title, cat, level }`
