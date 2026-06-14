@@ -50,17 +50,17 @@ export default async function ContactPage() {
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
           gap: 'clamp(36px, 5vw, 56px)',
-          alignItems: 'start',
+          alignItems: 'stretch',
         }}
       >
         {/* Form */}
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
           <EnquiryForm programmes={programmes} formspree={contact.formspree} />
         </div>
 
         {/* Right — address + map */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-          <div style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 18, padding: 26 }}>
+          <div style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 18, padding: 26, flexGrow: 1 }}>
             <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.1rem', color: '#1B2A4A', margin: '0 0 14px' }}>
               Visit us
             </h3>

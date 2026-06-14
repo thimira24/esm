@@ -65,6 +65,8 @@ export default function EnquiryForm({
         borderRadius: 22,
         padding: 'clamp(26px, 3.5vw, 38px)',
         boxShadow: '0 20px 50px rgba(15,29,51,0.1)',
+        height: '100%',
+        boxSizing: 'border-box' as const,
       }}
     >
       {status === 'success' ? (
