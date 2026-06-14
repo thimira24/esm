@@ -34,7 +34,7 @@ export default function PartnersPage() {
     <>
       {/* Hero */}
       <section style={{ background: '#F2F4F7', borderBottom: '1px solid #E6E9F0' }}>
-        <div style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(48px, 6vw, 80px) 0', textAlign: 'center' }}>
+        <div style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(48px, 6vw, 80px) 0' }}>
           <span style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 13, letterSpacing: '1.5px', color: '#D4891A', textTransform: 'uppercase' }}>
             Partnerships
           </span>
@@ -46,8 +46,7 @@ export default function PartnersPage() {
               lineHeight: 1.08,
               letterSpacing: '-1px',
               color: '#1B2A4A',
-              margin: '14px auto 0',
-              maxWidth: '18em',
+              margin: '14px 0 0',
             }}
           >
             University &amp; accreditation partners
@@ -57,7 +56,7 @@ export default function PartnersPage() {
               fontSize: 'clamp(1.05rem, 1.4vw, 1.18rem)',
               lineHeight: 1.6,
               color: '#48536B',
-              margin: '16px auto 0',
+              margin: '16px 0 0',
               maxWidth: '42em',
             }}
           >

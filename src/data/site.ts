@@ -120,7 +120,7 @@ export const contact = {
   phone: '+971 XX XXX XXXX',
   email: 'enquiries@esmglobal.co',
   website: 'esmglobal.co',
-  whatsapp: 'https://wa.me/971XXXXXXXXX',
+  whatsapp: 'https://wa.me/447537152855',
   formspree: 'https://formspree.io/f/mnjyorwe',
 }
 

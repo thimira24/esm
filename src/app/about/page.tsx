@@ -1,4 +1,5 @@
-import { whyEsm, partners, aboutTimeline } from '@/data/site'
+import Image from 'next/image'
+import { whyEsm, aboutTimeline } from '@/data/site'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 import SectionHeader from '@/components/shared/SectionHeader'
 import Testimonials from '@/components/home/Testimonials'
@@ -67,11 +68,19 @@ export default function AboutPage() {
               position: 'relative',
               minHeight: 'clamp(280px, 34vw, 380px)',
               borderRadius: 24,
-              background: 'radial-gradient(120% 120% at 80% 12%, rgba(245,166,35,0.45), transparent 52%), linear-gradient(135deg, #243a63, #0F1D33)',
+              overflow: 'hidden',
               boxShadow: '0 26px 60px rgba(15,29,51,0.28)',
             }}
           >
-            <div className="dot-pattern-sm" style={{ position: 'absolute', inset: 0, borderRadius: 24 }} />
+            <Image
+              src="/hero-graduate.png"
+              alt="ESM graduate in cap and gown"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ objectFit: 'cover', objectPosition: 'center top' }}
+            />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,29,51,0.45) 0%, transparent 60%)' }} />
           </div>
         </div>
       </section>
@@ -176,28 +185,6 @@ export default function AboutPage() {
 
       {/* Testimonials — reuse shared component */}
       <Testimonials />
-
-      {/* Accreditations */}
-      <section style={{ background: 'linear-gradient(140deg, #1B2A4A, #0F1D33)', position: 'relative', overflow: 'hidden' }}>
-        <div className="dot-pattern" style={{ position: 'absolute', inset: 0 }} />
-        <div style={{ position: 'relative', width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(54px, 7vw, 88px) 0', textAlign: 'center' }}>
-          <h2 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.7rem, 3vw, 2.3rem)', color: '#fff', margin: 0 }}>
-            Accreditations &amp; memberships
-          </h2>
-          <p style={{ color: '#B8C1D4', margin: '12px auto 0', maxWidth: '34em' }}>
-            We partner with recognised UK awarding bodies and quality-assurance organisations.{' '}
-            <span style={{ color: '#F5A623' }}>(Partner logos to be supplied by the ESM marketing team.)</span>
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 16, marginTop: 38 }}>
-            {partners.map((p) => (
-              <div key={p.m} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 14, padding: '24px 16px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 52, height: 52, borderRadius: 12, background: '#fff', fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 16, color: '#1B2A4A' }}>{p.m}</span>
-                <span style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 13, color: '#C3CBDB' }}>{p.l}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <EnquiryBlock />
     </>
