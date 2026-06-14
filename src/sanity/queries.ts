@@ -84,6 +84,13 @@ export async function getFaqs() {
   return client.fetch(`*[_type == "faq"] | order(order asc) { question, answer }`)
 }
 
+export async function getLegalPage(slug: string) {
+  return client.fetch(
+    `*[_type == "legalPage" && slug.current == $slug][0] { title, lastUpdated, content }`,
+    { slug }
+  )
+}
+
 export async function getPartners() {
   return client.fetch(`*[_type == "partner"] | order(order asc) { name, type, logoPath }`)
 }
