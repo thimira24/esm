@@ -8,6 +8,8 @@ export interface Programme {
   duration: string
   mode: string
   awarding: string
+  uniLogo: string
+  uniName: string
   fee: string
   tag: string
   blurb: string
@@ -44,15 +46,15 @@ const entry = [
 ]
 
 const raw = [
-  { id: 'biz-l4', cat: 'business', title: 'Level 4 Diploma in Business Management', level: 'Level 4 · RQF', duration: '9 months', mode: 'Online', awarding: 'UK Awarding Body', fee: 'AED 9,500', tag: 'Foundation', blurb: 'Build core management foundations across operations, marketing, finance and people.' },
-  { id: 'biz-l5', cat: 'business', title: 'Level 5 Diploma in Business Management', level: 'Level 5 · RQF', duration: '9 months', mode: 'Online / Blended', awarding: 'UK Awarding Body', fee: 'AED 11,500', tag: 'Popular', blurb: 'Advance into strategy, project management and organisational behaviour.' },
-  { id: 'biz-l7', cat: 'business', title: 'Level 7 Diploma in Strategic Management & Leadership', level: 'Level 7 · MBA Pathway', duration: '10 months', mode: 'Online', awarding: 'UK Awarding Body', fee: 'AED 16,900', tag: 'MBA Top-Up', blurb: 'A postgraduate leadership credential with a direct top-up route to a UK MBA.' },
-  { id: 'tech-l4', cat: 'technology', title: 'Level 4 Diploma in Computing', level: 'Level 4 · RQF', duration: '9 months', mode: 'Online', awarding: 'UK Awarding Body', fee: 'AED 9,900', tag: 'Foundation', blurb: 'Programming, databases and systems analysis for a career in software.' },
-  { id: 'tech-l5', cat: 'technology', title: 'Level 5 Diploma in Data Analytics', level: 'Level 5 · RQF', duration: '9 months', mode: 'Online', awarding: 'UK Awarding Body', fee: 'AED 12,500', tag: 'In demand', blurb: 'Turn data into decisions with analytics, visualisation and the basics of machine learning.' },
-  { id: 'tech-l5c', cat: 'technology', title: 'Level 5 Diploma in Cyber Security', level: 'Level 5 · RQF', duration: '10 months', mode: 'Blended', awarding: 'UK Awarding Body', fee: 'AED 13,200', tag: 'New', blurb: 'Defend systems and networks with practical, industry-aligned security skills.' },
-  { id: 'hsc-l3', cat: 'health', title: 'Level 3 Diploma in Health & Social Care', level: 'Level 3 · RQF', duration: '6 months', mode: 'Online', awarding: 'UK Awarding Body', fee: 'AED 7,500', tag: 'Entry', blurb: 'Your first step into the care sector, covering safeguarding and person-centred care.' },
-  { id: 'hsc-l5', cat: 'health', title: 'Level 5 Diploma in Health & Social Care Management', level: 'Level 5 · RQF', duration: '12 months', mode: 'Online / Blended', awarding: 'UK Awarding Body', fee: 'AED 13,900', tag: 'Popular', blurb: 'Step into leadership across health and social care services.' },
-  { id: 'hsc-l7', cat: 'health', title: 'Level 7 Diploma in Health & Social Care Management', level: 'Level 7 · Postgraduate', duration: '12 months', mode: 'Online', awarding: 'UK Awarding Body', fee: 'AED 17,500', tag: 'Advanced', blurb: 'Strategic leadership for senior and director-level roles across the care sector.' },
+  { id: 'biz-l4',  cat: 'business',   title: 'Level 4 Diploma in Business Management',                      level: 'Level 4 · RQF',         duration: '9 months',  mode: 'Online',            awarding: 'Qualifi',  uniLogo: '/logos/awarding-orgs/qualifi.svg',  uniName: 'Qualifi',  fee: 'AED 9,500',  tag: 'Foundation', blurb: 'Build core management foundations across operations, marketing, finance and people.' },
+  { id: 'biz-l5',  cat: 'business',   title: 'Level 5 Diploma in Business Management',                      level: 'Level 5 · RQF',         duration: '9 months',  mode: 'Online / Blended',  awarding: 'Qualifi',  uniLogo: '/logos/awarding-orgs/qualifi.svg',  uniName: 'Qualifi',  fee: 'AED 11,500', tag: 'Popular',    blurb: 'Advance into strategy, project management and organisational behaviour.' },
+  { id: 'biz-l7',  cat: 'business',   title: 'Level 7 Diploma in Strategic Management & Leadership',        level: 'Level 7 · MBA Pathway', duration: '10 months', mode: 'Online',            awarding: 'Qualifi',  uniLogo: '/logos/awarding-orgs/qualifi.svg',  uniName: 'Qualifi',  fee: 'AED 16,900', tag: 'MBA Top-Up', blurb: 'A postgraduate leadership credential with a direct top-up route to a UK MBA.' },
+  { id: 'tech-l4', cat: 'technology', title: 'Level 4 Diploma in Computing',                                level: 'Level 4 · RQF',         duration: '9 months',  mode: 'Online',            awarding: 'Eduqual', uniLogo: '/logos/awarding-orgs/eduqual.svg',  uniName: 'Eduqual', fee: 'AED 9,900',  tag: 'Foundation', blurb: 'Programming, databases and systems analysis for a career in software.' },
+  { id: 'tech-l5', cat: 'technology', title: 'Level 5 Diploma in Data Analytics',                           level: 'Level 5 · RQF',         duration: '9 months',  mode: 'Online',            awarding: 'Eduqual', uniLogo: '/logos/awarding-orgs/eduqual.svg',  uniName: 'Eduqual', fee: 'AED 12,500', tag: 'In demand',  blurb: 'Turn data into decisions with analytics, visualisation and the basics of machine learning.' },
+  { id: 'tech-l5c',cat: 'technology', title: 'Level 5 Diploma in Cyber Security',                           level: 'Level 5 · RQF',         duration: '10 months', mode: 'Blended',           awarding: 'Eduqual', uniLogo: '/logos/awarding-orgs/eduqual.svg',  uniName: 'Eduqual', fee: 'AED 13,200', tag: 'New',        blurb: 'Defend systems and networks with practical, industry-aligned security skills.' },
+  { id: 'hsc-l3',  cat: 'health',     title: 'Level 3 Diploma in Health & Social Care',                     level: 'Level 3 · RQF',         duration: '6 months',  mode: 'Online',            awarding: 'Qualifi',  uniLogo: '/logos/awarding-orgs/qualifi.svg',  uniName: 'Qualifi',  fee: 'AED 7,500',  tag: 'Entry',      blurb: 'Your first step into the care sector, covering safeguarding and person-centred care.' },
+  { id: 'hsc-l5',  cat: 'health',     title: 'Level 5 Diploma in Health & Social Care Management',          level: 'Level 5 · RQF',         duration: '12 months', mode: 'Online / Blended',  awarding: 'Qualifi',  uniLogo: '/logos/awarding-orgs/qualifi.svg',  uniName: 'Qualifi',  fee: 'AED 13,900', tag: 'Popular',    blurb: 'Step into leadership across health and social care services.' },
+  { id: 'hsc-l7',  cat: 'health',     title: 'Level 7 Diploma in Health & Social Care Management',          level: 'Level 7 · Postgraduate', duration: '12 months', mode: 'Online',            awarding: 'Qualifi',  uniLogo: '/logos/awarding-orgs/qualifi.svg',  uniName: 'Qualifi',  fee: 'AED 17,500', tag: 'Advanced',   blurb: 'Strategic leadership for senior and director-level roles across the care sector.' },
 ] as const
 
 export const programmes: Programme[] = raw.map((p) => ({
@@ -61,6 +63,8 @@ export const programmes: Programme[] = raw.map((p) => ({
   overview: overviewByCat[p.cat as ProgrammeCategory],
   modules: modulesByCat[p.cat as ProgrammeCategory],
   entry,
+  uniLogo: p.uniLogo,
+  uniName: p.uniName,
 }))
 
 export const featuredIds = ['biz-l7', 'tech-l5', 'hsc-l5', 'biz-l5', 'tech-l5c', 'hsc-l7']

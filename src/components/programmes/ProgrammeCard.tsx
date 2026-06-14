@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { ClockIcon, MonitorIcon, ArrowRightIcon, ImagePlaceholderIcon } from '@/components/shared/icons'
+import Image from 'next/image'
+import { ClockIcon, MonitorIcon, ArrowRightIcon } from '@/components/shared/icons'
 import type { Programme } from '@/data/programmes'
 
 interface ProgrammeCardProps {
@@ -47,15 +48,21 @@ export default function ProgrammeCard({ programme: p, compact = false }: Program
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: 44,
-              height: 44,
-              borderRadius: 11,
+              width: 80,
+              height: 36,
+              borderRadius: 8,
               background: '#F4F6FA',
               border: '1px solid #E6E9F0',
-              color: '#AEB8C9',
+              padding: '4px 8px',
             }}
           >
-            <ImagePlaceholderIcon />
+            <Image
+              src={p.uniLogo}
+              alt={p.uniName}
+              width={72}
+              height={28}
+              style={{ objectFit: 'contain', width: '100%', height: 28 }}
+            />
           </span>
           <span
             style={{
