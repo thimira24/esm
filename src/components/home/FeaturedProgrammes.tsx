@@ -1,9 +1,11 @@
 import Link from 'next/link'
-import { featured } from '@/data/programmes'
+import { getFeaturedProgrammes } from '@/sanity/queries'
 import ProgrammeCard from '@/components/programmes/ProgrammeCard'
 import SectionHeader from '@/components/shared/SectionHeader'
 
-export default function FeaturedProgrammes() {
+export default async function FeaturedProgrammes() {
+  const featured = await getFeaturedProgrammes()
+
   return (
     <section style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(64px, 8vw, 108px) 0' }}>
       <div

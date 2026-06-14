@@ -1,13 +1,16 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { programmes } from '@/data/programmes'
+import { getAllProgrammes, getProgrammeById } from '@/sanity/queries'
 import ProgrammeCard from '@/components/programmes/ProgrammeCard'
 import FAQAccordion from '@/components/shared/FAQAccordion'
 import { CheckIcon, StarIcon, WhatsAppIcon } from '@/components/shared/icons'
 import { faqs, contact } from '@/data/site'
 
-export function generateStaticParams() {
+export const revalidate = 60
+
+export async function generateStaticParams() {
+  const programmes = await getAllProgrammes()
   return programmes.map((p) => ({ id: p.id }))
 }
 
@@ -60,12 +63,15 @@ const partnerFacts = [
 
 export default async function ProgrammeDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const programme = programmes.find((p) => p.id === id)
+  const [programme, allProgrammes] = await Promise.all([
+    getProgrammeById(id),
+    getAllProgrammes(),
+  ])
   if (!programme) notFound()
 
-  const similar = programmes
+  const similar = allProgrammes
     .filter((p) => p.cat === programme.cat && p.id !== programme.id)
-    .concat(programmes.filter((p) => p.cat !== programme.cat && p.id !== programme.id))
+    .concat(allProgrammes.filter((p) => p.cat !== programme.cat && p.id !== programme.id))
     .slice(0, 3)
 
   return (

@@ -1,0 +1,132 @@
+import { defineField, defineType } from 'sanity'
+
+export const programme = defineType({
+  name: 'programme',
+  title: 'Programme',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'id',
+      title: 'ID (URL slug)',
+      type: 'slug',
+      description: 'Used in the URL e.g. biz-l5. Do not change after publishing.',
+      options: { source: 'title' },
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'title',
+      title: 'Programme title',
+      type: 'string',
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'cat',
+      title: 'Category',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Business & Management', value: 'business' },
+          { title: 'Technology', value: 'technology' },
+          { title: 'Health & Social Care', value: 'health' },
+        ],
+        layout: 'radio',
+      },
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'level',
+      title: 'Level',
+      description: 'e.g. Level 5 · RQF',
+      type: 'string',
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'duration',
+      title: 'Duration',
+      description: 'e.g. 9 months',
+      type: 'string',
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'mode',
+      title: 'Study mode',
+      description: 'e.g. Online  or  Online / Blended',
+      type: 'string',
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'fee',
+      title: 'Fee',
+      description: 'e.g. AED 11,500',
+      type: 'string',
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'tag',
+      title: 'Badge / tag',
+      description: 'Short label shown on the card e.g. Popular, New, MBA Top-Up',
+      type: 'string',
+    }),
+    defineField({
+      name: 'blurb',
+      title: 'Short description (card)',
+      description: 'One sentence shown on the programme card.',
+      type: 'text',
+      rows: 2,
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'uniName',
+      title: 'Awarding university name',
+      type: 'string',
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'uniLogo',
+      title: 'University logo path',
+      description: 'Path to logo file in /public e.g. /logos/universities/derby.svg',
+      type: 'string',
+    }),
+    defineField({
+      name: 'overview',
+      title: 'Programme overview (detail page)',
+      description: 'Two or three paragraphs shown at the top of the programme detail page.',
+      type: 'array',
+      of: [{ type: 'text' }],
+    }),
+    defineField({
+      name: 'modules',
+      title: 'Modules / units',
+      description: 'List of module names shown on the detail page.',
+      type: 'array',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'entry',
+      title: 'Entry requirements',
+      description: 'Bullet points shown on the detail page.',
+      type: 'array',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'featured',
+      title: 'Show on homepage?',
+      description: 'Tick to feature this programme on the home page.',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'order',
+      title: 'Display order',
+      description: 'Lower number = shown first. Leave blank for alphabetical.',
+      type: 'number',
+    }),
+  ],
+  preview: {
+    select: { title: 'title', subtitle: 'level' },
+  },
+  orderings: [
+    { title: 'Display order', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] },
+    { title: 'Category', name: 'catAsc', by: [{ field: 'cat', direction: 'asc' }] },
+  ],
+})
