@@ -84,10 +84,20 @@ export const universities = [
 // Legacy short-form used by the About page accreditations grid
 export const partners = universities.map((u) => ({ m: u.name.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase(), l: u.name }))
 
+export const awardingOrgs = [
+  { name: 'Eduqual', logo: '/logos/awarding-orgs/eduqual.svg' },
+  { name: 'Qualifi', logo: '/logos/awarding-orgs/qualifi.svg' },
+]
+
+export const profBodies = [
+  { name: 'Malvern', logo: '/logos/prof-bodies/malvern.svg' },
+  { name: 'Study Group', logo: '/logos/prof-bodies/studygroup.svg' },
+]
+
 export const partnerGroups = [
   { title: 'University Partners', desc: 'Degree-awarding UK universities whose programmes we represent and deliver across the region.', count: 8 },
-  { title: 'Awarding Organisations', desc: 'Regulated UK awarding bodies that certify and quality-assure our diplomas.', count: 4 },
-  { title: 'Professional Bodies', desc: 'Industry institutes offering recognition, membership and chartered progression.', count: 4 },
+  { title: 'Awarding Organisations', desc: 'Regulated UK awarding bodies that certify and quality-assure our diplomas.', count: 2 },
+  { title: 'Professional Bodies', desc: 'Industry institutes offering recognition, membership and chartered progression.', count: 2 },
   { title: 'Delivery & Employer Partners', desc: 'Delivery, employer and ecosystem partners that support our students and graduates.', count: 6 },
 ]
 

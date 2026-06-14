@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { partnerGroups, universities } from '@/data/site'
+import { partnerGroups, universities, awardingOrgs, profBodies } from '@/data/site'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 
 const LogoPlaceholder = () => (
@@ -78,7 +78,8 @@ export default function PartnersPage() {
         }}
       >
         {partnerGroups.map((g, gi) => {
-          const isUniversities = gi === 0
+          const realLogos = gi === 0 ? universities : gi === 1 ? awardingOrgs : gi === 2 ? profBodies : null
+          const hasRealLogos = realLogos !== null
           return (
             <div key={g.title}>
               {/* Group header */}
@@ -115,18 +116,18 @@ export default function PartnersPage() {
                     fontWeight: 700,
                     fontSize: 12.5,
                     letterSpacing: '0.4px',
-                    color: isUniversities ? '#1F8A5B' : '#D4891A',
-                    background: isUniversities ? '#EAF7EF' : '#FFF3DE',
+                    color: hasRealLogos ? '#1F8A5B' : '#D4891A',
+                    background: hasRealLogos ? '#EAF7EF' : '#FFF3DE',
                     padding: '7px 14px',
                     borderRadius: 100,
                   }}
                 >
-                  {isUniversities ? `${universities.length} partners` : `${g.count} logos to add`}
+                  {hasRealLogos ? `${realLogos.length} partners` : `${g.count} logos to add`}
                 </span>
               </div>
 
-              {/* University group — show real logos */}
-              {isUniversities ? (
+              {/* Real logo grid */}
+              {hasRealLogos ? (
                 <div
                   style={{
                     display: 'grid',
@@ -135,7 +136,7 @@ export default function PartnersPage() {
                     marginTop: 24,
                   }}
                 >
-                  {universities.map((u) => (
+                  {realLogos.map((u) => (
                     <div
                       key={u.name}
                       style={{
@@ -153,8 +154,8 @@ export default function PartnersPage() {
                         src={u.logo}
                         alt={u.name}
                         width={160}
-                        height={70}
-                        style={{ objectFit: 'contain', maxHeight: 60, width: 'auto' }}
+                        height={56}
+                        style={{ objectFit: 'contain', width: '100%', height: 56 }}
                       />
                     </div>
                   ))}
