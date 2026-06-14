@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 const USERNAME = process.env.PREVIEW_USER ?? 'esm'
 const PASSWORD = process.env.PREVIEW_PASS ?? 'esm2024'
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const auth = req.headers.get('authorization')
 
   if (auth) {
