@@ -42,28 +42,30 @@ export default function ProgrammeCard({ programme: p, compact = false }: Program
       {/* Top row: icon + tag + arrow */}
       <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
         <span style={{ display: 'flex', alignItems: 'center', gap: 11, minWidth: 0 }}>
-          <span
-            style={{
-              flexShrink: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: 80,
-              height: 36,
-              borderRadius: 8,
-              background: '#F4F6FA',
-              border: '1px solid #E6E9F0',
-              padding: '4px 8px',
-            }}
-          >
-            <Image
-              src={p.uniLogo}
-              alt={p.uniName}
-              width={72}
-              height={28}
-              style={{ objectFit: 'contain', width: '100%', height: 28 }}
-            />
-          </span>
+          {p.uniLogo && p.uniLogo !== '/logos/universities/placeholder.svg' && (
+            <span
+              style={{
+                flexShrink: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 110,
+                height: 48,
+                borderRadius: 10,
+                background: '#F4F6FA',
+                border: '1px solid #E6E9F0',
+                padding: '6px 10px',
+              }}
+            >
+              <Image
+                src={p.uniLogo}
+                alt={p.uniName ?? ''}
+                width={100}
+                height={40}
+                style={{ objectFit: 'contain', objectPosition: 'left center', width: '100%', height: 40 }}
+              />
+            </span>
+          )}
           <span
             style={{
               flexShrink: 0,
