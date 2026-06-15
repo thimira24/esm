@@ -23,7 +23,15 @@ export const programme = defineType({
       name: 'cat',
       title: 'Category',
       type: 'string',
-      description: 'Type a category name e.g. "MBA Programmes", "Undergraduate", "Postgraduate". Use the exact same spelling for all programmes in the same category.',
+      options: {
+        list: [
+          { title: 'MBA', value: 'mba' },
+          { title: 'Undergraduate', value: 'undergraduate' },
+          { title: 'Postgraduate', value: 'postgraduate' },
+          { title: 'Technology', value: 'technology' },
+        ],
+        layout: 'dropdown',
+      },
       validation: (r) => r.required(),
     }),
     defineField({
@@ -78,20 +86,6 @@ export const programme = defineType({
         disableNew: false,
       },
       description: 'Select the awarding university from the Partners list.',
-    }),
-    defineField({
-      name: 'uniName',
-      title: 'University name (legacy — use field above)',
-      type: 'string',
-      description: 'Kept for backwards-compatibility. Use the "Awarding university" reference above instead.',
-      hidden: ({ document }) => !!document?.university,
-    }),
-    defineField({
-      name: 'uniLogo',
-      title: 'University logo path (legacy — use Partners)',
-      description: 'No longer needed — logo is pulled from the Partners record.',
-      type: 'string',
-      hidden: ({ document }) => !!document?.university,
     }),
     defineField({
       name: 'overview',

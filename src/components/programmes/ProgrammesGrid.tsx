@@ -49,7 +49,8 @@ export default function ProgrammesGrid({ programmes, universities: universitiesP
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
           {categories.map((cat) => {
             const active = catFilter === cat
-            const label = cat === 'all' ? 'All Programmes' : cat
+            const catLabels: Record<string, string> = { mba: 'MBA', undergraduate: 'Undergraduate', postgraduate: 'Postgraduate', technology: 'Technology' }
+          const label = cat === 'all' ? 'All Programmes' : (catLabels[cat] ?? cat)
             return (
               <button
                 key={cat}
