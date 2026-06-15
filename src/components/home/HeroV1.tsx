@@ -168,7 +168,7 @@ export default async function HeroV1() {
             alt={h.heading ?? 'ESM graduate'}
             fill
             priority
-            unoptimized={imgSrc.startsWith('https://cdn.sanity.io')}
+            unoptimized
             style={{ objectFit: 'cover', objectPosition: 'center top', borderRadius: 24 }}
           />
           <div

@@ -95,7 +95,7 @@ export default async function AboutPage() {
               fill
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
-              unoptimized={imgSrc.startsWith('https://cdn.sanity.io')}
+              unoptimized
               style={{ objectFit: 'cover', objectPosition: 'center top' }}
             />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,29,51,0.45) 0%, transparent 60%)' }} />
