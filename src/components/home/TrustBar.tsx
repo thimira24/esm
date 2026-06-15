@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { getPartners } from '@/sanity/queries'
 
 export const revalidate = 60
@@ -50,15 +49,15 @@ export default async function TrustBar() {
                   height: 48,
                 }}
               >
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={u.logoPath}
                   alt={u.name}
-                  width={140}
-                  height={48}
                   style={{
                     objectFit: 'contain',
                     objectPosition: 'center',
                     maxHeight: 44,
+                    maxWidth: 140,
                     width: 'auto',
                     filter: 'grayscale(1)',
                     opacity: 0.65,
