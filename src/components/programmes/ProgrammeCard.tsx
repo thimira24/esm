@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { ClockIcon, MonitorIcon, ArrowRightIcon } from '@/components/shared/icons'
 import type { Programme } from '@/data/programmes'
 
@@ -57,11 +56,10 @@ export default function ProgrammeCard({ programme: p, compact = false }: Program
                 padding: '6px 10px',
               }}
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={p.uniLogo}
                 alt={p.uniName ?? ''}
-                width={100}
-                height={40}
                 style={{ objectFit: 'contain', objectPosition: 'left center', width: '100%', height: 40 }}
               />
             </span>
