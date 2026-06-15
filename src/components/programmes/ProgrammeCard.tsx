@@ -50,10 +50,6 @@ export default function ProgrammeCard({ programme: p, compact = false }: Program
                 justifyContent: 'center',
                 width: 140,
                 height: 60,
-                borderRadius: 10,
-                background: '#F4F6FA',
-                border: '1px solid #E6E9F0',
-                padding: '8px 12px',
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
