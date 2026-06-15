@@ -238,13 +238,13 @@ export default function HeaderClient({ universities }: { universities: Universit
                         <img
                           src={uni.logoPath}
                           alt=""
-                          style={{ width: 34, height: 34, objectFit: 'contain', flexShrink: 0, borderRadius: 6 }}
+                          style={{ width: 72, height: 32, objectFit: 'contain', objectPosition: 'left center', flexShrink: 0 }}
                         />
                       ) : (
                         <div
                           style={{
-                            width: 34,
-                            height: 34,
+                            width: 72,
+                            height: 32,
                             borderRadius: 6,
                             background: '#F2F4F7',
                             flexShrink: 0,
