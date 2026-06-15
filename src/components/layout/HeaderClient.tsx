@@ -234,16 +234,14 @@ export default function HeaderClient({ universities }: { universities: Universit
                       }}
                     >
                       {uni.logoPath ? (
-                        <div style={{ width: 80, height: 40, display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={uni.logoPath}
-                            alt=""
-                            style={{ width: '100%', height: 'auto', maxHeight: 40, objectFit: 'contain' }}
-                          />
-                        </div>
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          src={uni.logoPath}
+                          alt=""
+                          style={{ width: 80, height: 36, objectFit: 'contain', objectPosition: 'left center', flexShrink: 0 }}
+                        />
                       ) : (
-                        <div style={{ width: 80, height: 40, borderRadius: 6, background: '#F2F4F7', flexShrink: 0 }} />
+                        <div style={{ width: 80, height: 36, borderRadius: 6, background: '#F2F4F7', flexShrink: 0 }} />
                       )}
                       <span
                         style={{
