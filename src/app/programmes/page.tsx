@@ -1,12 +1,15 @@
 import { Suspense } from 'react'
-import { getAllProgrammes } from '@/sanity/queries'
+import { getAllProgrammes, getPartners } from '@/sanity/queries'
 import ProgrammesGrid from '@/components/programmes/ProgrammesGrid'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 
 export const revalidate = 60 // re-fetch from Sanity at most once per minute
 
 export default async function ProgrammesPage() {
-  const programmes = await getAllProgrammes()
+  const [programmes, partners] = await Promise.all([getAllProgrammes(), getPartners()])
+  const universities = (partners as { name: string; type: string }[])
+    .filter((p) => p.type === 'university')
+    .map((p) => p.name)
 
   return (
     <>
@@ -53,7 +56,7 @@ export default async function ProgrammesPage() {
       </section>
 
       <Suspense fallback={<div style={{ padding: '60px 0', textAlign: 'center', color: '#9AA6BE' }}>Loading…</div>}>
-        <ProgrammesGrid programmes={programmes} />
+        <ProgrammesGrid programmes={programmes} universities={universities} />
       </Suspense>
 
       <EnquiryBlock />

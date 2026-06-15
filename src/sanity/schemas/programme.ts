@@ -69,16 +69,29 @@ export const programme = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
+      name: 'university',
+      title: 'Awarding university',
+      type: 'reference',
+      to: [{ type: 'partner' }],
+      options: {
+        filter: 'type == "university"',
+        disableNew: false,
+      },
+      description: 'Select the awarding university from the Partners list.',
+    }),
+    defineField({
       name: 'uniName',
-      title: 'Awarding university name',
+      title: 'University name (legacy — use field above)',
       type: 'string',
-      validation: (r) => r.required(),
+      description: 'Kept for backwards-compatibility. Use the "Awarding university" reference above instead.',
+      hidden: ({ document }) => !!document?.university,
     }),
     defineField({
       name: 'uniLogo',
-      title: 'University logo path',
-      description: 'Path to logo file in /public e.g. /logos/universities/derby.svg',
+      title: 'University logo path (legacy — use Partners)',
+      description: 'No longer needed — logo is pulled from the Partners record.',
       type: 'string',
+      hidden: ({ document }) => !!document?.university,
     }),
     defineField({
       name: 'overview',
