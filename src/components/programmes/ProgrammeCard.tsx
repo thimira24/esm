@@ -41,7 +41,7 @@ export default function ProgrammeCard({ programme: p, compact = false }: Program
       {/* Top row: icon + tag + arrow */}
       <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
         <span style={{ display: 'flex', alignItems: 'center', gap: 11, minWidth: 0 }}>
-          {p.uniLogo && p.uniLogo !== '/logos/universities/placeholder.svg' && (
+          {p.uniLogo && p.uniLogo.trim() !== '' && p.uniLogo !== '/logos/universities/placeholder.svg' && (
             <span
               style={{
                 flexShrink: 0,

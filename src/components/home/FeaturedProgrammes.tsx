@@ -20,7 +20,7 @@ const CATEGORY_META: Record<string, {
   undergraduate: {
     label: 'Undergraduate',
     desc: 'Level 5 Extended Diploma + UK Honours degree. Earn a fully accredited BA or BSc through a flexible online pathway — no traditional A-levels required.',
-    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=700&q=80',
+    image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=700&q=80',
     order: 2,
   },
   postgraduate: {
@@ -119,8 +119,8 @@ export default async function FeaturedProgrammes() {
 
                   {/* Example programmes */}
                   <ul style={{ margin: '0 0 24px', padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 7 }}>
-                    {examples.map((title) => (
-                      <li key={title} style={{ display: 'flex', alignItems: 'flex-start', gap: 9 }}>
+                    {examples.map((title, i) => (
+                      <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 9 }}>
                         <span style={{ flexShrink: 0, marginTop: 5, width: 5, height: 5, borderRadius: '50%', background: '#F5A623', display: 'block' }} />
                         <span style={{ fontSize: '0.88rem', color: '#48536B', lineHeight: 1.45 }}>{title}</span>
                       </li>
