@@ -1,8 +1,12 @@
 import { getSiteSettings } from '@/sanity/queries'
 import SectionHeader from '@/components/shared/SectionHeader'
-import { ShieldIcon } from '@/components/shared/icons'
 
 export const revalidate = 60
+
+const CARD_ILLUSTRATIONS = [
+  '/illustrations/shield-check.png',
+  '/illustrations/calendar.png',
+]
 
 export default async function ValueProps() {
   const settings = await getSiteSettings()
@@ -20,7 +24,7 @@ export default async function ValueProps() {
           marginTop: 50,
         }}
       >
-        {values.map((v) => (
+        {values.map((v, i) => (
           <div
             key={v.title}
             style={{
@@ -31,19 +35,14 @@ export default async function ValueProps() {
               boxShadow: '0 1px 2px rgba(15,29,51,0.04)',
             }}
           >
-            <span
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 56,
-                height: 56,
-                borderRadius: 14,
-                background: 'linear-gradient(135deg, #FFF3DE, #FCE3B5)',
-              }}
-            >
-              <ShieldIcon />
-            </span>
+            {CARD_ILLUSTRATIONS[i] ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={CARD_ILLUSTRATIONS[i]}
+                alt=""
+                style={{ width: 90, height: 90, objectFit: 'contain' }}
+              />
+            ) : null}
             <h3
               style={{
                 fontFamily: 'var(--font-montserrat), sans-serif',
