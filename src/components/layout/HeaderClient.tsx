@@ -57,34 +57,13 @@ export default function HeaderClient({ universities }: { universities: Universit
         }}
       >
         {/* Logo */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 11, textDecoration: 'none' }}>
-          <span style={{ textAlign: 'left', lineHeight: 1 }}>
-            <span
-              style={{
-                display: 'block',
-                fontFamily: 'var(--font-montserrat), sans-serif',
-                fontWeight: 800,
-                fontSize: 18,
-                color: '#1B2A4A',
-                letterSpacing: '0.4px',
-              }}
-            >
-              ESM
-            </span>
-            <span
-              style={{
-                display: 'block',
-                fontFamily: 'var(--font-dm-sans), sans-serif',
-                fontWeight: 500,
-                fontSize: 9.5,
-                color: '#6B7689',
-                letterSpacing: '2.4px',
-                marginTop: 3,
-              }}
-            >
-              BUSINESS SCHOOL
-            </span>
-          </span>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/esm-logo-navbar.png"
+            alt="ESM Business School"
+            style={{ height: 44, width: 'auto', display: 'block' }}
+          />
         </Link>
 
         {/* Desktop nav */}

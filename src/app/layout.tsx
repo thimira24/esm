@@ -28,6 +28,8 @@ const dmSans = DM_Sans({
   display: 'swap',
 })
 
+export const revalidate = 60 // re-fetch site settings (WhatsApp, etc.) at most once per minute
+
 export const metadata: Metadata = {
   title: 'ESM Business School — Accredited British Qualifications',
   description:
