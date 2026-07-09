@@ -4,8 +4,8 @@ import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemas'
 import type { StructureBuilder } from 'sanity/structure'
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production'
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'msq7ysrf'
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 
 function partnerList(S: StructureBuilder, title: string, type: string, icon: string) {
   return S.listItem()
