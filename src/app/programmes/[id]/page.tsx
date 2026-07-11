@@ -13,6 +13,19 @@ export async function generateStaticParams() {
   return programmes.map((p) => ({ id: p.id }))
 }
 
+// UAE Dirham is pegged to USD at a fixed official rate (1 USD = 3.6725 AED).
+const AED_PER_USD = 3.6725
+
+// Convert an "AED 25,000" style fee to a rounded USD display, e.g. "≈ US$ 6,810".
+// Returns null if no numeric amount can be parsed, so the USD line is simply hidden.
+function feeInUsd(fee?: string): string | null {
+  if (!fee) return null
+  const amount = parseFloat(fee.replace(/[^\d.]/g, ''))
+  if (!amount || Number.isNaN(amount)) return null
+  const usd = Math.round(amount / AED_PER_USD / 10) * 10
+  return `≈ US$ ${usd.toLocaleString('en-US')}`
+}
+
 const studyMethods = [
   {
     icon: (
@@ -71,6 +84,8 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
   const contact = settings?.contact ?? {}
   const faqs = (sanityFaqs ?? []).map((f: { question: string; answer: string }) => ({ q: f.question, a: f.answer }))
   if (!programme) notFound()
+
+  const feeUsd = feeInUsd(programme.fee)
 
   const similar = allProgrammes
     .filter((p) => p.cat === programme.cat && p.id !== programme.id)
@@ -179,7 +194,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
             { label: 'Duration', value: programme.duration },
             { label: 'Mode', value: programme.mode },
             { label: 'Awarding body', value: programme.awarding },
-            { label: 'Indicative fee', value: programme.fee },
+            { label: 'Indicative fee', value: feeUsd ? `${programme.fee} · ${feeUsd}` : programme.fee },
           ].map((fact) => (
             <div key={fact.label} style={{ background: '#fff', padding: '24px 20px' }}>
               <div
@@ -321,6 +336,9 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
             <div style={{ background: 'linear-gradient(140deg, #1B2A4A, #0F1D33)', borderRadius: 18, padding: 26, color: '#fff' }}>
               <div style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', color: '#9AA6BE' }}>Total programme fee</div>
               <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 2.6rem)', color: '#F5A623', marginTop: 6 }}>{programme.fee}</div>
+              {feeUsd && (
+                <div style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 16, color: '#C3CBDB', marginTop: 3 }}>{feeUsd}</div>
+              )}
               <div style={{ fontSize: 14, color: '#C3CBDB', marginTop: 4 }}>or flexible monthly instalments</div>
               <Link
                 href="/contact"
