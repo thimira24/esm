@@ -61,7 +61,6 @@ export default defineConfig({
   title: 'ESM Business School',
   projectId,
   dataset,
-  basePath: '/studio',
   plugins: [structureTool({ structure }), visionTool()],
   schema: { types: schemaTypes },
 })
