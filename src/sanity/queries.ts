@@ -78,6 +78,7 @@ export async function getSiteSettings() {
     values,
     whyEsm,
     contact,
+    social,
     hero {
       eyebrow,
       heading,

@@ -7,6 +7,9 @@ import { nav } from '@/data/site'
 
 type University = { name: string; logoPath: string }
 
+// Set to true to bring the "Universities" nav dropdown back (desktop + mobile).
+const SHOW_UNIVERSITIES = false
+
 export default function HeaderClient({ universities }: { universities: University[] }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileUniOpen, setMobileUniOpen] = useState(false)
@@ -103,6 +106,7 @@ export default function HeaderClient({ universities }: { universities: Universit
           ))}
 
           {/* Universities mega-dropdown trigger */}
+          {SHOW_UNIVERSITIES && (
           <div
             style={{ position: 'relative' }}
             onMouseEnter={() => setUniHover(true)}
@@ -255,6 +259,7 @@ export default function HeaderClient({ universities }: { universities: Universit
               </div>
             )}
           </div>
+          )}
 
           <Link
             href="/contact"
@@ -335,6 +340,7 @@ export default function HeaderClient({ universities }: { universities: Universit
             ))}
 
             {/* Universities accordion — mobile */}
+            {SHOW_UNIVERSITIES && (
             <div>
               <button
                 onClick={() => setMobileUniOpen(!mobileUniOpen)}
@@ -423,6 +429,7 @@ export default function HeaderClient({ universities }: { universities: Universit
                 </div>
               )}
             </div>
+            )}
 
             <Link
               href="/contact"

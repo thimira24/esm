@@ -182,6 +182,22 @@ export const siteSettings = defineType({
         defineField({ name: 'formspree', title: 'Formspree URL', type: 'url' }),
       ],
     }),
+
+    // ── Social links ─────────────────────────────────────────
+    defineField({
+      name: 'social',
+      title: 'Social media links',
+      description: 'Paste a full URL to show that icon in the footer. Leave a field empty to hide its icon.',
+      type: 'object',
+      group: 'contact',
+      fields: [
+        defineField({ name: 'linkedin', title: 'LinkedIn URL', type: 'url' }),
+        defineField({ name: 'facebook', title: 'Facebook URL', type: 'url' }),
+        defineField({ name: 'instagram', title: 'Instagram URL', type: 'url' }),
+        defineField({ name: 'twitter', title: 'Twitter / X URL', type: 'url' }),
+        defineField({ name: 'youtube', title: 'YouTube URL', type: 'url' }),
+      ],
+    }),
   ],
   preview: { prepare: () => ({ title: 'Site Settings' }) },
 })
