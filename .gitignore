@@ -19,3 +19,6 @@ out/
 .dev.vars
 cloudflare-env.d.ts
 .wrangler/
+
+# Sanity Studio build output
+dist/
