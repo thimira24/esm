@@ -7,4 +7,7 @@ export default defineCliConfig({
   },
   // Hostname for the hosted Studio: https://<studioHost>.sanity.studio
   studioHost: 'esm-business-school',
+  deployment: {
+    appId: 'dcxadctl802p9zsz1jgas4nl',
+  },
 })
