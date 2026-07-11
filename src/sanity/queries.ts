@@ -10,7 +10,7 @@ const PROGRAMME_FIELDS = `
   mode,
   credits,
   "awarding": university->name,
-  "uniLogo": university->logoPath,
+  "uniLogo": coalesce(university->logo.asset->url, university->logoPath),
   "uniName": university->name,
   fee,
   tag,
@@ -124,5 +124,5 @@ export async function getLegalPage(slug: string) {
 }
 
 export async function getPartners() {
-  return client.fetch(`*[_type == "partner"] | order(order asc) { name, type, logoPath }`)
+  return client.fetch(`*[_type == "partner"] | order(order asc) { name, type, "logoPath": coalesce(logo.asset->url, logoPath) }`)
 }
