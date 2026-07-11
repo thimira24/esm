@@ -110,6 +110,22 @@ export default function ProgrammeCard({ programme: p, compact = false }: Program
         {p.level}
       </span>
 
+      {/* University name */}
+      {p.uniName && p.uniName.trim() !== '' && (
+        <span
+          style={{
+            display: 'block',
+            fontFamily: 'var(--font-dm-sans), sans-serif',
+            fontWeight: 600,
+            fontSize: 13,
+            color: '#D4891A',
+            marginTop: 6,
+          }}
+        >
+          {p.uniName}
+        </span>
+      )}
+
       {/* Title */}
       <span
         style={{
