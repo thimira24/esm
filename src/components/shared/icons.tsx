@@ -51,6 +51,21 @@ export const AwardIcon = ({ size = 15, color = '#D4891A' }: { size?: number; col
   </svg>
 )
 
+export const CapIcon = ({ size = 15, color = '#D4891A' }: { size?: number; color?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 10 12 5 2 10l10 5 10-5z" />
+    <path d="M6 12v5c3 2 9 2 12 0v-5" />
+    <path d="M22 10v6" />
+  </svg>
+)
+
+export const TagIcon = ({ size = 15, color = '#D4891A' }: { size?: number; color?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20.6 13.4 13 21a1.9 1.9 0 0 1-2.7 0l-7.3-7.3A2 2 0 0 1 2.4 12V4.4A2 2 0 0 1 4.4 2.4H12a2 2 0 0 1 1.4.6l7.2 7.2a1.9 1.9 0 0 1 0 2.7z" />
+    <circle cx="7.5" cy="7.5" r="1.3" />
+  </svg>
+)
+
 export const ImagePlaceholderIcon = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <rect x="3" y="3" width="18" height="18" rx="2" />

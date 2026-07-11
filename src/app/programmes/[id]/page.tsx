@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { getAllProgrammes, getProgrammeById, getSiteSettings, getFaqs } from '@/sanity/queries'
 import ProgrammeCard from '@/components/programmes/ProgrammeCard'
 import FAQAccordion from '@/components/shared/FAQAccordion'
-import { CheckIcon, StarIcon, WhatsAppIcon } from '@/components/shared/icons'
+import { CheckIcon, StarIcon, WhatsAppIcon, ClockIcon, MonitorIcon, AwardIcon, CapIcon, TagIcon } from '@/components/shared/icons'
 
 export const revalidate = 60
 
@@ -191,15 +191,18 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
           }}
         >
           {[
-            { label: 'Duration', value: programme.duration },
-            { label: 'Mode', value: programme.mode },
-            ...(programme.credits?.trim() ? [{ label: 'Credits', value: programme.credits }] : []),
-            { label: 'Awarding body', value: programme.awarding },
-            { label: 'Indicative fee', value: feeUsd ? `${programme.fee} · ${feeUsd}` : programme.fee },
+            { icon: <ClockIcon size={16} />, label: 'Duration', value: programme.duration },
+            { icon: <MonitorIcon size={16} />, label: 'Mode', value: programme.mode },
+            ...(programme.credits?.trim() ? [{ icon: <AwardIcon size={16} />, label: 'Credits', value: programme.credits }] : []),
+            { icon: <CapIcon size={16} />, label: 'Awarding body', value: programme.awarding },
+            { icon: <TagIcon size={16} />, label: 'Indicative fee', value: feeUsd ? `${programme.fee} · ${feeUsd}` : programme.fee },
           ].map((fact) => (
             <div key={fact.label} style={{ background: '#fff', padding: '24px 20px' }}>
               <div
                 style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
                   fontSize: 12,
                   color: '#8A93A6',
                   letterSpacing: '0.5px',
@@ -208,6 +211,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                   fontWeight: 600,
                 }}
               >
+                <span style={{ display: 'flex', flexShrink: 0 }}>{fact.icon}</span>
                 {fact.label}
               </div>
               <div
@@ -442,14 +446,31 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
             </a>
           </div>
 
-          {/* Testimonial */}
-          <div style={{ background: '#1B2A4A', borderRadius: 20, padding: 26, marginTop: 18 }}>
-            <div style={{ fontSize: 38, lineHeight: 0.6, color: '#F5A623', fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800 }}>&ldquo;</div>
-            <p style={{ fontSize: '1rem', lineHeight: 1.6, color: '#E4E8F0', margin: '12px 0 0' }}>
-              The credential opened the door — I moved into the role I&apos;d been aiming at for years.
-            </p>
-            <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: 14, color: '#fff', marginTop: 16 }}>
-              Daniel M. <span style={{ fontWeight: 400, color: '#9AA6BE', fontFamily: 'var(--font-open-sans), sans-serif' }}>· Graduate</span>
+          {/* Graduation gallery (placeholder images — replace in future) */}
+          <div style={{ marginTop: 18 }}>
+            <div
+              style={{
+                fontFamily: 'var(--font-dm-sans), sans-serif',
+                fontWeight: 700,
+                fontSize: 12,
+                letterSpacing: '0.6px',
+                textTransform: 'uppercase',
+                color: '#9AA6BE',
+                marginBottom: 12,
+              }}
+            >
+              Our graduates
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+              {['/images/graduation/grad-1.svg', '/images/graduation/grad-2.svg', '/images/graduation/grad-3.svg', '/images/graduation/grad-4.svg'].map((src) => (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  key={src}
+                  src={src}
+                  alt="ESM graduation"
+                  style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', borderRadius: 12, display: 'block' }}
+                />
+              ))}
             </div>
           </div>
         </aside>
