@@ -7,6 +7,7 @@ export interface Programme {
   level: string
   duration: string
   mode: string
+  credits?: string
   awarding: string
   uniLogo: string
   uniName: string

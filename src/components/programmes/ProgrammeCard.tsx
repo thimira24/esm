@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ClockIcon, MonitorIcon, ArrowRightIcon } from '@/components/shared/icons'
+import { ClockIcon, MonitorIcon, AwardIcon, ArrowRightIcon } from '@/components/shared/icons'
 import type { Programme } from '@/data/programmes'
 
 interface ProgrammeCardProps {
@@ -179,6 +179,22 @@ export default function ProgrammeCard({ programme: p, compact = false }: Program
           <MonitorIcon />
           {p.mode}
         </span>
+        {p.credits && p.credits.trim() !== '' && (
+          <span
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 7,
+              fontFamily: 'var(--font-dm-sans), sans-serif',
+              fontWeight: 500,
+              fontSize: 13,
+              color: '#5A647A',
+            }}
+          >
+            <AwardIcon />
+            {p.credits}
+          </span>
+        )}
       </span>
     </Link>
   )

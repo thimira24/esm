@@ -44,6 +44,13 @@ export const MonitorIcon = ({ size = 15, color = '#D4891A' }: { size?: number; c
   </svg>
 )
 
+export const AwardIcon = ({ size = 15, color = '#D4891A' }: { size?: number; color?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="8" r="6" />
+    <path d="M8.2 13.5 7 22l5-3 5 3-1.2-8.5" />
+  </svg>
+)
+
 export const ImagePlaceholderIcon = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <rect x="3" y="3" width="18" height="18" rx="2" />

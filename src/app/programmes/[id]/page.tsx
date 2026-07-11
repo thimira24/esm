@@ -193,6 +193,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
           {[
             { label: 'Duration', value: programme.duration },
             { label: 'Mode', value: programme.mode },
+            ...(programme.credits?.trim() ? [{ label: 'Credits', value: programme.credits }] : []),
             { label: 'Awarding body', value: programme.awarding },
             { label: 'Indicative fee', value: feeUsd ? `${programme.fee} · ${feeUsd}` : programme.fee },
           ].map((fact) => (

@@ -56,6 +56,12 @@ export const programme = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
+      name: 'credits',
+      title: 'Credits',
+      description: 'Optional. e.g. "120 credits" or "180 ECTS". Leave empty to hide it from the site.',
+      type: 'string',
+    }),
+    defineField({
       name: 'fee',
       title: 'Fee',
       description: 'e.g. AED 11,500',

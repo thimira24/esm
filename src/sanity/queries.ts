@@ -8,6 +8,7 @@ const PROGRAMME_FIELDS = `
   level,
   duration,
   mode,
+  credits,
   "awarding": university->name,
   "uniLogo": university->logoPath,
   "uniName": university->name,
