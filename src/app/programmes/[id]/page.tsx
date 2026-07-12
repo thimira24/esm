@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getAllProgrammes, getProgrammeById, getSiteSettings, getFaqs } from '@/sanity/queries'
 import ProgrammeCard from '@/components/programmes/ProgrammeCard'
+import GraduationGallery from '@/components/programmes/GraduationGallery'
 import FAQAccordion from '@/components/shared/FAQAccordion'
 import { CheckIcon, StarIcon, WhatsAppIcon, ClockIcon, MonitorIcon, AwardIcon, CapIcon, TagIcon } from '@/components/shared/icons'
 
@@ -90,9 +91,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
   // Graduation gallery: uploaded photos (Site Settings) or default placeholders.
   const placeholderGrads = ['/images/graduation/grad-1.svg', '/images/graduation/grad-2.svg', '/images/graduation/grad-3.svg', '/images/graduation/grad-4.svg']
   const uploadedGrads = ((settings?.graduationPhotos as string[] | undefined) ?? []).filter(Boolean)
-  const gradImages = uploadedGrads.length > 0
-    ? uploadedGrads.map((u) => (u.includes('cdn.sanity.io') ? `${u}?w=500&h=375&fit=crop&auto=format` : u))
-    : placeholderGrads
+  const gradImages = uploadedGrads.length > 0 ? uploadedGrads : placeholderGrads
 
   const similar = allProgrammes
     .filter((p) => p.cat === programme.cat && p.id !== programme.id)
@@ -468,17 +467,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
             >
               Our graduates
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-              {gradImages.map((src) => (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  key={src}
-                  src={src}
-                  alt="ESM graduation"
-                  style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', borderRadius: 12, display: 'block' }}
-                />
-              ))}
-            </div>
+            <GraduationGallery images={gradImages} />
           </div>
         </aside>
       </section>
