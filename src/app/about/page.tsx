@@ -1,8 +1,8 @@
 import Image from 'next/image'
-import { getSiteSettings } from '@/sanity/queries'
+import Link from 'next/link'
+import { getSiteSettings, getPartners } from '@/sanity/queries'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 import SectionHeader from '@/components/shared/SectionHeader'
-import Testimonials from '@/components/home/Testimonials'
 import { ShieldIcon } from '@/components/shared/icons'
 
 export const revalidate = 60
@@ -12,6 +12,14 @@ const VISION_ICONS = [
   <svg key="star" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l2.4 6.9H22l-6 4.4 2.3 7-6.3-4.4L5.7 20l2.3-7-6-4.4h7.6z" /></svg>,
   <svg key="check" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><path d="M22 4L12 14.01l-3-3" /></svg>,
   <svg key="heart" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" /></svg>,
+]
+
+// DEMO faculty content — placeholder photos/names until real profiles are supplied.
+const FACULTY = [
+  { name: 'Dr. Sarah Whitfield', role: 'Dean of Business & Management', bio: 'PhD in Strategic Management with 18+ years leading postgraduate business education across the UK and GCC.', photo: 'https://randomuser.me/api/portraits/women/44.jpg' },
+  { name: 'Prof. James Okoro', role: 'Head of Faculty', bio: 'Chartered management practitioner and researcher in leadership and organisational behaviour.', photo: 'https://randomuser.me/api/portraits/men/32.jpg' },
+  { name: 'Dr. Aisha Rahman', role: 'Academic Director', bio: 'Leads curriculum quality and assessment so every programme meets UK academic standards.', photo: 'https://randomuser.me/api/portraits/women/68.jpg' },
+  { name: 'Michael Chen', role: 'Student Success Lead', bio: 'Guides learners from enrolment to graduation with personalised academic and career support.', photo: 'https://randomuser.me/api/portraits/men/75.jpg' },
 ]
 
 const FALLBACK_ABOUT = {
@@ -29,7 +37,13 @@ const FALLBACK_ABOUT = {
 }
 
 export default async function AboutPage() {
-  const settings = await getSiteSettings().catch(() => null)
+  const [settings, partnerData] = await Promise.all([
+    getSiteSettings().catch(() => null),
+    getPartners().catch(() => []),
+  ])
+
+  const accreditationPartners = (partnerData as { name: string; type: string; logoPath: string }[])
+    .filter((p) => p.logoPath && ['university', 'awarding', 'professional'].includes(p.type))
 
   const a = { ...FALLBACK_ABOUT, ...settings?.about }
   const timeline: { year: string; desc: string; current?: boolean }[] = a.timeline ?? []
@@ -203,7 +217,50 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <Testimonials />
+      {/* Our Faculty (demo content — real profiles to follow) */}
+      <section style={{ background: '#F2F4F7' }}>
+        <div style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(56px, 7vw, 96px) 0' }}>
+          <SectionHeader eyebrow="Our faculty" title="Learn from experienced academics & practitioners" center />
+          <p style={{ fontSize: 'clamp(1.02rem, 1.3vw, 1.15rem)', lineHeight: 1.65, color: '#48536B', margin: '18px auto 0', maxWidth: '42em', textAlign: 'center' }}>
+            Our programmes are led by qualified academics and industry practitioners who bring real-world insight into every session — combining UK academic rigour with practical, career-focused teaching.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: 22, marginTop: 46 }}>
+            {FACULTY.map((f) => (
+              <div key={f.name} style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 18, padding: 26, textAlign: 'center' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={f.photo} alt={f.name} style={{ width: 96, height: 96, borderRadius: '50%', objectFit: 'cover', margin: '0 auto', display: 'block', border: '3px solid #FCE3B5' }} />
+                <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.12rem', color: '#1B2A4A', margin: '16px 0 0' }}>{f.name}</h3>
+                <div style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 13, color: '#D4891A', marginTop: 4 }}>{f.role}</div>
+                <p style={{ fontSize: '0.92rem', lineHeight: 1.55, color: '#5A647A', margin: '12px 0 0' }}>{f.bio}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Accreditations & Partnerships */}
+      {accreditationPartners.length > 0 && (
+        <section style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(56px, 7vw, 96px) 0' }}>
+          <SectionHeader eyebrow="Accreditations & partnerships" title="Recognised & regulated by leading UK institutions" center />
+          <p style={{ fontSize: 'clamp(1.02rem, 1.3vw, 1.15rem)', lineHeight: 1.65, color: '#48536B', margin: '18px auto 0', maxWidth: '42em', textAlign: 'center' }}>
+            Every ESM qualification is awarded and quality-assured by established UK universities, regulated awarding organisations and professional bodies — so your certificate carries genuine international recognition.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 16, marginTop: 46 }}>
+            {accreditationPartners.map((p) => (
+              <div key={p.name} style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 16, padding: '22px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 100 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={p.logoPath} alt={p.name} style={{ objectFit: 'contain', maxWidth: '100%', maxHeight: 52 }} />
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 36 }}>
+            <Link href="/partners" style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 700, fontSize: 15, color: '#D4891A', textDecoration: 'none' }}>
+              View all partners →
+            </Link>
+          </div>
+        </section>
+      )}
+
       <EnquiryBlock />
     </>
   )
