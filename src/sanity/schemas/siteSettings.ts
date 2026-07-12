@@ -9,6 +9,7 @@ export const siteSettings = defineType({
     { name: 'stats', title: 'Stats Strip' },
     { name: 'about', title: 'About Page' },
     { name: 'contact', title: 'Contact Details' },
+    { name: 'media', title: 'Photos' },
   ],
   fields: [
     // ── Hero ────────────────────────────────────────────────
@@ -197,6 +198,17 @@ export const siteSettings = defineType({
         defineField({ name: 'twitter', title: 'Twitter / X URL', type: 'url' }),
         defineField({ name: 'youtube', title: 'YouTube URL', type: 'url' }),
       ],
+    }),
+
+    // ── Graduation gallery ───────────────────────────────────
+    defineField({
+      name: 'graduationPhotos',
+      title: 'Graduation photos',
+      description: 'Shown in the "Our graduates" gallery on every programme details page. Upload a few (4–6 works best). Leave empty to show the default placeholder images.',
+      type: 'array',
+      group: 'media',
+      of: [defineArrayMember({ type: 'image', options: { hotspot: true } })],
+      options: { layout: 'grid' },
     }),
   ],
   preview: { prepare: () => ({ title: 'Site Settings' }) },

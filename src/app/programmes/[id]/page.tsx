@@ -87,6 +87,13 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
 
   const feeUsd = feeInUsd(programme.fee)
 
+  // Graduation gallery: uploaded photos (Site Settings) or default placeholders.
+  const placeholderGrads = ['/images/graduation/grad-1.svg', '/images/graduation/grad-2.svg', '/images/graduation/grad-3.svg', '/images/graduation/grad-4.svg']
+  const uploadedGrads = ((settings?.graduationPhotos as string[] | undefined) ?? []).filter(Boolean)
+  const gradImages = uploadedGrads.length > 0
+    ? uploadedGrads.map((u) => (u.includes('cdn.sanity.io') ? `${u}?w=500&h=375&fit=crop&auto=format` : u))
+    : placeholderGrads
+
   const similar = allProgrammes
     .filter((p) => p.cat === programme.cat && p.id !== programme.id)
     .concat(allProgrammes.filter((p) => p.cat !== programme.cat && p.id !== programme.id))
@@ -462,7 +469,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
               Our graduates
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-              {['/images/graduation/grad-1.svg', '/images/graduation/grad-2.svg', '/images/graduation/grad-3.svg', '/images/graduation/grad-4.svg'].map((src) => (
+              {gradImages.map((src) => (
                 /* eslint-disable-next-line @next/next/no-img-element */
                 <img
                   key={src}
