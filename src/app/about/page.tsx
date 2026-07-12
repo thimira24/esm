@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { getSiteSettings, getPartners } from '@/sanity/queries'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 import SectionHeader from '@/components/shared/SectionHeader'
-import { ShieldIcon } from '@/components/shared/icons'
 
 export const revalidate = 60
 
@@ -12,6 +11,16 @@ const VISION_ICONS = [
   <svg key="star" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l2.4 6.9H22l-6 4.4 2.3 7-6.3-4.4L5.7 20l2.3-7-6-4.4h7.6z" /></svg>,
   <svg key="check" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><path d="M22 4L12 14.01l-3-3" /></svg>,
   <svg key="heart" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" /></svg>,
+]
+
+// Distinct icons cycled across the "Why choose ESM" cards.
+const WHY_ICONS = [
+  <svg key="shield" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z" /></svg>,
+  <svg key="cap" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z" /><path d="M6 12v5c3 2 9 2 12 0v-5" /></svg>,
+  <svg key="globe" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18" /></svg>,
+  <svg key="medal" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14 7 22l5-3 5 3-1.5-8" /></svg>,
+  <svg key="clock" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>,
+  <svg key="users" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2" /><circle cx="10" cy="7" r="4" /><path d="M21 21v-2a4 4 0 00-3-3.87" /></svg>,
 ]
 
 // DEMO faculty content — placeholder photos/names until real profiles are supplied.
@@ -205,10 +214,10 @@ export default async function AboutPage() {
       <section style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(56px, 7vw, 96px) 0' }}>
         <SectionHeader eyebrow="Why choose ESM" title="What sets us apart" center />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 22, marginTop: 46 }}>
-          {whyEsm.map((w) => (
+          {whyEsm.map((w, i) => (
             <div key={w.title} style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 18, padding: '30px 26px' }}>
               <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 50, height: 50, borderRadius: 13, background: 'linear-gradient(135deg, #FFF3DE, #FCE3B5)' }}>
-                <ShieldIcon />
+                {WHY_ICONS[i % WHY_ICONS.length]}
               </span>
               <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.18rem', color: '#1B2A4A', margin: '20px 0 0' }}>{w.title}</h3>
               <p style={{ fontSize: '0.98rem', lineHeight: 1.6, color: '#5A647A', margin: '10px 0 0' }}>{w.desc}</p>
