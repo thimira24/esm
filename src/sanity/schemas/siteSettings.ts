@@ -10,6 +10,7 @@ export const siteSettings = defineType({
     { name: 'about', title: 'About Page' },
     { name: 'contact', title: 'Contact Details' },
     { name: 'media', title: 'Photos' },
+    { name: 'sections', title: 'Section text' },
   ],
   fields: [
     // ── Hero ────────────────────────────────────────────────
@@ -209,6 +210,41 @@ export const siteSettings = defineType({
       group: 'media',
       of: [defineArrayMember({ type: 'image', options: { hotspot: true } })],
       options: { layout: 'grid' },
+    }),
+
+    // ── Editable section headings ────────────────────────────
+    defineField({
+      name: 'testimonialsSection',
+      title: 'Home — “Student success” section',
+      type: 'object',
+      group: 'sections',
+      fields: [
+        defineField({ name: 'eyebrow', title: 'Eyebrow', type: 'string', description: 'Small label e.g. "Student success"' }),
+        defineField({ name: 'title', title: 'Title', type: 'string', description: 'e.g. "Careers, changed"' }),
+      ],
+    }),
+    defineField({
+      name: 'facultySection',
+      title: 'About — “Our faculty” section',
+      type: 'object',
+      group: 'sections',
+      fields: [
+        defineField({ name: 'eyebrow', title: 'Eyebrow', type: 'string' }),
+        defineField({ name: 'title', title: 'Title', type: 'string' }),
+        defineField({ name: 'intro', title: 'Intro paragraph', type: 'text', rows: 3 }),
+      ],
+    }),
+    defineField({
+      name: 'enquirySection',
+      title: 'Enquiry form section',
+      type: 'object',
+      group: 'sections',
+      fields: [
+        defineField({ name: 'eyebrow', title: 'Eyebrow', type: 'string' }),
+        defineField({ name: 'title', title: 'Title', type: 'string' }),
+        defineField({ name: 'subtext', title: 'Subtext', type: 'text', rows: 3 }),
+        defineField({ name: 'perks', title: 'Bullet points', type: 'array', of: [defineArrayMember({ type: 'string' })], description: 'The check-list points shown under the heading.' }),
+      ],
     }),
   ],
   preview: { prepare: () => ({ title: 'Site Settings' }) },

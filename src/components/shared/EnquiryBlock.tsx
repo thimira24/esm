@@ -3,7 +3,7 @@ import SectionHeader from '@/components/shared/SectionHeader'
 import { CheckIcon } from '@/components/shared/icons'
 import { getAllProgrammeTitles, getSiteSettings } from '@/sanity/queries'
 
-const perks = [
+const DEFAULT_PERKS = [
   'Free, no-obligation programme advice',
   'Flexible monthly payment plans available',
   'We reply within 24 hours',
@@ -12,6 +12,8 @@ const perks = [
 export default async function EnquiryBlock() {
   const [programmes, settings] = await Promise.all([getAllProgrammeTitles(), getSiteSettings().catch(() => null)])
   const contact = settings?.contact ?? {}
+  const section = settings?.enquirySection ?? {}
+  const perks: string[] = section.perks?.length ? section.perks : DEFAULT_PERKS
 
   return (
     <section style={{ background: '#F2F4F7', borderTop: '1px solid #E6E9F0' }}>
@@ -29,8 +31,8 @@ export default async function EnquiryBlock() {
         {/* Left */}
         <div>
           <SectionHeader
-            eyebrow="Enquire now"
-            title="Take the first step toward your qualification"
+            eyebrow={section.eyebrow || 'Enquire now'}
+            title={section.title || 'Take the first step toward your qualification'}
           />
           <p
             style={{
@@ -41,7 +43,7 @@ export default async function EnquiryBlock() {
               maxWidth: '32em',
             }}
           >
-            Share a few details and an advisor will recommend the right programme, start date and payment plan — usually within 24 hours.
+            {section.subtext || 'Share a few details and an advisor will recommend the right programme, start date and payment plan — usually within 24 hours.'}
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 28 }}>

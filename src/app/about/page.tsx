@@ -54,6 +54,8 @@ export default async function AboutPage() {
   const accreditationPartners = (partnerData as { name: string; type: string; logoPath: string }[])
     .filter((p) => p.logoPath && ['university', 'awarding', 'professional'].includes(p.type))
 
+  const faculty: { eyebrow?: string; title?: string; intro?: string } = settings?.facultySection ?? {}
+
   const a = { ...FALLBACK_ABOUT, ...settings?.about }
   const timeline: { year: string; desc: string; current?: boolean }[] = a.timeline ?? []
   const visionCards: { title: string; desc: string }[] = a.visionCards ?? []
@@ -229,9 +231,9 @@ export default async function AboutPage() {
       {/* Our Faculty (demo content — real profiles to follow) */}
       <section style={{ background: '#F2F4F7' }}>
         <div style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(56px, 7vw, 96px) 0' }}>
-          <SectionHeader eyebrow="Our faculty" title="Learn from experienced academics & practitioners" center />
+          <SectionHeader eyebrow={faculty.eyebrow || 'Our faculty'} title={faculty.title || 'Learn from experienced academics & practitioners'} center />
           <p style={{ fontSize: 'clamp(1.02rem, 1.3vw, 1.15rem)', lineHeight: 1.65, color: '#48536B', margin: '18px auto 0', maxWidth: '42em', textAlign: 'center' }}>
-            Our programmes are led by qualified academics and industry practitioners who bring real-world insight into every session — combining UK academic rigour with practical, career-focused teaching.
+            {faculty.intro || 'Our programmes are led by qualified academics and industry practitioners who bring real-world insight into every session — combining UK academic rigour with practical, career-focused teaching.'}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: 22, marginTop: 46 }}>
             {FACULTY.map((f) => (

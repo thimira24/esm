@@ -80,6 +80,9 @@ export async function getSiteSettings() {
     whyEsm,
     contact,
     social,
+    testimonialsSection,
+    facultySection,
+    enquirySection,
     "graduationPhotos": graduationPhotos[].asset->url,
     hero {
       eyebrow,
