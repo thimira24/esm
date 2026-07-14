@@ -84,13 +84,13 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
 
   const feeUsd = feeInUsd(programme.fee)
 
-  // Editable programme-page content (per-university + global), with fallbacks.
-  const whyChoose = programme.uniWhyChoose?.trim() || DEFAULT_WHY
-  const uniStats = programme.uniStats?.length ? programme.uniStats : DEFAULT_STATS
-  const uniFacts = programme.uniFacts?.length ? programme.uniFacts : DEFAULT_FACTS
-  const includes: string[] = (settings?.programmeIncludes as string[] | undefined)?.length ? (settings!.programmeIncludes as string[]) : DEFAULT_INCLUDES
+  // Editable programme-page content — all per-programme, with fallbacks.
+  const whyChoose = programme.whyChoose?.trim() || DEFAULT_WHY
+  const uniStats = programme.highlightStats?.length ? programme.highlightStats : DEFAULT_STATS
+  const uniFacts = programme.accreditationFacts?.length ? programme.accreditationFacts : DEFAULT_FACTS
+  const includes: string[] = programme.included?.length ? programme.included : DEFAULT_INCLUDES
+  const methods: { title: string; desc: string }[] = programme.studyMethods?.length ? programme.studyMethods : DEFAULT_STUDY_METHODS
   const L = (settings?.programmeLabels ?? {}) as Record<string, string | undefined>
-  const methods: { title: string; desc: string }[] = (settings?.studyMethods as { title: string; desc: string }[] | undefined)?.length ? (settings!.studyMethods as { title: string; desc: string }[]) : DEFAULT_STUDY_METHODS
 
   // Graduation gallery: uploaded photos (Site Settings) or default placeholders.
   const placeholderGrads = ['/images/graduation/grad-1.svg', '/images/graduation/grad-2.svg', '/images/graduation/grad-3.svg', '/images/graduation/grad-4.svg']

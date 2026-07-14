@@ -114,6 +114,58 @@ export const programme = defineType({
       type: 'array',
       of: [{ type: 'string' }],
     }),
+
+    // ── "Why choose … university" block (per programme) ──────
+    defineField({
+      name: 'whyChoose',
+      title: 'Why choose — paragraph',
+      description: 'Paragraph shown under the "Why choose <university>" heading. Leave empty to use the default.',
+      type: 'text',
+      rows: 4,
+    }),
+    defineField({
+      name: 'highlightStats',
+      title: 'Why choose — highlight stats',
+      description: 'Small stat tiles, e.g. number "#6", label "UK ranking · Business & Management".',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'number', title: 'Number', type: 'string' },
+          { name: 'label', title: 'Label', type: 'string' },
+        ],
+        preview: { select: { title: 'number', subtitle: 'label' } },
+      }],
+    }),
+    defineField({
+      name: 'accreditationFacts',
+      title: 'Rankings & accreditations',
+      description: 'Bullet points in the "Rankings & accreditations" card. Wrap a phrase in **double asterisks** to bold it, e.g. "Ranked **#6 in the UK**".',
+      type: 'array',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'included',
+      title: '“What’s included”',
+      description: 'The check-list shown in the "What\'s included" box.',
+      type: 'array',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'studyMethods',
+      title: '“Study method” cards',
+      description: 'The cards in the "Study method" section. Icons are assigned automatically.',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'title', title: 'Title', type: 'string' },
+          { name: 'desc', title: 'Description', type: 'text', rows: 2 },
+        ],
+        preview: { select: { title: 'title', subtitle: 'desc' } },
+      }],
+    }),
+
     defineField({
       name: 'featured',
       title: 'Show on homepage?',
