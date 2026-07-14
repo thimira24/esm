@@ -28,6 +28,15 @@ function feeInUsd(fee?: string): string | null {
 }
 
 // Icons cycled across the "Study method" cards (content is editable in Sanity).
+// Render text with **double-asterisk** emphasis as bold spans.
+function renderEmphasis(text: string) {
+  return text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**')
+      ? <strong key={i} style={{ color: '#1B2A4A', fontWeight: 700 }}>{part.slice(2, -2)}</strong>
+      : <span key={i}>{part}</span>
+  )
+}
+
 const STUDY_ICONS = [
   <svg key="0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></svg>,
   <svg key="1" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" /></svg>,
@@ -54,11 +63,11 @@ const DEFAULT_STATS = [
 ]
 
 const DEFAULT_FACTS = [
-  'Ranked #6 in the UK for Business and Management studies',
-  'Commendation from the Quality Assurance Agency (QAA) in the UK',
-  'Awarded Silver by the Teaching Excellence Framework (TEF)',
-  'A 96% graduate employability rate for their students',
-  'A rich 190-year history and international recognition',
+  'Ranked **#6 in the UK** for Business and Management studies',
+  'Commendation from the **Quality Assurance Agency (QAA)** in the UK',
+  'Awarded **Silver** by the Teaching Excellence Framework (TEF)',
+  'A **96% graduate employability rate** for their students',
+  'A rich **190-year history** and international recognition',
 ]
 
 export default async function ProgrammeDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -80,6 +89,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
   const uniStats = programme.uniStats?.length ? programme.uniStats : DEFAULT_STATS
   const uniFacts = programme.uniFacts?.length ? programme.uniFacts : DEFAULT_FACTS
   const includes: string[] = (settings?.programmeIncludes as string[] | undefined)?.length ? (settings!.programmeIncludes as string[]) : DEFAULT_INCLUDES
+  const L = (settings?.programmeLabels ?? {}) as Record<string, string | undefined>
   const methods: { title: string; desc: string }[] = (settings?.studyMethods as { title: string; desc: string }[] | undefined)?.length ? (settings!.studyMethods as { title: string; desc: string }[]) : DEFAULT_STUDY_METHODS
 
   // Graduation gallery: uploaded photos (Site Settings) or default placeholders.
@@ -173,7 +183,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
               boxShadow: '0 12px 28px rgba(245,166,35,0.4)',
             }}
           >
-            Enquire about this programme
+            {L.heroCta || 'Enquire about this programme'}
           </Link>
         </div>
       </section>
@@ -245,14 +255,14 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
         {/* Left — main content */}
         <div>
           <h2 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.5rem, 2.6vw, 2rem)', color: '#1B2A4A', margin: 0 }}>
-            Programme overview
+            {L.overviewTitle || 'Programme overview'}
           </h2>
           {programme.overview.map((para, i) => (
             <p key={i} style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#48536B', margin: '16px 0 0' }}>{para}</p>
           ))}
 
           <h2 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.5rem, 2.6vw, 2rem)', color: '#1B2A4A', margin: '44px 0 0' }}>
-            What you&apos;ll learn
+            {L.learnTitle || 'What you’ll learn'}
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12, marginTop: 20 }}>
             {programme.modules.map((m) => (
@@ -266,7 +276,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
           </div>
 
           <h2 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.5rem, 2.6vw, 2rem)', color: '#1B2A4A', margin: '44px 0 0' }}>
-            Entry requirements
+            {L.entryTitle || 'Entry requirements'}
           </h2>
           <div style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 12 }}>
             {programme.entry.map((e) => (
@@ -310,7 +320,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                   <span style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24, borderRadius: '50%', background: '#FFF3DE' }}>
                     <StarIcon />
                   </span>
-                  <span style={{ fontSize: '1.02rem', lineHeight: 1.5, color: '#33405C' }}>{fact}</span>
+                  <span style={{ fontSize: '1.02rem', lineHeight: 1.5, color: '#33405C' }}>{renderEmphasis(fact)}</span>
                 </div>
               ))}
             </div>
@@ -318,7 +328,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
 
           {/* Study method */}
           <h2 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.5rem, 2.6vw, 2rem)', color: '#1B2A4A', margin: '44px 0 0' }}>
-            Study method
+            {L.studyTitle || 'Study method'}
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 14, marginTop: 20 }}>
             {methods.map((sm, i) => (
@@ -334,16 +344,16 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
 
           {/* Fee */}
           <h2 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.5rem, 2.6vw, 2rem)', color: '#1B2A4A', margin: '44px 0 0' }}>
-            Course fee
+            {L.feeTitle || 'Course fee'}
           </h2>
           <div style={{ marginTop: 20, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, alignItems: 'start' }}>
             <div style={{ background: 'linear-gradient(140deg, #1B2A4A, #0F1D33)', borderRadius: 18, padding: 26, color: '#fff' }}>
-              <div style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', color: '#9AA6BE' }}>Total programme fee</div>
+              <div style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', color: '#9AA6BE' }}>{L.feeCardLabel || 'Total programme fee'}</div>
               <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 2.6rem)', color: '#F5A623', marginTop: 6 }}>{programme.fee}</div>
               {feeUsd && (
                 <div style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 16, color: '#C3CBDB', marginTop: 3 }}>{feeUsd}</div>
               )}
-              <div style={{ fontSize: 14, color: '#C3CBDB', marginTop: 4 }}>or flexible monthly instalments</div>
+              <div style={{ fontSize: 14, color: '#C3CBDB', marginTop: 4 }}>{L.feeInstalments || 'or flexible monthly instalments'}</div>
               <Link
                 href="/contact"
                 style={{
@@ -361,11 +371,11 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                   textAlign: 'center',
                 }}
               >
-                Ask about payment plans
+                {L.feeCta || 'Ask about payment plans'}
               </Link>
             </div>
             <div style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 18, padding: 26 }}>
-              <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.05rem', color: '#1B2A4A' }}>What&apos;s included</div>
+              <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.05rem', color: '#1B2A4A' }}>{L.includesTitle || 'What’s included'}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 11, marginTop: 14 }}>
                 {includes.map((item) => (
                   <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
@@ -394,12 +404,12 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                 />
               </span>
               <div>
-                <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: 15, color: '#1B2A4A' }}>Accredited award</div>
+                <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: 15, color: '#1B2A4A' }}>{L.sidebarHeading || 'Accredited award'}</div>
                 <div style={{ fontSize: 13, color: '#6B7689' }}>{programme.awarding}</div>
               </div>
             </div>
             <p style={{ fontSize: '0.98rem', lineHeight: 1.6, color: '#5A647A', margin: '18px 0 0' }}>
-              Speak to an advisor about start dates, payment plans and the fastest route to enrol.
+              {L.sidebarText || 'Speak to an advisor about start dates, payment plans and the fastest route to enrol.'}
             </p>
             <Link
               href="/contact"
@@ -418,7 +428,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                 textAlign: 'center',
               }}
             >
-              Enquire now
+              {L.sidebarCta || 'Enquire now'}
             </Link>
             <a
               href={contact.whatsapp}
@@ -469,7 +479,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
       <section style={{ background: '#F2F4F7' }}>
         <div style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(48px, 6vw, 80px) 0' }}>
           <h2 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)', letterSpacing: '-0.4px', color: '#1B2A4A', margin: 0 }}>
-            Similar courses
+            {L.similarTitle || 'Similar courses'}
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20, marginTop: 28 }}>
             {similar.map((p) => (
@@ -482,7 +492,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
       {/* Programme FAQs */}
       <section style={{ width: 'min(820px, 92%)', margin: '0 auto', padding: 'clamp(48px, 6vw, 84px) 0' }}>
         <h2 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.7rem, 3vw, 2.3rem)', color: '#1B2A4A', margin: '0 0 28px', textAlign: 'center' }}>
-          Programme FAQs
+          {L.faqTitle || 'Programme FAQs'}
         </h2>
         <FAQAccordion faqs={faqs} />
       </section>

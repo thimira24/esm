@@ -58,7 +58,7 @@ export const partner = defineType({
     defineField({
       name: 'accreditationFacts',
       title: 'Rankings & accreditations',
-      description: 'Bullet points shown in the "Rankings & accreditations" card on programme pages.',
+      description: 'Bullet points in the "Rankings & accreditations" card. Wrap a phrase in **double asterisks** to make it bold, e.g. "Ranked **#6 in the UK**".',
       type: 'array',
       hidden: ({ parent }) => parent?.type !== 'university',
       of: [defineArrayMember({ type: 'string' })],

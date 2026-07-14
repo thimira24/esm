@@ -88,6 +88,7 @@ export async function getSiteSettings() {
     enquirySection,
     programmeIncludes,
     studyMethods,
+    programmeLabels,
     "graduationPhotos": graduationPhotos[].asset->url,
     hero {
       eyebrow,
