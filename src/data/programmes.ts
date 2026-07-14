@@ -11,6 +11,9 @@ export interface Programme {
   awarding: string
   uniLogo: string
   uniName: string
+  uniWhyChoose?: string
+  uniStats?: { number: string; label: string }[]
+  uniFacts?: string[]
   fee: string
   tag: string
   blurb: string

@@ -27,51 +27,38 @@ function feeInUsd(fee?: string): string | null {
   return `≈ US$ ${usd.toLocaleString('en-US')}`
 }
 
-const studyMethods = [
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="4" width="18" height="13" rx="2" /><path d="M8 21h8M12 17v4" />
-      </svg>
-    ),
-    title: 'Online & flexible',
-    desc: 'Study from anywhere, fitting learning around work and family.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-      </svg>
-    ),
-    title: 'Live tutor support',
-    desc: 'Scheduled live sessions and a personal tutor throughout.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M14 2v6h6M9 15l2 2 4-4" />
-      </svg>
-    ),
-    title: 'Coursework assessed',
-    desc: 'Assessed through applied assignments — no exam halls.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="9" /><path d="M12 7.5V12l3 1.8" />
-      </svg>
-    ),
-    title: 'Self-paced units',
-    desc: 'Structured units you progress through at your own pace.',
-  },
+// Icons cycled across the "Study method" cards (content is editable in Sanity).
+const STUDY_ICONS = [
+  <svg key="0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></svg>,
+  <svg key="1" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" /></svg>,
+  <svg key="2" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M14 2v6h6M9 15l2 2 4-4" /></svg>,
+  <svg key="3" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7.5V12l3 1.8" /></svg>,
 ]
 
-const partnerFacts = [
-  { text: 'Ranked <strong style="color:#1B2A4A">#6 in the UK</strong> for Business and Management studies' },
-  { text: 'Commendation from the <strong style="color:#1B2A4A">Quality Assurance Agency (QAA)</strong> in the UK' },
-  { text: 'Awarded <strong style="color:#1B2A4A">Silver</strong> by the Teaching Excellence Framework (TEF)' },
-  { text: 'A <strong style="color:#1B2A4A">96% graduate employability rate</strong> for their students' },
-  { text: 'A rich <strong style="color:#1B2A4A">190-year history</strong> and international recognition' },
+// Fallbacks used when the university / Site Settings haven't been filled in yet.
+const DEFAULT_STUDY_METHODS = [
+  { title: 'Online & flexible', desc: 'Study from anywhere, fitting learning around work and family.' },
+  { title: 'Live tutor support', desc: 'Scheduled live sessions and a personal tutor throughout.' },
+  { title: 'Coursework assessed', desc: 'Assessed through applied assignments — no exam halls.' },
+  { title: 'Self-paced units', desc: 'Structured units you progress through at your own pace.' },
+]
+
+const DEFAULT_INCLUDES = ['Full tuition & learning materials', 'Personal tutor support', 'All assessment & marking', 'Official certification on completion']
+
+const DEFAULT_WHY = 'Your qualification is awarded by an established UK university — a globally respected institution combining academic heritage with a modern focus on employability and career outcomes.'
+
+const DEFAULT_STATS = [
+  { number: '#6', label: 'UK ranking · Business & Management' },
+  { number: '96%', label: 'Graduate employability' },
+  { number: '190', label: 'Years of heritage' },
+]
+
+const DEFAULT_FACTS = [
+  'Ranked #6 in the UK for Business and Management studies',
+  'Commendation from the Quality Assurance Agency (QAA) in the UK',
+  'Awarded Silver by the Teaching Excellence Framework (TEF)',
+  'A 96% graduate employability rate for their students',
+  'A rich 190-year history and international recognition',
 ]
 
 export default async function ProgrammeDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -87,6 +74,13 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
   if (!programme) notFound()
 
   const feeUsd = feeInUsd(programme.fee)
+
+  // Editable programme-page content (per-university + global), with fallbacks.
+  const whyChoose = programme.uniWhyChoose?.trim() || DEFAULT_WHY
+  const uniStats = programme.uniStats?.length ? programme.uniStats : DEFAULT_STATS
+  const uniFacts = programme.uniFacts?.length ? programme.uniFacts : DEFAULT_FACTS
+  const includes: string[] = (settings?.programmeIncludes as string[] | undefined)?.length ? (settings!.programmeIncludes as string[]) : DEFAULT_INCLUDES
+  const methods: { title: string; desc: string }[] = (settings?.studyMethods as { title: string; desc: string }[] | undefined)?.length ? (settings!.studyMethods as { title: string; desc: string }[]) : DEFAULT_STUDY_METHODS
 
   // Graduation gallery: uploaded photos (Site Settings) or default placeholders.
   const placeholderGrads = ['/images/graduation/grad-1.svg', '/images/graduation/grad-2.svg', '/images/graduation/grad-3.svg', '/images/graduation/grad-4.svg']
@@ -289,18 +283,20 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
             Why choose {programme.awarding}
           </h2>
           <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#48536B', margin: '16px 0 0' }}>
-            Your qualification is awarded by one of the UK&apos;s most established universities — a globally respected institution combining nearly two centuries of academic heritage with a sharp, modern focus on employability and career outcomes.
+            {whyChoose}
           </p>
 
           {/* Partner stats */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 24 }}>
-            {[{ n: '#6', l: 'UK ranking · Business & Management' }, { n: '96%', l: 'Graduate employability' }, { n: '190', l: 'Years of heritage' }].map((s) => (
-              <div key={s.n} style={{ flex: '1 1 130px', background: '#F2F4F7', borderRadius: 14, padding: '18px 20px' }}>
-                <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: '1.7rem', color: '#1B2A4A' }}>{s.n}</div>
-                <div style={{ fontSize: 13, color: '#6B7689', marginTop: 2 }}>{s.l}</div>
-              </div>
-            ))}
-          </div>
+          {uniStats.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 24 }}>
+              {uniStats.map((s, i) => (
+                <div key={i} style={{ flex: '1 1 130px', background: '#F2F4F7', borderRadius: 14, padding: '18px 20px' }}>
+                  <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: '1.7rem', color: '#1B2A4A' }}>{s.number}</div>
+                  <div style={{ fontSize: 13, color: '#6B7689', marginTop: 2 }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Accreditation card */}
           <div style={{ marginTop: 20, background: '#F2F4F7', borderRadius: 18, padding: 'clamp(22px, 3vw, 30px)' }}>
@@ -309,15 +305,12 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
               <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.15rem', color: '#1B2A4A', marginTop: 4 }}>{programme.awarding}</div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 18 }}>
-              {partnerFacts.map((fact, i) => (
+              {uniFacts.map((fact, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
                   <span style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24, borderRadius: '50%', background: '#FFF3DE' }}>
                     <StarIcon />
                   </span>
-                  <span
-                    style={{ fontSize: '1.02rem', lineHeight: 1.5, color: '#33405C' }}
-                    dangerouslySetInnerHTML={{ __html: fact.text }}
-                  />
+                  <span style={{ fontSize: '1.02rem', lineHeight: 1.5, color: '#33405C' }}>{fact}</span>
                 </div>
               ))}
             </div>
@@ -328,10 +321,10 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
             Study method
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 14, marginTop: 20 }}>
-            {studyMethods.map((sm) => (
-              <div key={sm.title} style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 16, padding: 22 }}>
+            {methods.map((sm, i) => (
+              <div key={i} style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 16, padding: 22 }}>
                 <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 44, height: 44, borderRadius: 11, background: 'linear-gradient(135deg, #FFF3DE, #FCE3B5)' }}>
-                  {sm.icon}
+                  {STUDY_ICONS[i % STUDY_ICONS.length]}
                 </span>
                 <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.05rem', color: '#1B2A4A', margin: '14px 0 0' }}>{sm.title}</h3>
                 <p style={{ fontSize: '0.92rem', lineHeight: 1.55, color: '#5A647A', margin: '6px 0 0' }}>{sm.desc}</p>
@@ -374,7 +367,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
             <div style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 18, padding: 26 }}>
               <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.05rem', color: '#1B2A4A' }}>What&apos;s included</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 11, marginTop: 14 }}>
-                {['Full tuition & learning materials', 'Personal tutor support', 'All assessment & marking', 'Official certification on completion'].map((item) => (
+                {includes.map((item) => (
                   <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
                     <span style={{ flexShrink: 0, width: 20, height: 20, borderRadius: '50%', background: '#EAF7EF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <CheckIcon />

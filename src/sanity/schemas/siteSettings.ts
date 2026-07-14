@@ -246,6 +246,33 @@ export const siteSettings = defineType({
         defineField({ name: 'perks', title: 'Bullet points', type: 'array', of: [defineArrayMember({ type: 'string' })], description: 'The check-list points shown under the heading.' }),
       ],
     }),
+
+    // ── Programme details page (applies to every programme) ──
+    defineField({
+      name: 'programmeIncludes',
+      title: 'Programme page — “What’s included”',
+      description: 'The check-list shown in the "What\'s included" box on every programme page.',
+      type: 'array',
+      group: 'sections',
+      of: [defineArrayMember({ type: 'string' })],
+    }),
+    defineField({
+      name: 'studyMethods',
+      title: 'Programme page — “Study method” cards',
+      description: 'The cards in the "Study method" section on every programme page. Icons are assigned automatically.',
+      type: 'array',
+      group: 'sections',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({ name: 'title', title: 'Title', type: 'string' }),
+            defineField({ name: 'desc', title: 'Description', type: 'text', rows: 2 }),
+          ],
+          preview: { select: { title: 'title', subtitle: 'desc' } },
+        }),
+      ],
+    }),
   ],
   preview: { prepare: () => ({ title: 'Site Settings' }) },
 })

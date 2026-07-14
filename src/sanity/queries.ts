@@ -12,6 +12,9 @@ const PROGRAMME_FIELDS = `
   "awarding": university->name,
   "uniLogo": coalesce(university->logo.asset->url, university->logoPath),
   "uniName": university->name,
+  "uniWhyChoose": university->whyChoose,
+  "uniStats": university->stats,
+  "uniFacts": university->accreditationFacts,
   fee,
   tag,
   blurb,
@@ -83,6 +86,8 @@ export async function getSiteSettings() {
     testimonialsSection,
     facultySection,
     enquirySection,
+    programmeIncludes,
+    studyMethods,
     "graduationPhotos": graduationPhotos[].asset->url,
     hero {
       eyebrow,
