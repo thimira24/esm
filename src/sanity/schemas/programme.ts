@@ -167,6 +167,21 @@ export const programme = defineType({
     }),
 
     defineField({
+      name: 'faqs',
+      title: 'FAQs (this programme)',
+      description: 'Questions & answers in the "Programme FAQs" section. Leave empty to show the shared FAQ list instead.',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'question', title: 'Question', type: 'string' },
+          { name: 'answer', title: 'Answer', type: 'text', rows: 4 },
+        ],
+        preview: { select: { title: 'question' } },
+      }],
+    }),
+
+    defineField({
       name: 'featured',
       title: 'Show on homepage?',
       description: 'Tick to feature this programme on the home page.',

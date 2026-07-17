@@ -79,7 +79,8 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
     getFaqs().catch(() => []),
   ])
   const contact = settings?.contact ?? {}
-  const faqs = (sanityFaqs ?? []).map((f: { question: string; answer: string }) => ({ q: f.question, a: f.answer }))
+  const faqSource = programme?.faqs?.length ? programme.faqs : (sanityFaqs ?? [])
+  const faqs = faqSource.map((f: { question: string; answer: string }) => ({ q: f.question, a: f.answer }))
   if (!programme) notFound()
 
   const feeUsd = feeInUsd(programme.fee)

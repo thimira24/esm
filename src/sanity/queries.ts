@@ -17,6 +17,7 @@ const PROGRAMME_FIELDS = `
   accreditationFacts,
   included,
   studyMethods,
+  faqs,
   fee,
   tag,
   blurb,

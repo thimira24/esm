@@ -16,6 +16,7 @@ export interface Programme {
   accreditationFacts?: string[]
   included?: string[]
   studyMethods?: { title: string; desc: string }[]
+  faqs?: { question: string; answer: string }[]
   fee: string
   tag: string
   blurb: string
