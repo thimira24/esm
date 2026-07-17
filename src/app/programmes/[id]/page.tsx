@@ -44,32 +44,6 @@ const STUDY_ICONS = [
   <svg key="3" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4891A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7.5V12l3 1.8" /></svg>,
 ]
 
-// Fallbacks used when the university / Site Settings haven't been filled in yet.
-const DEFAULT_STUDY_METHODS = [
-  { title: 'Online & flexible', desc: 'Study from anywhere, fitting learning around work and family.' },
-  { title: 'Live tutor support', desc: 'Scheduled live sessions and a personal tutor throughout.' },
-  { title: 'Coursework assessed', desc: 'Assessed through applied assignments — no exam halls.' },
-  { title: 'Self-paced units', desc: 'Structured units you progress through at your own pace.' },
-]
-
-const DEFAULT_INCLUDES = ['Full tuition & learning materials', 'Personal tutor support', 'All assessment & marking', 'Official certification on completion']
-
-const DEFAULT_WHY = 'Your qualification is awarded by an established UK university — a globally respected institution combining academic heritage with a modern focus on employability and career outcomes.'
-
-const DEFAULT_STATS = [
-  { number: '#6', label: 'UK ranking · Business & Management' },
-  { number: '96%', label: 'Graduate employability' },
-  { number: '190', label: 'Years of heritage' },
-]
-
-const DEFAULT_FACTS = [
-  'Ranked **#6 in the UK** for Business and Management studies',
-  'Commendation from the **Quality Assurance Agency (QAA)** in the UK',
-  'Awarded **Silver** by the Teaching Excellence Framework (TEF)',
-  'A **96% graduate employability rate** for their students',
-  'A rich **190-year history** and international recognition',
-]
-
 export default async function ProgrammeDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const [programme, allProgrammes, settings, sanityFaqs] = await Promise.all([
@@ -85,12 +59,13 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
 
   const feeUsd = feeInUsd(programme.fee)
 
-  // Editable programme-page content — all per-programme, with fallbacks.
-  const whyChoose = programme.whyChoose?.trim() || DEFAULT_WHY
-  const uniStats = programme.highlightStats?.length ? programme.highlightStats : DEFAULT_STATS
-  const uniFacts = programme.accreditationFacts?.length ? programme.accreditationFacts : DEFAULT_FACTS
-  const includes: string[] = programme.included?.length ? programme.included : DEFAULT_INCLUDES
-  const methods: { title: string; desc: string }[] = programme.studyMethods?.length ? programme.studyMethods : DEFAULT_STUDY_METHODS
+  // Editable programme-page content — all per-programme, sourced only from Sanity.
+  const whyChoose = programme.whyChoose?.trim() || ''
+  const uniStats = programme.highlightStats ?? []
+  const uniFacts = programme.accreditationFacts ?? []
+  const includes: string[] = programme.included ?? []
+  const methods: { title: string; desc: string }[] = programme.studyMethods ?? []
+  const hasWhySection = Boolean(whyChoose) || uniStats.length > 0 || uniFacts.length > 0
   const L = (settings?.programmeLabels ?? {}) as Record<string, string | undefined>
 
   // Graduation gallery: uploaded photos (Site Settings) or default placeholders.
@@ -290,12 +265,16 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
             ))}
           </div>
 
+          {hasWhySection && (
+          <>
           <h2 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.5rem, 2.6vw, 2rem)', color: '#1B2A4A', margin: '44px 0 0' }}>
             Why choose {programme.awarding}
           </h2>
-          <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#48536B', margin: '16px 0 0' }}>
-            {whyChoose}
-          </p>
+          {whyChoose && (
+            <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#48536B', margin: '16px 0 0' }}>
+              {whyChoose}
+            </p>
+          )}
 
           {/* Partner stats */}
           {uniStats.length > 0 && (
@@ -310,6 +289,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
           )}
 
           {/* Accreditation card */}
+          {uniFacts.length > 0 && (
           <div style={{ marginTop: 20, background: '#F2F4F7', borderRadius: 18, padding: 'clamp(22px, 3vw, 30px)' }}>
             <div style={{ paddingBottom: 18, borderBottom: '1px solid #E6E9F0' }}>
               <div style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', color: '#8A93A6' }}>Rankings &amp; accreditations</div>
@@ -326,8 +306,13 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
               ))}
             </div>
           </div>
+          )}
+          </>
+          )}
 
           {/* Study method */}
+          {methods.length > 0 && (
+          <>
           <h2 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.5rem, 2.6vw, 2rem)', color: '#1B2A4A', margin: '44px 0 0' }}>
             {L.studyTitle || 'Study method'}
           </h2>
@@ -342,6 +327,8 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
               </div>
             ))}
           </div>
+          </>
+          )}
 
           {/* Fee */}
           <h2 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.5rem, 2.6vw, 2rem)', color: '#1B2A4A', margin: '44px 0 0' }}>
@@ -375,6 +362,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                 {L.feeCta || 'Ask about payment plans'}
               </Link>
             </div>
+            {includes.length > 0 && (
             <div style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 18, padding: 26 }}>
               <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.05rem', color: '#1B2A4A' }}>{L.includesTitle || 'What’s included'}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 11, marginTop: 14 }}>
@@ -388,6 +376,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                 ))}
               </div>
             </div>
+            )}
           </div>
         </div>
 
