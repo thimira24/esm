@@ -74,80 +74,113 @@ export const siteSettings = defineType({
       ],
     }),
 
-    // ── About ────────────────────────────────────────────────
+    // ══ ABOUT PAGE (6 sections) ═════════════════════════════
+    // 1 — About ESM
     defineField({
-      name: 'about',
-      title: 'About page',
+      name: 'aboutIntro',
+      title: 'About page — 1. About ESM',
       type: 'object',
       group: 'about',
+      options: { collapsible: true, collapsed: false },
       fields: [
-        // Hero
-        defineField({ name: 'heading', title: 'Hero heading', type: 'string' }),
-        defineField({ name: 'body1', title: 'Hero paragraph 1', type: 'text', rows: 3 }),
-        defineField({ name: 'body2', title: 'Hero paragraph 2', type: 'text', rows: 3 }),
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'intro', title: 'Intro paragraph', type: 'text', rows: 5 }),
+        defineField({ name: 'missionTitle', title: 'Mission — title', type: 'string' }),
+        defineField({ name: 'missionText', title: 'Mission — text', type: 'text', rows: 3 }),
+        defineField({ name: 'visionTitle', title: 'Vision — title', type: 'string' }),
+        defineField({ name: 'visionText', title: 'Vision — text', type: 'text', rows: 3 }),
+      ],
+    }),
+    // 2 — Global presence (flags)
+    defineField({
+      name: 'globalPresence',
+      title: 'About page — 2. Global presence',
+      type: 'object',
+      group: 'about',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
         defineField({
-          name: 'image',
-          title: 'Hero image',
-          type: 'image',
-          options: { hotspot: true },
-        }),
-        // Our story
-        defineField({ name: 'storyHeading', title: 'Our story — heading', type: 'string' }),
-        defineField({ name: 'storyBody1', title: 'Our story — paragraph 1', type: 'text', rows: 3 }),
-        defineField({ name: 'storyBody2', title: 'Our story — paragraph 2', type: 'text', rows: 3 }),
-        defineField({
-          name: 'timeline',
-          title: 'Timeline',
+          name: 'countries',
+          title: 'Countries',
           type: 'array',
-          of: [
-            defineArrayMember({
-              type: 'object',
-              fields: [
-                defineField({ name: 'year', title: 'Year / label', type: 'string', description: 'e.g. "2016 · Founded"' }),
-                defineField({ name: 'desc', title: 'Description', type: 'text', rows: 2 }),
-                defineField({ name: 'current', title: 'Mark as current', type: 'boolean' }),
-              ],
-              preview: { select: { title: 'year', subtitle: 'desc' } },
-            }),
-          ],
-        }),
-        // Vision
-        defineField({ name: 'visionHeading', title: 'Vision — heading', type: 'string' }),
-        defineField({ name: 'visionSubtext', title: 'Vision — subtext', type: 'text', rows: 2 }),
-        defineField({
-          name: 'visionCards',
-          title: 'Vision cards',
-          type: 'array',
-          of: [
-            defineArrayMember({
-              type: 'object',
-              fields: [
-                defineField({ name: 'title', title: 'Title', type: 'string' }),
-                defineField({ name: 'desc', title: 'Description', type: 'text', rows: 2 }),
-              ],
-              preview: { select: { title: 'title', subtitle: 'desc' } },
-            }),
-          ],
+          of: [defineArrayMember({
+            type: 'object',
+            fields: [
+              defineField({ name: 'name', title: 'Country name', type: 'string' }),
+              defineField({ name: 'flag', title: 'Flag', type: 'image' }),
+            ],
+            preview: { select: { title: 'name', media: 'flag' } },
+          })],
         }),
       ],
     }),
-
-    // ── Why choose ESM ──────────────────────────────────────
+    // 3 — Programme portfolio
     defineField({
-      name: 'whyEsm',
-      title: 'Why choose ESM (About page)',
-      description: 'Cards in the "What sets us apart" section on the About page.',
-      type: 'array',
+      name: 'programmePortfolio',
+      title: 'About page — 3. Programme portfolio',
+      type: 'object',
       group: 'about',
-      of: [
-        defineArrayMember({
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'items', title: 'Programme types', type: 'array', of: [defineArrayMember({ type: 'string' })] }),
+      ],
+    }),
+    // 4 — Executive leadership
+    defineField({
+      name: 'executiveLeadership',
+      title: 'About page — 4. Executive leadership',
+      type: 'object',
+      group: 'about',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'name', title: 'Name', type: 'string' }),
+        defineField({ name: 'photo', title: 'Photo', type: 'image', options: { hotspot: true } }),
+        defineField({ name: 'roles', title: 'Roles / positions', type: 'array', of: [defineArrayMember({ type: 'string' })] }),
+        defineField({ name: 'qualifications', title: 'Qualifications', type: 'array', of: [defineArrayMember({ type: 'string' })] }),
+        defineField({ name: 'experience', title: 'Experience note', type: 'text', rows: 2 }),
+      ],
+    }),
+    // 5 — ESM Operation team
+    defineField({
+      name: 'operationTeam',
+      title: 'About page — 5. ESM Operation team',
+      type: 'object',
+      group: 'about',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'people', title: 'People', type: 'array', of: [defineArrayMember({
           type: 'object',
           fields: [
-            defineField({ name: 'title', title: 'Title', type: 'string' }),
-            defineField({ name: 'desc', title: 'Description', type: 'text', rows: 2 }),
+            defineField({ name: 'name', title: 'Name', type: 'string' }),
+            defineField({ name: 'role', title: 'Role', type: 'string' }),
+            defineField({ name: 'photo', title: 'Photo', type: 'image', options: { hotspot: true } }),
           ],
-          preview: { select: { title: 'title', subtitle: 'desc' } },
-        }),
+          preview: { select: { title: 'name', subtitle: 'role', media: 'photo' } },
+        })] }),
+      ],
+    }),
+    // 6 — Faculty of Management
+    defineField({
+      name: 'facultyTeam',
+      title: 'About page — 6. Faculty of Management',
+      type: 'object',
+      group: 'about',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'people', title: 'People', type: 'array', of: [defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({ name: 'name', title: 'Name', type: 'string' }),
+            defineField({ name: 'role', title: 'Role', type: 'string' }),
+            defineField({ name: 'photo', title: 'Photo', type: 'image', options: { hotspot: true } }),
+          ],
+          preview: { select: { title: 'name', subtitle: 'role', media: 'photo' } },
+        })] }),
       ],
     }),
 

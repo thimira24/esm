@@ -83,7 +83,6 @@ export async function getSiteSettings() {
   return client.fetch(`*[_type == "siteSettings"][0]{
     stats,
     values,
-    whyEsm,
     contact,
     social,
     testimonialsSection,
@@ -103,19 +102,12 @@ export async function getSiteSettings() {
       chipValue,
       "imageUrl": image.asset->url
     },
-    about {
-      heading,
-      body1,
-      body2,
-      "imageUrl": image.asset->url,
-      storyHeading,
-      storyBody1,
-      storyBody2,
-      timeline,
-      visionHeading,
-      visionSubtext,
-      visionCards
-    }
+    aboutIntro,
+    globalPresence{ heading, countries[]{ name, "flag": flag.asset->url } },
+    programmePortfolio,
+    executiveLeadership{ heading, name, roles, qualifications, experience, "photo": photo.asset->url },
+    operationTeam{ heading, people[]{ name, role, "photo": photo.asset->url } },
+    facultyTeam{ heading, people[]{ name, role, "photo": photo.asset->url } }
   }`)
 }
 
