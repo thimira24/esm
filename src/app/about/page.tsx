@@ -36,6 +36,10 @@ export default async function AboutPage() {
   const operation = settings?.operationTeam ?? {}
   const faculty = settings?.facultyTeam ?? {}
 
+  const acc = settings?.partnerAccreditation ?? {}
+  const accItems: { name?: string; description?: string; logo?: string }[] = acc.items ?? []
+  const recogLogos: { name?: string; logo?: string }[] = acc.recognitionLogos ?? []
+
   const countries: { name?: string; flag?: string }[] = presence.countries ?? []
   const opPeople: Person[] = operation.people ?? []
   const facPeople: Person[] = faculty.people ?? []
@@ -134,6 +138,48 @@ export default async function AboutPage() {
             <SectionHeader eyebrow="Our team" title={operation.heading || 'Academic Operations Team'} center />
             <PeopleGrid people={opPeople} />
           </div>
+        </section>
+      )}
+
+      {/* 6 — Partnership & Accreditation */}
+      {accItems.length > 0 && (
+        <section style={{ width: 'min(1080px, 92%)', margin: '0 auto', padding: 'clamp(56px, 7vw, 92px) 0' }}>
+          <SectionHeader eyebrow="Recognised & regulated" title={acc.heading || 'Partnership & Accreditation'} center />
+          {acc.intro && (
+            <p style={{ fontSize: 'clamp(1.02rem, 1.3vw, 1.15rem)', lineHeight: 1.65, color: '#48536B', margin: '18px auto 0', maxWidth: '46em', textAlign: 'center' }}>{acc.intro}</p>
+          )}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 18, marginTop: 46 }}>
+            {accItems.map((it, i) => (
+              <div key={i} style={{ ...card, padding: 'clamp(22px, 3vw, 32px)', display: 'flex', flexWrap: 'wrap', gap: '22px 34px', alignItems: 'center' }}>
+                {it.logo && (
+                  <div style={{ flex: '0 0 180px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={it.logo} alt={it.name ?? ''} style={{ maxWidth: 180, maxHeight: 96, objectFit: 'contain' }} />
+                  </div>
+                )}
+                <div style={{ flex: '1 1 320px' }}>
+                  {it.name && <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.2rem', color: '#1B2A4A', margin: 0 }}>{it.name}</h3>}
+                  {it.description && <p style={{ fontSize: '1rem', lineHeight: 1.65, color: '#48536B', margin: '10px 0 0' }}>{it.description}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {recogLogos.length > 0 && (
+            <div style={{ marginTop: 56, textAlign: 'center' }}>
+              <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.3rem, 2.2vw, 1.7rem)', color: '#1B2A4A', margin: 0 }}>{acc.recognitionHeading || 'Recognition'}</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 16, marginTop: 28 }}>
+                {recogLogos.map((r, i) => (
+                  <div key={i} style={{ ...card, padding: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 96 }}>
+                    {r.logo && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={r.logo} alt={r.name ?? ''} style={{ maxWidth: '100%', maxHeight: 60, objectFit: 'contain' }} />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </section>
       )}
 

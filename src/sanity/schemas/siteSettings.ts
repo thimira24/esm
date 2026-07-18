@@ -171,6 +171,46 @@ export const siteSettings = defineType({
         })] }),
       ],
     }),
+    // 7 — Partnership & Accreditation
+    defineField({
+      name: 'partnerAccreditation',
+      title: 'About page — 7. Partnership & Accreditation',
+      type: 'object',
+      group: 'about',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'intro', title: 'Intro paragraph', type: 'text', rows: 3 }),
+        defineField({
+          name: 'items',
+          title: 'Partners & accreditation bodies',
+          type: 'array',
+          of: [defineArrayMember({
+            type: 'object',
+            fields: [
+              defineField({ name: 'name', title: 'Name', type: 'string' }),
+              defineField({ name: 'description', title: 'Description', type: 'text', rows: 4 }),
+              defineField({ name: 'logo', title: 'Logo', type: 'image' }),
+            ],
+            preview: { select: { title: 'name', media: 'logo' } },
+          })],
+        }),
+        defineField({ name: 'recognitionHeading', title: 'Recognition — heading', type: 'string' }),
+        defineField({
+          name: 'recognitionLogos',
+          title: 'Recognition logos',
+          type: 'array',
+          of: [defineArrayMember({
+            type: 'object',
+            fields: [
+              defineField({ name: 'name', title: 'Name', type: 'string' }),
+              defineField({ name: 'logo', title: 'Logo', type: 'image' }),
+            ],
+            preview: { select: { title: 'name', media: 'logo' } },
+          })],
+        }),
+      ],
+    }),
 
     // ── Values (home) ────────────────────────────────────────
     defineField({

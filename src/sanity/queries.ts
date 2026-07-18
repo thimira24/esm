@@ -106,7 +106,8 @@ export async function getSiteSettings() {
     globalPresence{ heading, countries[]{ name, "flag": flag.asset->url } },
     executiveLeadership{ heading, name, message, roles, qualifications, "photo": photo.asset->url },
     operationTeam{ heading, people[]{ name, role, "photo": photo.asset->url } },
-    facultyTeam{ heading, people[]{ name, role, "photo": photo.asset->url } }
+    facultyTeam{ heading, people[]{ name, role, "photo": photo.asset->url } },
+    partnerAccreditation{ heading, intro, items[]{ name, description, "logo": logo.asset->url }, recognitionHeading, recognitionLogos[]{ name, "logo": logo.asset->url } }
   }`)
 }
 
