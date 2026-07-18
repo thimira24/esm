@@ -32,13 +32,11 @@ export default async function AboutPage() {
 
   const intro = settings?.aboutIntro ?? {}
   const presence = settings?.globalPresence ?? {}
-  const portfolio = settings?.programmePortfolio ?? {}
   const leader = settings?.executiveLeadership ?? {}
   const operation = settings?.operationTeam ?? {}
   const faculty = settings?.facultyTeam ?? {}
 
   const countries: { name?: string; flag?: string }[] = presence.countries ?? []
-  const portfolioItems: string[] = portfolio.items ?? []
   const opPeople: Person[] = operation.people ?? []
   const facPeople: Person[] = faculty.people ?? []
 
@@ -90,67 +88,52 @@ export default async function AboutPage() {
         </section>
       )}
 
-      {/* 3 — Programme portfolio */}
-      {portfolioItems.length > 0 && (
+      {/* 3 — Executive leadership message */}
+      {(leader.photo || leader.message || (leader.roles?.length ?? 0) > 0) && (
         <section style={{ background: '#F2F4F7' }}>
           <div style={{ width: 'min(1080px, 92%)', margin: '0 auto', padding: 'clamp(56px, 7vw, 92px) 0' }}>
-            <SectionHeader eyebrow="What we offer" title={portfolio.heading || 'Programme Portfolio'} center />
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 18, marginTop: 46 }}>
-              {portfolioItems.map((item, i) => (
-                <div key={i} style={{ ...card, padding: '26px 22px', display: 'flex', alignItems: 'center', gap: 14 }}>
-                  <span style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: 11, background: 'linear-gradient(135deg, #FFF3DE, #FCE3B5)', fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, color: '#D4891A', fontSize: 15 }}>{i + 1}</span>
-                  <span style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.02rem', color: '#1B2A4A', lineHeight: 1.3 }}>{item}</span>
-                </div>
-              ))}
+            <SectionHeader eyebrow="Leadership" title={leader.heading || 'A Message from Our Executive Leadership'} center />
+            <div style={{ ...card, marginTop: 46, overflow: 'hidden', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 0 }}>
+              {leader.photo ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={leader.photo} alt={leader.name ?? 'Executive leadership'} style={{ width: '100%', height: '100%', minHeight: 340, objectFit: 'cover', display: 'block' }} />
+              ) : <div />}
+              <div style={{ padding: 'clamp(28px, 3.5vw, 44px)' }}>
+                {leader.message && leader.message.split(/\n\s*\n/).map((para: string, i: number) => (
+                  <p key={i} style={{ fontSize: '1.02rem', lineHeight: 1.7, color: '#48536B', margin: i === 0 ? 0 : '14px 0 0' }}>{para}</p>
+                ))}
+                {leader.name && <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: '1.3rem', color: '#1B2A4A', margin: leader.message ? '26px 0 0' : 0 }}>{leader.name}</h3>}
+                {(leader.roles ?? []).map((r: string, i: number) => (
+                  <div key={i} style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 14, color: '#D4891A', marginTop: i === 0 ? (leader.name ? 6 : 0) : 3 }}>{r}</div>
+                ))}
+                {(leader.qualifications?.length ?? 0) > 0 && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 20 }}>
+                    {(leader.qualifications ?? []).map((q: string, i: number) => (
+                      <span key={i} style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontSize: 12.5, color: '#33405C', background: '#F2F4F7', border: '1px solid #E6E9F0', borderRadius: 100, padding: '6px 13px' }}>{q}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>
       )}
 
-      {/* 4 — Executive leadership */}
-      {(leader.photo || (leader.roles?.length ?? 0) > 0) && (
+      {/* 4 — Faculty of Business & Management */}
+      {facPeople.length > 0 && (
         <section style={{ width: 'min(1080px, 92%)', margin: '0 auto', padding: 'clamp(56px, 7vw, 92px) 0' }}>
-          <SectionHeader eyebrow="Leadership" title={leader.heading || 'Executive Leadership'} center />
-          <div style={{ ...card, marginTop: 46, overflow: 'hidden', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 0 }}>
-            {leader.photo && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={leader.photo} alt={leader.name ?? 'Executive leadership'} style={{ width: '100%', height: '100%', minHeight: 320, objectFit: 'cover', display: 'block' }} />
-            )}
-            <div style={{ padding: 'clamp(28px, 3.5vw, 42px)' }}>
-              {leader.name && <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: '1.5rem', color: '#1B2A4A', margin: 0 }}>{leader.name}</h3>}
-              {(leader.roles ?? []).map((r: string, i: number) => (
-                <div key={i} style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 14.5, color: '#D4891A', marginTop: i === 0 ? (leader.name ? 8 : 0) : 4 }}>{r}</div>
-              ))}
-              {(leader.qualifications?.length ?? 0) > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 20 }}>
-                  {(leader.qualifications ?? []).map((q: string, i: number) => (
-                    <span key={i} style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontSize: 13, color: '#33405C', background: '#F2F4F7', border: '1px solid #E6E9F0', borderRadius: 100, padding: '7px 14px' }}>{q}</span>
-                  ))}
-                </div>
-              )}
-              {leader.experience && (
-                <p style={{ fontSize: '1rem', lineHeight: 1.6, color: '#48536B', margin: '20px 0 0', borderTop: '1px solid #EEF1F6', paddingTop: 18 }}>{leader.experience}</p>
-              )}
-            </div>
-          </div>
+          <SectionHeader eyebrow="Academics" title={faculty.heading || 'Faculty of Business & Management'} center />
+          <PeopleGrid people={facPeople} />
         </section>
       )}
 
-      {/* 5 — ESM Operation */}
+      {/* 5 — Academic Operations Team */}
       {opPeople.length > 0 && (
         <section style={{ background: '#F2F4F7' }}>
           <div style={{ width: 'min(1080px, 92%)', margin: '0 auto', padding: 'clamp(56px, 7vw, 92px) 0' }}>
-            <SectionHeader eyebrow="Our team" title={operation.heading || 'ESM Operation'} center />
+            <SectionHeader eyebrow="Our team" title={operation.heading || 'Academic Operations Team'} center />
             <PeopleGrid people={opPeople} />
           </div>
-        </section>
-      )}
-
-      {/* 6 — Faculty of Management */}
-      {facPeople.length > 0 && (
-        <section style={{ width: 'min(1080px, 92%)', margin: '0 auto', padding: 'clamp(56px, 7vw, 92px) 0' }}>
-          <SectionHeader eyebrow="Academics" title={faculty.heading || 'Faculty of Management'} center />
-          <PeopleGrid people={facPeople} />
         </section>
       )}
 

@@ -115,32 +115,20 @@ export const siteSettings = defineType({
         }),
       ],
     }),
-    // 3 — Programme portfolio
-    defineField({
-      name: 'programmePortfolio',
-      title: 'About page — 3. Programme portfolio',
-      type: 'object',
-      group: 'about',
-      options: { collapsible: true, collapsed: true },
-      fields: [
-        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-        defineField({ name: 'items', title: 'Programme types', type: 'array', of: [defineArrayMember({ type: 'string' })] }),
-      ],
-    }),
-    // 4 — Executive leadership
+    // 3 — Executive leadership (message)
     defineField({
       name: 'executiveLeadership',
-      title: 'About page — 4. Executive leadership',
+      title: 'About page — 3. Executive leadership',
       type: 'object',
       group: 'about',
       options: { collapsible: true, collapsed: true },
       fields: [
-        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'heading', title: 'Heading', type: 'string', description: 'e.g. "A Message from Our Executive Leadership"' }),
         defineField({ name: 'name', title: 'Name', type: 'string' }),
         defineField({ name: 'photo', title: 'Photo', type: 'image', options: { hotspot: true } }),
+        defineField({ name: 'message', title: 'Message', type: 'text', rows: 8, description: 'The welcome message. Separate paragraphs with a blank line.' }),
         defineField({ name: 'roles', title: 'Roles / positions', type: 'array', of: [defineArrayMember({ type: 'string' })] }),
         defineField({ name: 'qualifications', title: 'Qualifications', type: 'array', of: [defineArrayMember({ type: 'string' })] }),
-        defineField({ name: 'experience', title: 'Experience note', type: 'text', rows: 2 }),
       ],
     }),
     // 5 — ESM Operation team

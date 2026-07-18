@@ -104,8 +104,7 @@ export async function getSiteSettings() {
     },
     aboutIntro,
     globalPresence{ heading, countries[]{ name, "flag": flag.asset->url } },
-    programmePortfolio,
-    executiveLeadership{ heading, name, roles, qualifications, experience, "photo": photo.asset->url },
+    executiveLeadership{ heading, name, message, roles, qualifications, "photo": photo.asset->url },
     operationTeam{ heading, people[]{ name, role, "photo": photo.asset->url } },
     facultyTeam{ heading, people[]{ name, role, "photo": photo.asset->url } }
   }`)
