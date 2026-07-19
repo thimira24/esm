@@ -3,6 +3,7 @@ import TrustBar from '@/components/home/TrustBar'
 import ValueProps from '@/components/home/ValueProps'
 import StatsStrip from '@/components/home/StatsStrip'
 import FeaturedProgrammes from '@/components/home/FeaturedProgrammes'
+import AlumniMarquee from '@/components/home/AlumniMarquee'
 import Testimonials from '@/components/home/Testimonials'
 import FAQAccordion from '@/components/shared/FAQAccordion'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
@@ -20,6 +21,7 @@ export default async function HomePage() {
       <ValueProps />
       <StatsStrip />
       <FeaturedProgrammes />
+      <AlumniMarquee />
       <Testimonials />
 
       {/* FAQ */}

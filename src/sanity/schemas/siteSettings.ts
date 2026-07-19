@@ -275,6 +275,32 @@ export const siteSettings = defineType({
 
     // ── Editable section headings ────────────────────────────
     defineField({
+      name: 'alumniAtWork',
+      title: 'Home — “Our alumni at work” (logo marquee)',
+      type: 'object',
+      group: 'sections',
+      fields: [
+        defineField({ name: 'eyebrow', title: 'Eyebrow', type: 'string' }),
+        defineField({ name: 'title', title: 'Title', type: 'string' }),
+        defineField({ name: 'subtitle', title: 'Subtitle', type: 'text', rows: 2 }),
+        defineField({
+          name: 'logos',
+          title: 'Company logos',
+          description: 'Logos scroll in a marquee. Best with transparent PNG/SVG.',
+          type: 'array',
+          options: { layout: 'grid' },
+          of: [defineArrayMember({
+            type: 'object',
+            fields: [
+              defineField({ name: 'name', title: 'Company name', type: 'string' }),
+              defineField({ name: 'logo', title: 'Logo', type: 'image' }),
+            ],
+            preview: { select: { title: 'name', media: 'logo' } },
+          })],
+        }),
+      ],
+    }),
+    defineField({
       name: 'testimonialsSection',
       title: 'Home — “Student success” section',
       type: 'object',
