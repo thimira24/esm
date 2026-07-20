@@ -261,22 +261,44 @@ export default function HeaderClient({ universities }: { universities: Universit
           </div>
           )}
 
-          <Link
-            href="/contact"
-            style={{
-              background: '#F5A623',
-              color: '#1B2A4A',
-              fontFamily: 'var(--font-dm-sans), sans-serif',
-              fontWeight: 700,
-              fontSize: 14.5,
-              padding: '11px 22px',
-              borderRadius: 9,
-              boxShadow: '0 6px 18px rgba(245,166,35,0.35)',
-              textDecoration: 'none',
-            }}
-          >
-            Enquire Now
-          </Link>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <a
+              href="https://portal.esm-lms.com/dashboard"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                background: '#fff',
+                color: '#1B2A4A',
+                border: '1px solid #D9DEE8',
+                fontFamily: 'var(--font-dm-sans), sans-serif',
+                fontWeight: 700,
+                fontSize: 14.5,
+                padding: '10px 20px',
+                borderRadius: 9,
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Student login
+            </a>
+            <Link
+              href="/contact"
+              style={{
+                background: '#F5A623',
+                color: '#1B2A4A',
+                fontFamily: 'var(--font-dm-sans), sans-serif',
+                fontWeight: 700,
+                fontSize: 14.5,
+                padding: '11px 22px',
+                borderRadius: 9,
+                boxShadow: '0 6px 18px rgba(245,166,35,0.35)',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Enquire Now
+            </Link>
+          </span>
         </nav>
 
         {/* Burger — mobile only */}
@@ -449,6 +471,27 @@ export default function HeaderClient({ universities }: { universities: Universit
             >
               Enquire Now
             </Link>
+            <a
+              href="https://portal.esm-lms.com/dashboard"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+              style={{
+                marginTop: 10,
+                background: '#fff',
+                color: '#1B2A4A',
+                border: '1px solid #D9DEE8',
+                fontFamily: 'var(--font-dm-sans), sans-serif',
+                fontWeight: 700,
+                fontSize: 16,
+                padding: 14,
+                borderRadius: 10,
+                textAlign: 'center',
+                textDecoration: 'none',
+              }}
+            >
+              Student login
+            </a>
           </div>
         </div>
       )}
