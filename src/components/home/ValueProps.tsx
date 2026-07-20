@@ -6,6 +6,7 @@ export const revalidate = 60
 const CARD_ILLUSTRATIONS = [
   '/illustrations/shield-check.png',
   '/illustrations/calendar.png',
+  '/illustrations/global-recognition.png',
 ]
 
 export default async function ValueProps() {
