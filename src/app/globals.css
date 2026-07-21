@@ -107,10 +107,12 @@ body {
   }
   .about-lead-card {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: stretch;
   }
   .about-lead-photo {
     height: 100%;
-    min-height: 360px;
-    object-position: center;
+    min-height: 320px;
+    max-height: 430px;
+    object-position: center 15%;
   }
 }

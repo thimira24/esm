@@ -1,6 +1,7 @@
 import { getSiteSettings } from '@/sanity/queries'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 import SectionHeader from '@/components/shared/SectionHeader'
+import LeadershipMessage from '@/components/about/LeadershipMessage'
 
 export const revalidate = 60
 
@@ -103,9 +104,7 @@ export default async function AboutPage() {
                 <img className="about-lead-photo" src={leader.photo} alt={leader.name ?? 'Executive leadership'} />
               ) : <div />}
               <div style={{ padding: 'clamp(28px, 3.5vw, 44px)' }}>
-                {leader.message && leader.message.split(/\n\s*\n/).map((para: string, i: number) => (
-                  <p key={i} style={{ fontSize: '1.02rem', lineHeight: 1.7, color: '#48536B', margin: i === 0 ? 0 : '14px 0 0' }}>{para}</p>
-                ))}
+                {leader.message && <LeadershipMessage paragraphs={leader.message.split(/\n\s*\n/)} />}
                 {leader.name && <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: '1.3rem', color: '#1B2A4A', margin: leader.message ? '26px 0 0' : 0 }}>{leader.name}</h3>}
                 {(leader.roles ?? []).map((r: string, i: number) => (
                   <div key={i} style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 14, color: '#D4891A', marginTop: i === 0 ? (leader.name ? 6 : 0) : 3 }}>{r}</div>
