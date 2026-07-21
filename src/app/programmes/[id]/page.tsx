@@ -93,6 +93,8 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
           <Link
             href="/programmes"
             style={{
+              display: 'block',
+              width: 'fit-content',
               fontFamily: 'var(--font-dm-sans), sans-serif',
               fontWeight: 600,
               fontSize: 14,
@@ -102,22 +104,25 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
           >
             ← All programmes
           </Link>
-          <span
+          <div
             style={{
               display: 'inline-block',
-              margin: '20px 0 0',
+              margin: '22px 0 0',
               fontFamily: 'var(--font-dm-sans), sans-serif',
               fontWeight: 700,
               fontSize: 12,
-              color: '#1B2A4A',
-              background: '#F5A623',
+              letterSpacing: '0.4px',
+              textTransform: 'uppercase',
+              color: '#F5C97B',
+              background: 'rgba(245,166,35,0.12)',
+              border: '1px solid rgba(245,166,35,0.32)',
               padding: '6px 13px',
               borderRadius: 100,
               whiteSpace: 'nowrap',
             }}
           >
             {programme.level}
-          </span>
+          </div>
           <h1
             style={{
               fontFamily: 'var(--font-montserrat), sans-serif',
