@@ -16,7 +16,7 @@ function PeopleGrid({ people }: { people: Person[] }) {
         <div key={i} style={{ ...card, overflow: 'hidden', textAlign: 'center', paddingBottom: 18 }}>
           {p.photo ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={p.photo} alt={p.name ?? ''} style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }} />
+            <img src={p.photo} alt={p.name ?? ''} style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
           ) : (
             <div style={{ width: '100%', aspectRatio: '1 / 1', background: 'linear-gradient(135deg, #F2F4F7, #E6E9F0)' }} />
           )}
