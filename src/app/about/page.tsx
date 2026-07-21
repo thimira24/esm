@@ -10,17 +10,17 @@ const card: React.CSSProperties = { background: '#fff', border: '1px solid #E6E9
 
 function PeopleGrid({ people }: { people: Person[] }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 24, marginTop: 46 }}>
+    <div className="about-people-grid">
       {people.map((p, i) => (
-        <div key={i} style={{ ...card, overflow: 'hidden', textAlign: 'center', paddingBottom: 22 }}>
+        <div key={i} style={{ ...card, overflow: 'hidden', textAlign: 'center', paddingBottom: 18 }}>
           {p.photo ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={p.photo} alt={p.name ?? ''} style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }} />
           ) : (
             <div style={{ width: '100%', aspectRatio: '1 / 1', background: 'linear-gradient(135deg, #F2F4F7, #E6E9F0)' }} />
           )}
-          <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1.1rem', color: '#1B2A4A', margin: '18px 20px 0' }}>{p.name}</h3>
-          {p.role && <div style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 13.5, color: '#D4891A', margin: '5px 20px 0', lineHeight: 1.4 }}>{p.role}</div>}
+          <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: 'clamp(0.95rem, 2.6vw, 1.1rem)', color: '#1B2A4A', margin: '14px 12px 0', lineHeight: 1.25 }}>{p.name}</h3>
+          {p.role && <div style={{ fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: 'clamp(11.5px, 2.4vw, 13.5px)', color: '#D4891A', margin: '5px 12px 0', lineHeight: 1.4 }}>{p.role}</div>}
         </div>
       ))}
     </div>
@@ -85,7 +85,7 @@ export default async function AboutPage() {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={c.flag} alt={c.name ?? ''} style={{ width: 88, height: 58, objectFit: 'cover', borderRadius: 8, border: '1px solid #E6E9F0' }} />
                 )}
-                <span style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1rem', color: '#1B2A4A' }}>{c.name}</span>
+                <span style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: '1rem', color: '#1B2A4A', textAlign: 'center' }}>{c.name}</span>
               </div>
             ))}
           </div>
@@ -97,10 +97,10 @@ export default async function AboutPage() {
         <section style={{ background: '#F2F4F7' }}>
           <div style={{ width: 'min(1080px, 92%)', margin: '0 auto', padding: 'clamp(56px, 7vw, 92px) 0' }}>
             <SectionHeader eyebrow="Leadership" title={leader.heading || 'A Message from Our Executive Leadership'} center />
-            <div style={{ ...card, marginTop: 46, overflow: 'hidden', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 0 }}>
+            <div className="about-lead-card" style={{ ...card, marginTop: 46, overflow: 'hidden' }}>
               {leader.photo ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={leader.photo} alt={leader.name ?? 'Executive leadership'} style={{ width: '100%', height: '100%', minHeight: 340, objectFit: 'cover', display: 'block' }} />
+                <img className="about-lead-photo" src={leader.photo} alt={leader.name ?? 'Executive leadership'} />
               ) : <div />}
               <div style={{ padding: 'clamp(28px, 3.5vw, 44px)' }}>
                 {leader.message && leader.message.split(/\n\s*\n/).map((para: string, i: number) => (
