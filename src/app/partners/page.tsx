@@ -75,6 +75,15 @@ export default async function PartnersPage() {
       >
         {groups.map(([type, partners]) => {
           const meta = GROUP_LABELS[type] ?? { title: type, desc: '' }
+          const visiblePartners = partners.filter(
+            (p) => Boolean(p.logoPath) && p.logoPath !== '/logos/universities/placeholder.svg'
+          )
+          if (visiblePartners.length === 0) return null
+
+          const isUniversity = type === 'university'
+          const logoHeight = isUniversity ? 88 : 56
+          const minHeight = isUniversity ? 140 : 110
+
           return (
             <div key={type}>
               <div
@@ -95,22 +104,23 @@ export default async function PartnersPage() {
                   {meta.desc && <p style={{ fontSize: '1rem', lineHeight: 1.55, color: '#5A647A', margin: '7px 0 0' }}>{meta.desc}</p>}
                 </div>
                 <span style={{ flexShrink: 0, fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 700, fontSize: 12.5, letterSpacing: '0.4px', color: '#1F8A5B', background: '#EAF7EF', padding: '7px 14px', borderRadius: 100 }}>
-                  {partners.length} {partners.length === 1 ? 'partner' : 'partners'}
+                  {visiblePartners.length} {visiblePartners.length === 1 ? 'partner' : 'partners'}
                 </span>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16, marginTop: 24 }}>
-                {partners.map((p) => (
+                {visiblePartners.map((p) => (
                   <div
                     key={p.name}
-                    style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 16, padding: '24px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 110 }}
+                    style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 16, padding: isUniversity ? '28px 24px' : '24px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight }}
                   >
                     <Image
-                      src={p.logoPath || '/logos/universities/placeholder.svg'}
+                      src={p.logoPath}
                       alt={p.name}
-                      width={160}
-                      height={56}
-                      style={{ objectFit: 'contain', width: '100%', height: 56 }}
+                      width={220}
+                      height={logoHeight}
+                      unoptimized
+                      style={{ objectFit: 'contain', width: '100%', height: logoHeight }}
                     />
                   </div>
                 ))}
