@@ -169,10 +169,10 @@ export default async function AboutPage() {
               <h3 style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 800, fontSize: 'clamp(1.3rem, 2.2vw, 1.7rem)', color: '#1B2A4A', margin: 0 }}>{acc.recognitionHeading || 'Recognition'}</h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 16, marginTop: 28 }}>
                 {recogLogos.map((r, i) => (
-                  <div key={i} style={{ ...card, padding: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 96 }}>
+                  <div key={i} style={{ ...card, padding: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 180 }}>
                     {r.logo && (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={r.logo} alt={r.name ?? ''} style={{ maxWidth: '100%', maxHeight: 60, objectFit: 'contain' }} />
+                      <img src={r.logo} alt={r.name ?? ''} style={{ maxWidth: '100%', maxHeight: 160, objectFit: 'contain' }} />
                     )}
                   </div>
                 ))}
