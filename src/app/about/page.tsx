@@ -100,8 +100,10 @@ export default async function AboutPage() {
             <SectionHeader eyebrow="Leadership" title={leader.heading || 'A Message from Our Executive Leadership'} center />
             <div className="about-lead-card" style={{ ...card, marginTop: 46, overflow: 'hidden' }}>
               {leader.photo ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img className="about-lead-photo" src={leader.photo} alt={leader.name ?? 'Executive leadership'} />
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 32 }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="about-lead-photo" src={leader.photo} alt={leader.name ?? 'Executive leadership'} />
+                </div>
               ) : <div />}
               <div style={{ padding: 'clamp(28px, 3.5vw, 44px)' }}>
                 {leader.message && <LeadershipMessage paragraphs={leader.message.split(/\n\s*\n/)} />}
