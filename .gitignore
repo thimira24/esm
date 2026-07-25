@@ -22,3 +22,4 @@ cloudflare-env.d.ts
 
 # Sanity Studio build output
 dist/
+.sanity/

@@ -48,15 +48,15 @@ export default function ProgrammeCard({ programme: p, compact = false }: Program
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: 140,
-                height: 60,
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={p.uniLogo}
-                alt={p.uniName ?? ''}
-                style={{ objectFit: 'contain', objectPosition: 'left center', width: '100%', height: 50 }}
+                  width: 160,
+                  height: 72,
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={p.uniLogo}
+                  alt={p.uniName ?? ''}
+                  style={{ objectFit: 'contain', objectPosition: 'left center', width: '100%', height: 72 }}
               />
             </span>
           )}
