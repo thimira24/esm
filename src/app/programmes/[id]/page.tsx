@@ -5,7 +5,7 @@ import { getAllProgrammes, getProgrammeById, getSiteSettings, getFaqs } from '@/
 import ProgrammeCard from '@/components/programmes/ProgrammeCard'
 import GraduationGallery from '@/components/programmes/GraduationGallery'
 import FAQAccordion from '@/components/shared/FAQAccordion'
-import { CheckIcon, StarIcon, WhatsAppIcon, ClockIcon, MonitorIcon, AwardIcon, CapIcon, TagIcon } from '@/components/shared/icons'
+import { CheckIcon, StarIcon, WhatsAppIcon, ClockIcon, MonitorIcon, AwardIcon, TagIcon } from '@/components/shared/icons'
 
 export const revalidate = 60
 
@@ -185,7 +185,6 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
             { icon: <ClockIcon size={16} />, label: 'Duration', value: programme.duration },
             { icon: <MonitorIcon size={16} />, label: 'Mode', value: programme.mode },
             ...(programme.credits?.trim() ? [{ icon: <AwardIcon size={16} />, label: 'Credits', value: programme.credits }] : []),
-            { icon: <CapIcon size={16} />, label: 'Awarding body', value: programme.awarding },
             { icon: <TagIcon size={16} />, label: 'Indicative fee', value: feeUsd ? `${programme.fee} · ${feeUsd}` : programme.fee },
           ].map((fact) => (
             <div key={fact.label} style={{ background: '#fff', padding: '24px 20px' }}>
@@ -389,13 +388,13 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
         <aside style={{ position: 'sticky', top: 96 }}>
           <div style={{ background: '#fff', border: '1px solid #E6E9F0', borderRadius: 20, padding: 28, boxShadow: '0 14px 40px rgba(15,29,51,0.08)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 13 }}>
-              <span style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 64, height: 48, borderRadius: 12, background: '#F4F6FA', border: '1px solid #E6E9F0', padding: '6px 10px' }}>
+              <span style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', height: 128 }}>
                 <Image
                   src={programme.uniLogo}
                   alt={programme.uniName}
-                  width={56}
-                  height={36}
-                  style={{ objectFit: 'contain', width: '100%', height: 36 }}
+                  width={200}
+                  height={128}
+                  style={{ objectFit: 'contain', objectPosition: 'left center', width: 'auto', height: 128 }}
                 />
               </span>
               <div>
