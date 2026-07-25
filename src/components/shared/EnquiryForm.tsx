@@ -73,7 +73,6 @@ export default function EnquiryForm({
     >
       {status === 'success' ? (
         <div style={{ textAlign: 'center', padding: '40px 0' }}>
-          <div style={{ fontSize: 40, marginBottom: 16 }}>✅</div>
           <h3
             style={{
               fontFamily: 'var(--font-montserrat), sans-serif',
@@ -161,7 +160,7 @@ export default function EnquiryForm({
             </p>
           )}
           <p style={{ textAlign: 'center', fontSize: 13, color: '#8A93A6', margin: '13px 0 0' }}>
-            🔒 Your details are kept private. No spam, ever.
+            Your details are kept private. No spam, ever.
           </p>
         </form>
       )}

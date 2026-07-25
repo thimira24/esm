@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ClockIcon, MonitorIcon, AwardIcon, ArrowRightIcon } from '@/components/shared/icons'
+import { ClockIcon, MonitorIcon, AwardIcon } from '@/components/shared/icons'
 import type { Programme } from '@/data/programmes'
 
 interface ProgrammeCardProps {
@@ -38,7 +38,7 @@ export default function ProgrammeCard({ programme: p, compact = false }: Program
         el.style.borderColor = '#E6E9F0'
       }}
     >
-      {/* Top row: icon + tag + arrow */}
+      {/* Top row: logo + tag */}
       <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
         <span style={{ display: 'flex', alignItems: 'center', gap: 11, minWidth: 0 }}>
           {p.uniLogo && p.uniLogo.trim() !== '' && p.uniLogo !== '/logos/universities/placeholder.svg' && (
@@ -48,50 +48,37 @@ export default function ProgrammeCard({ programme: p, compact = false }: Program
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                  width: 160,
-                  height: 72,
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={p.uniLogo}
-                  alt={p.uniName ?? ''}
-                  style={{ objectFit: 'contain', objectPosition: 'left center', width: '100%', height: 72 }}
+                width: 160,
+                height: 72,
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={p.uniLogo}
+                alt={p.uniName ?? ''}
+                style={{ objectFit: 'contain', objectPosition: 'left center', width: '100%', height: 72 }}
               />
             </span>
           )}
-          <span
-            style={{
-              flexShrink: 0,
-              whiteSpace: 'nowrap',
-              fontFamily: 'var(--font-dm-sans), sans-serif',
-              fontWeight: 700,
-              fontSize: 11,
-              letterSpacing: '0.6px',
-              textTransform: 'uppercase',
-              color: '#D4891A',
-              background: '#FFF3DE',
-              padding: '6px 12px',
-              borderRadius: 100,
-            }}
-          >
-            {p.tag}
-          </span>
-        </span>
-        <span
-          style={{
-            flexShrink: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 34,
-            height: 34,
-            borderRadius: '50%',
-            background: '#F2F4F7',
-            color: '#1B2A4A',
-          }}
-        >
-          <ArrowRightIcon />
+          {Boolean(p.tag?.trim()) && (
+            <span
+              style={{
+                flexShrink: 0,
+                whiteSpace: 'nowrap',
+                fontFamily: 'var(--font-dm-sans), sans-serif',
+                fontWeight: 700,
+                fontSize: 11,
+                letterSpacing: '0.6px',
+                textTransform: 'uppercase',
+                color: '#D4891A',
+                background: '#FFF3DE',
+                padding: '6px 12px',
+                borderRadius: 100,
+              }}
+            >
+              {p.tag}
+            </span>
+          )}
         </span>
       </span>
 
