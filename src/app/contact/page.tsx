@@ -67,7 +67,6 @@ export default async function ContactPage() {
             <div style={{ fontSize: 15, lineHeight: 1.7, color: '#48536B' }}>
               ESM Business School<br />
               {contact.address}<br />
-              <span style={{ color: '#A0A8B8' }}>(address to be supplied by client)</span><br />
               📞 {contact.phone}
             </div>
             <ContactMap />

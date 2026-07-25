@@ -23,7 +23,7 @@ export default function ContactMap() {
       const maplibre = (window as any).maplibregl
       if (!maplibre || !mapRef.current || mapInstance.current) return
 
-      const lngLat: [number, number] = [55.2708, 25.2048]
+      const lngLat: [number, number] = [55.27019817971544, 25.18121946251496]
 
       const map = new maplibre.Map({
         container: mapRef.current,

@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { CheckIcon } from '@/components/shared/icons'
 import { getSiteSettings } from '@/sanity/queries'
 import HeroBackground from './HeroBackground'
 
@@ -197,19 +196,13 @@ export default async function HeroV1() {
               gap: 14,
             }}
           >
-            <span
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 46,
-                height: 46,
-                borderRadius: 12,
-                background: '#EAF7EF',
-              }}
-            >
-              <CheckIcon size={22} color="#1F8A5B" strokeWidth={2.4} />
-            </span>
+            <Image
+              src="/illustrations/grad-cap-diploma.png"
+              alt="Graduation cap and diploma"
+              width={48}
+              height={48}
+              style={{ objectFit: 'contain', flexShrink: 0 }}
+            />
             <div>
               <div
                 style={{
