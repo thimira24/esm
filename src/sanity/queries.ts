@@ -21,6 +21,7 @@ const PROGRAMME_FIELDS = `
   fee,
   tag,
   blurb,
+  sidebarText,
   overview,
   modules,
   entry,

@@ -83,6 +83,13 @@ export const programme = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
+      name: 'sidebarText',
+      title: 'Sidebar — advisor text',
+      description: 'The short text in the sidebar enquiry card, e.g. "Speak to an advisor about start dates...". Leave empty to use the default.',
+      type: 'text',
+      rows: 2,
+    }),
+    defineField({
       name: 'university',
       title: 'Awarding university',
       type: 'reference',

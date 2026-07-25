@@ -404,7 +404,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
               </div>
             </div>
             <p style={{ fontSize: '0.98rem', lineHeight: 1.6, color: '#5A647A', margin: '18px 0 0' }}>
-              {L.sidebarText || 'Speak to an advisor about start dates, payment plans and the fastest route to enrol.'}
+              {programme.sidebarText?.trim() || L.sidebarText || 'Speak to an advisor about start dates, payment plans and the fastest route to enrol.'}
             </p>
             <Link
               href="/contact"

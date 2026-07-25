@@ -20,6 +20,7 @@ export interface Programme {
   fee: string
   tag: string
   blurb: string
+  sidebarText?: string
   overview: string[]
   modules: string[]
   entry: string[]
