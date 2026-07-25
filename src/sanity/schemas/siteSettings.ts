@@ -275,6 +275,30 @@ export const siteSettings = defineType({
 
     // ── Editable section headings ────────────────────────────
     defineField({
+      name: 'heroMarquee',
+      title: 'Home — logo marquee (below hero)',
+      description: 'University / accreditation logos that scroll below the hero. Leave empty to fall back to the University Partners.',
+      type: 'object',
+      group: 'sections',
+      fields: [
+        defineField({ name: 'label', title: 'Label', type: 'string', description: 'Small text before the logos, e.g. "Awarded & accredited by".' }),
+        defineField({
+          name: 'logos',
+          title: 'Logos',
+          type: 'array',
+          options: { layout: 'grid' },
+          of: [defineArrayMember({
+            type: 'object',
+            fields: [
+              defineField({ name: 'name', title: 'Name', type: 'string' }),
+              defineField({ name: 'logo', title: 'Logo', type: 'image' }),
+            ],
+            preview: { select: { title: 'name', media: 'logo' } },
+          })],
+        }),
+      ],
+    }),
+    defineField({
       name: 'alumniAtWork',
       title: 'Home — “Our alumni at work” (logo marquee)',
       type: 'object',

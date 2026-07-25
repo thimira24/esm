@@ -1,11 +1,24 @@
-import { getPartners } from '@/sanity/queries'
+import { getPartners, getSiteSettings } from '@/sanity/queries'
 
 export const revalidate = 60
 
+type Logo = { name?: string; logo?: string }
+
 export default async function TrustBar() {
-  const partners = await getPartners().catch(() => [])
-  const universities = partners.filter((p: { type: string }) => p.type === 'university')
-  const doubled = [...universities, ...universities]
+  const settings = await getSiteSettings().catch(() => null)
+  const label: string = settings?.heroMarquee?.label || 'Awarded & accredited by'
+
+  let logos: Logo[] = (settings?.heroMarquee?.logos ?? []).filter((l: Logo) => l.logo)
+  // Fall back to the University Partners if the dedicated marquee is empty.
+  if (logos.length === 0) {
+    const partners = await getPartners().catch(() => [])
+    logos = partners
+      .filter((p: { type: string; logoPath?: string }) => p.type === 'university' && p.logoPath)
+      .map((p: { name?: string; logoPath?: string }) => ({ name: p.name, logo: p.logoPath }))
+  }
+  if (logos.length === 0) return null
+
+  const doubled = [...logos, ...logos]
 
   return (
     <section style={{ borderBottom: '1px solid #E6E9F0', overflow: 'hidden' }}>
@@ -31,7 +44,7 @@ export default async function TrustBar() {
             whiteSpace: 'nowrap',
           }}
         >
-          Awarded &amp; accredited by
+          {label}
         </span>
 
         <div className="marquee-mask" style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
@@ -39,7 +52,7 @@ export default async function TrustBar() {
             {doubled.map((u, i) => (
               <div
                 key={i}
-                aria-hidden={i >= universities.length}
+                aria-hidden={i >= logos.length}
                 style={{
                   flexShrink: 0,
                   display: 'flex',
@@ -51,8 +64,8 @@ export default async function TrustBar() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={u.logoPath}
-                  alt={u.name}
+                  src={u.logo}
+                  alt={u.name ?? ''}
                   style={{
                     objectFit: 'contain',
                     objectPosition: 'center',
