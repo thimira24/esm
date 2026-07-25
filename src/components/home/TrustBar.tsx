@@ -26,7 +26,7 @@ export default async function TrustBar() {
         style={{
           width: 'min(1180px, 92%)',
           margin: '0 auto',
-          padding: '20px 0',
+          padding: '26px 0',
           display: 'flex',
           alignItems: 'center',
           gap: 'clamp(16px, 2.5vw, 28px)',
@@ -58,8 +58,8 @@ export default async function TrustBar() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginRight: 'clamp(32px, 4.5vw, 60px)',
-                  height: 48,
+                  marginRight: 'clamp(36px, 5vw, 68px)',
+                  height: 66,
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -69,11 +69,11 @@ export default async function TrustBar() {
                   style={{
                     objectFit: 'contain',
                     objectPosition: 'center',
-                    maxHeight: 44,
-                    maxWidth: 140,
+                    maxHeight: 62,
+                    maxWidth: 190,
                     width: 'auto',
                     filter: 'grayscale(1)',
-                    opacity: 0.65,
+                    opacity: 0.7,
                   }}
                 />
               </div>
