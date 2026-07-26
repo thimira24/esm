@@ -54,6 +54,26 @@ export const siteSettings = defineType({
         defineField({ name: 'chipValue', title: 'Top chip — value', type: 'string', description: 'e.g. "100% Online"' }),
       ],
     }),
+    // ── Hero Carousel Slides ──────────────────────────────────
+    defineField({
+      name: 'heroSlides',
+      title: 'Hero — Background images (carousel)',
+      description: 'Full-width background images that cycle. The hero text, buttons and stats stay static. Leave empty to show no slider.',
+      type: 'array',
+      group: 'hero',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({ name: 'image', title: 'Background image', type: 'image', options: { hotspot: true }, validation: (r) => r.required() }),
+            defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
+          ],
+          preview: {
+            select: { title: 'alt', media: 'image' },
+          },
+        }),
+      ],
+    }),
 
     // ── Stats strip ─────────────────────────────────────────
     defineField({

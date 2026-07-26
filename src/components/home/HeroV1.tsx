@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { getSiteSettings } from '@/sanity/queries'
 import HeroBackground from './HeroBackground'
+import HeroCarousel from './HeroCarousel'
 
 const FALLBACK = {
   eyebrow: 'British Education · Based in the UAE',
@@ -27,8 +27,7 @@ export default async function HeroV1() {
   const settings = await getSiteSettings().catch(() => null)
   const h = { ...FALLBACK, ...settings?.hero }
   const heroStats = settings?.stats?.length ? settings.stats : FALLBACK_STATS
-
-  const imgSrc = h.imageUrl ?? '/hero-graduate.png'
+  const heroSlides = settings?.heroSlides
 
   return (
     <section style={{
@@ -39,23 +38,29 @@ export default async function HeroV1() {
         ].join(', '),
         overflow: 'hidden',
         position: 'relative',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
       }}>
       <HeroBackground />
+      <style>{`
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; min-height: 100vh; }
+        .hero-content { padding: clamp(56px, 8vw, 104px) 0; }
+        @media (max-width: 768px) {
+          .hero-grid { grid-template-columns: 1fr; min-height: auto; }
+          .hero-content { padding: 48px 24px 32px; }
+          .hero-grid > div:last-child { position: relative !important; min-height: 50vh !important; }
+        }
+      `}</style>
       <div
+        className="hero-grid"
         style={{
           position: 'relative',
           zIndex: 1,
-          width: 'min(1180px, 92%)',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(330px, 1fr))',
-          gap: 'clamp(40px, 5vw, 72px)',
-          alignItems: 'center',
-          padding: 'clamp(56px, 8vw, 104px) 0',
         }}
       >
-        {/* Left — copy */}
-        <div>
+        {/* Left — content (static) */}
+        <div className="hero-content" style={{ paddingLeft: 'clamp(24px, 8vw, 120px)', paddingRight: 'clamp(24px, 4vw, 60px)' }}>
           <span
             style={{
               display: 'inline-flex',
@@ -77,7 +82,7 @@ export default async function HeroV1() {
             style={{
               fontFamily: 'var(--font-montserrat), sans-serif',
               fontWeight: 800,
-              fontSize: 'clamp(2.3rem, 5.2vw, 4rem)',
+              fontSize: 'clamp(1.9rem, 4.2vw, 3.2rem)',
               lineHeight: 1.04,
               letterSpacing: '-1px',
               color: '#1B2A4A',
@@ -160,100 +165,106 @@ export default async function HeroV1() {
           </div>
         </div>
 
-        {/* Right — visual card */}
-        <div style={{ position: 'relative', minHeight: 'clamp(340px, 42vw, 480px)' }}>
-          <Image
-            src={imgSrc}
-            alt={h.heading ?? 'ESM graduate'}
-            fill
-            priority
-            unoptimized
-            style={{ objectFit: 'cover', objectPosition: 'center top', borderRadius: 24 }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              borderRadius: 24,
-              background: 'linear-gradient(to top, rgba(15,29,51,0.55) 0%, rgba(15,29,51,0.08) 55%, transparent 100%)',
-              boxShadow: '0 30px 70px rgba(15,29,51,0.32)',
-            }}
-          />
-
-          {/* Floating badge */}
-          <div
-            className="animate-float"
-            style={{
-              position: 'absolute',
-              right: -6,
-              bottom: 36,
-              background: '#fff',
-              borderRadius: 16,
-              padding: '18px 22px',
-              boxShadow: '0 20px 45px rgba(15,29,51,0.22)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 14,
-            }}
-          >
-            <Image
-              src="/illustrations/grad-cap-diploma.png"
-              alt="Graduation cap and diploma"
-              width={48}
-              height={48}
-              style={{ objectFit: 'contain', flexShrink: 0 }}
+        {/* Right — image slider or single image */}
+        {heroSlides && heroSlides.length > 0 ? (
+          <HeroCarousel slides={heroSlides} />
+        ) : (
+          <div style={{ position: 'relative', minHeight: '100vh' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={h.imageUrl ?? '/hero-graduate.png'}
+              alt={h.heading ?? 'ESM graduate'}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center top',
+              }}
             />
-            <div>
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(to top, rgba(15,29,51,0.55) 0%, rgba(15,29,51,0.08) 55%, transparent 100%)',
+              }}
+            />
+
+            {/* Floating badge */}
+            <div
+              className="animate-float"
+              style={{
+                position: 'absolute',
+                right: 32,
+                bottom: 36,
+                background: '#fff',
+                borderRadius: 16,
+                padding: '18px 22px',
+                boxShadow: '0 20px 45px rgba(15,29,51,0.22)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 14,
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/illustrations/grad-cap-diploma.png"
+                alt="Graduation cap and diploma"
+                style={{ width: 48, height: 48, objectFit: 'contain', flexShrink: 0 }}
+              />
+              <div>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-montserrat), sans-serif',
+                    fontWeight: 700,
+                    fontSize: 15,
+                    color: '#1B2A4A',
+                  }}
+                >
+                  {h.badgeTitle}
+                </div>
+                <div style={{ fontSize: 12.5, color: '#6B7689' }}>{h.badgeSubtitle}</div>
+              </div>
+            </div>
+
+            {/* Top left chip */}
+            <div
+              style={{
+                position: 'absolute',
+                left: 32,
+                top: 34,
+                background: 'rgba(255,255,255,0.92)',
+                backdropFilter: 'blur(8px)',
+                borderRadius: 14,
+                padding: '14px 18px',
+                boxShadow: '0 16px 36px rgba(15,29,51,0.18)',
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: 'var(--font-dm-sans), sans-serif',
+                  fontWeight: 600,
+                  fontSize: 12,
+                  color: '#6B7689',
+                  letterSpacing: '0.5px',
+                }}
+              >
+                {h.chipLabel}
+              </div>
               <div
                 style={{
                   fontFamily: 'var(--font-montserrat), sans-serif',
-                  fontWeight: 700,
-                  fontSize: 15,
+                  fontWeight: 800,
+                  fontSize: '1.35rem',
                   color: '#1B2A4A',
                 }}
               >
-                {h.badgeTitle}
+                {h.chipValue}
               </div>
-              <div style={{ fontSize: 12.5, color: '#6B7689' }}>{h.badgeSubtitle}</div>
             </div>
           </div>
-
-          {/* Top left chip */}
-          <div
-            style={{
-              position: 'absolute',
-              left: -6,
-              top: 34,
-              background: 'rgba(255,255,255,0.92)',
-              backdropFilter: 'blur(8px)',
-              borderRadius: 14,
-              padding: '14px 18px',
-              boxShadow: '0 16px 36px rgba(15,29,51,0.18)',
-            }}
-          >
-            <div
-              style={{
-                fontFamily: 'var(--font-dm-sans), sans-serif',
-                fontWeight: 600,
-                fontSize: 12,
-                color: '#6B7689',
-                letterSpacing: '0.5px',
-              }}
-            >
-              {h.chipLabel}
-            </div>
-            <div
-              style={{
-                fontFamily: 'var(--font-montserrat), sans-serif',
-                fontWeight: 800,
-                fontSize: '1.35rem',
-                color: '#1B2A4A',
-              }}
-            >
-              {h.chipValue}
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     </section>
   )

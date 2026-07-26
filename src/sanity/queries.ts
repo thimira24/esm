@@ -105,6 +105,10 @@ export async function getSiteSettings() {
       chipValue,
       "imageUrl": image.asset->url
     },
+    heroSlides[] {
+      alt,
+      "imageUrl": image.asset->url
+    },
     aboutIntro,
     globalPresence{ heading, countries[]{ name, "flag": flag.asset->url } },
     executiveLeadership{ heading, name, message, roles, qualifications, "photo": photo.asset->url },
