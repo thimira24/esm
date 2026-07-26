@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { getProgrammeCategories } from '@/sanity/queries'
 import SectionHeader from '@/components/shared/SectionHeader'
 
@@ -11,23 +10,29 @@ const CATEGORY_META: Record<string, {
   image: string
   order: number
 }> = {
-  mba: {
-    label: 'MBA Programmes',
-    desc: 'Level 7 PGD + MBA pathways from leading UK universities. Choose a General MBA or specialise in Finance, Marketing, HRM, Project Management and more.',
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=700&q=80',
-    order: 1,
-  },
   undergraduate: {
     label: 'Undergraduate',
     desc: 'Level 5 Extended Diploma + UK Honours degree. Earn a fully accredited BA or BSc through a flexible online pathway — no traditional A-levels required.',
     image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=700&q=80',
+    order: 1,
+  },
+  pgd: {
+    label: 'Postgraduate Diploma',
+    desc: 'Advanced specialist qualifications including Level 7 Dual Certifications and NZQA Level 8 diplomas. Build expertise for senior roles.',
+    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=700&q=80',
     order: 2,
   },
-  postgraduate: {
-    label: 'Postgraduate',
-    desc: 'Advanced specialist qualifications including MA Education, MSc Artificial Intelligence, Level 7 Dual Certifications and NZQA Level 8 diplomas.',
-    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=700&q=80',
+  masters: {
+    label: 'Master Programs',
+    desc: 'MBA pathways and Master\'s degrees from leading UK universities. Choose a General MBA or specialise in Finance, Marketing, HRM, Project Management and more.',
+    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=700&q=80',
     order: 3,
+  },
+  'teacher-education': {
+    label: 'Teacher Education',
+    desc: 'Professional teaching qualifications and education programmes for aspiring and existing educators.',
+    image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=700&q=80',
+    order: 4,
   },
 }
 
@@ -42,6 +47,18 @@ export default async function FeaturedProgrammes() {
 
   return (
     <section style={{ background: '#F2F4F7' }}>
+      <style>{`
+        .featured-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; align-items: stretch; }
+        .featured-card { transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 8px rgba(15,29,51,0.04); height: 100%; }
+        .featured-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15,29,51,0.12); }
+        .featured-card-img { position: relative; }
+        .featured-card-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        @media (max-width: 768px) {
+          .featured-grid { grid-template-columns: 1fr; }
+          .featured-card { flex-direction: column !important; }
+          .featured-card-img { width: 100% !important; min-height: 200px !important; height: 200px !important; }
+        }
+      `}</style>
       <div style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(64px, 8vw, 108px) 0' }}>
 
         {/* Header row */}
@@ -56,7 +73,7 @@ export default async function FeaturedProgrammes() {
         </div>
 
         {/* Category cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
+        <div className="featured-grid">
           {sorted.map(({ cat, count, examples }) => {
             const meta = CATEGORY_META[cat]
             const label = meta?.label ?? cat.charAt(0).toUpperCase() + cat.slice(1)
@@ -64,97 +81,100 @@ export default async function FeaturedProgrammes() {
             const image = meta?.image ?? 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=700&q=80'
 
             return (
-              <div
+              <Link
                 key={cat}
+                href={`/programmes?cat=${encodeURIComponent(cat)}`}
+                className="featured-card"
                 style={{
                   background: '#fff',
                   borderRadius: 20,
-                  border: '1px solid #E6E9F0',
                   overflow: 'hidden',
                   display: 'flex',
-                  flexDirection: 'column',
-                  boxShadow: '0 2px 12px rgba(15,29,51,0.07)',
+                  textDecoration: 'none',
+                  border: '1px solid #E6E9F0',
                 }}
               >
                 {/* Image */}
-                <div style={{ position: 'relative', height: 200, flexShrink: 0 }}>
-                  <Image
+                <div className="featured-card-img" style={{ position: 'relative', width: '45%', minHeight: 280, flexShrink: 0, overflow: 'hidden' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={image}
                     alt={label}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 380px"
-                    style={{ objectFit: 'cover' }}
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
                   />
-                  {/* Dark overlay */}
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,29,51,0.55) 0%, rgba(15,29,51,0.05) 60%)' }} />
-                  {/* Count badge */}
-                  <span style={{
-                    position: 'absolute', top: 14, right: 14,
-                    fontFamily: 'var(--font-dm-sans), sans-serif',
-                    fontWeight: 700, fontSize: 12.5,
-                    color: '#1B2A4A', background: '#F5A623',
-                    padding: '5px 13px', borderRadius: 100,
-                    letterSpacing: '0.3px',
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(15,29,51,0.3) 0%, rgba(15,29,51,0.1) 100%)' }} />
+                  {/* Programme count overlay */}
+                  <div style={{
+                    position: 'absolute',
+                    bottom: 16,
+                    left: 16,
+                    background: 'rgba(255,255,255,0.95)',
+                    backdropFilter: 'blur(8px)',
+                    padding: '8px 14px',
+                    borderRadius: 10,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
                   }}>
-                    {count} programme{count !== 1 ? 's' : ''}
-                  </span>
+                    <span style={{
+                      fontFamily: 'var(--font-montserrat), sans-serif',
+                      fontWeight: 800,
+                      fontSize: 18,
+                      color: '#1B2A4A',
+                    }}>
+                      {count}
+                    </span>
+                    <span style={{
+                      fontFamily: 'var(--font-dm-sans), sans-serif',
+                      fontWeight: 500,
+                      fontSize: 12,
+                      color: '#5A647A',
+                      lineHeight: 1.2,
+                    }}>
+                      programme{count !== 1 ? 's' : ''}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '26px 26px 28px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                  <h3 style={{
-                    fontFamily: 'var(--font-montserrat), sans-serif',
-                    fontWeight: 800,
-                    fontSize: 'clamp(1.15rem, 2vw, 1.4rem)',
-                    color: '#1B2A4A',
-                    margin: '0 0 10px',
-                    lineHeight: 1.2,
-                  }}>
-                    {label}
-                  </h3>
+                <div style={{ padding: '28px 28px 28px 24px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <h3 style={{
+                      fontFamily: 'var(--font-montserrat), sans-serif',
+                      fontWeight: 800,
+                      fontSize: 'clamp(1.1rem, 1.8vw, 1.35rem)',
+                      color: '#1B2A4A',
+                      margin: 0,
+                      lineHeight: 1.25,
+                    }}>
+                      {label}
+                    </h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+                      <path d="M5 12h14M12 5l7 7-7 7" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
 
-                  <p style={{ fontSize: '0.95rem', lineHeight: 1.65, color: '#5A647A', margin: '0 0 20px', flexGrow: 1 }}>
+                  <p style={{ fontSize: '0.92rem', lineHeight: 1.65, color: '#5A647A', margin: '0 0 20px', flex: 1 }}>
                     {desc}
                   </p>
 
                   {/* Example programmes */}
-                  <ul style={{ margin: '0 0 24px', padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 7 }}>
-                    {examples.map((title, i) => (
-                      <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 9 }}>
-                        <span style={{ flexShrink: 0, marginTop: 5, width: 5, height: 5, borderRadius: '50%', background: '#F5A623', display: 'block' }} />
-                        <span style={{ fontSize: '0.88rem', color: '#48536B', lineHeight: 1.45 }}>{title}</span>
-                      </li>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {examples.slice(0, 3).map((title, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#F5A623', flexShrink: 0 }} />
+                        <span style={{ fontSize: '0.85rem', color: '#48536B', lineHeight: 1.4 }}>{title}</span>
+                      </div>
                     ))}
                     {count > 3 && (
-                      <li style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
-                        <span style={{ flexShrink: 0, width: 5, height: 5, borderRadius: '50%', background: '#D5DBE6', display: 'block' }} />
-                        <span style={{ fontSize: '0.85rem', color: '#9AA6BE' }}>+{count - 3} more programmes</span>
-                      </li>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#D5DBE6', flexShrink: 0 }} />
+                        <span style={{ fontSize: '0.82rem', color: '#9AA6BE' }}>+{count - 3} more</span>
+                      </div>
                     )}
-                  </ul>
-
-                  {/* CTA */}
-                  <Link
-                    href={`/programmes?cat=${encodeURIComponent(cat)}`}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: 8,
-                      fontFamily: 'var(--font-dm-sans), sans-serif',
-                      fontWeight: 700,
-                      fontSize: 14.5,
-                      color: '#fff',
-                      background: '#1B2A4A',
-                      padding: '13px 22px',
-                      borderRadius: 11,
-                      textDecoration: 'none',
-                    }}
-                  >
-                    Explore {label} <span style={{ fontSize: 16 }}>→</span>
-                  </Link>
+                  </div>
                 </div>
-              </div>
+              </Link>
             )
           })}
         </div>

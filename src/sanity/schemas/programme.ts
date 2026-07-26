@@ -25,10 +25,10 @@ export const programme = defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'MBA', value: 'mba' },
           { title: 'Undergraduate', value: 'undergraduate' },
-          { title: 'Postgraduate', value: 'postgraduate' },
-          { title: 'Technology', value: 'technology' },
+          { title: 'Postgraduate Diploma', value: 'pgd' },
+          { title: 'Master Programs', value: 'masters' },
+          { title: 'Teacher Education', value: 'teacher-education' },
         ],
         layout: 'dropdown',
       },

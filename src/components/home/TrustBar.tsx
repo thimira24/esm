@@ -72,8 +72,7 @@ export default async function TrustBar() {
                     maxHeight: 96,
                     maxWidth: 190,
                     width: 'auto',
-                    filter: 'grayscale(1)',
-                    opacity: 0.7,
+                    opacity: 0.85,
                   }}
                 />
               </div>

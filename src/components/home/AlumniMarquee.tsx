@@ -43,8 +43,8 @@ export default async function AlumniMarquee() {
         .alu-marquee:hover .alu-track { animation-play-state: paused; }
         .alu-item { flex: 0 0 auto; display: flex; align-items: center; }
         .alu-item img { height: clamp(40px, 5.5vw, 60px); width: auto; max-width: 210px; object-fit: contain;
-          filter: grayscale(1); opacity: 0.62; transition: filter .25s, opacity .25s; }
-        .alu-item img:hover { filter: grayscale(0); opacity: 1; }
+          opacity: 0.85; transition: opacity .25s; }
+        .alu-item img:hover { opacity: 1; }
         @keyframes aluScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         @media (prefers-reduced-motion: reduce) { .alu-track { animation: none; } }
       `}</style>

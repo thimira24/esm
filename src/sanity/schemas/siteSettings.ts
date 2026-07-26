@@ -237,7 +237,8 @@ export const siteSettings = defineType({
       type: 'object',
       group: 'contact',
       fields: [
-        defineField({ name: 'address', title: 'Address', type: 'string' }),
+        defineField({ name: 'address', title: 'Address — UAE', type: 'string' }),
+        defineField({ name: 'address2', title: 'Address — Sri Lanka', type: 'string' }),
         defineField({ name: 'phone', title: 'Phone', type: 'string' }),
         defineField({ name: 'email', title: 'Email', type: 'string' }),
         defineField({ name: 'website', title: 'Website', type: 'string' }),

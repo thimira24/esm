@@ -10,10 +10,20 @@ type University = { name: string; logoPath: string }
 // Set to true to bring the "Universities" nav dropdown back (desktop + mobile).
 const SHOW_UNIVERSITIES = false
 
+const PROGRAMME_CATEGORIES = [
+  { label: 'All Programmes', href: '/programmes' },
+  { label: 'Undergraduate', href: '/programmes?cat=undergraduate' },
+  { label: 'Postgraduate Diploma', href: '/programmes?cat=pgd' },
+  { label: 'Master Programs', href: '/programmes?cat=masters' },
+  { label: 'Teacher Education', href: '/programmes?cat=teacher-education' },
+]
+
 export default function HeaderClient({ universities }: { universities: University[] }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileUniOpen, setMobileUniOpen] = useState(false)
   const [uniHover, setUniHover] = useState(false)
+  const [progHover, setProgHover] = useState(false)
+  const [mobileProgOpen, setMobileProgOpen] = useState(false)
   const pathname = usePathname()
 
   const isActive = (href: string) =>
@@ -74,36 +84,152 @@ export default function HeaderClient({ universities }: { universities: Universit
           className="esm-nav-desktop"
           style={{ alignItems: 'center', gap: 34 }}
         >
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              style={{
-                position: 'relative',
-                fontFamily: 'var(--font-dm-sans), sans-serif',
-                fontWeight: 600,
-                fontSize: 15,
-                color: '#1B2A4A',
-                padding: '6px 0',
-                textDecoration: 'none',
-              }}
-            >
-              {item.label}
-              {isActive(item.href) && (
-                <span
-                  style={{
-                    position: 'absolute',
-                    left: 0,
-                    right: 0,
-                    bottom: -2,
-                    height: 2.5,
-                    borderRadius: 2,
-                    background: '#F5A623',
-                  }}
-                />
-              )}
-            </Link>
-          ))}
+          {nav.map((item) => {
+            if (item.href === '/programmes') {
+              return (
+                <div
+                  key={item.href}
+                  style={{ position: 'relative' }}
+                  onMouseEnter={() => setProgHover(true)}
+                  onMouseLeave={() => setProgHover(false)}
+                >
+                  <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, height: 16, zIndex: 101 }} />
+                  <Link
+                    href={item.href}
+                    style={{
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 5,
+                      fontFamily: 'var(--font-dm-sans), sans-serif',
+                      fontWeight: 600,
+                      fontSize: 15,
+                      color: '#1B2A4A',
+                      padding: '6px 0',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    {item.label}
+                    <svg
+                      width="11"
+                      height="7"
+                      viewBox="0 0 11 7"
+                      fill="none"
+                      style={{ transition: 'transform 0.15s', transform: progHover ? 'rotate(180deg)' : 'none' }}
+                    >
+                      <path d="M1 1l4.5 4.5L10 1" stroke="#1B2A4A" strokeWidth="1.6" strokeLinecap="round" />
+                    </svg>
+                    {isActive(item.href) && (
+                      <span
+                        style={{
+                          position: 'absolute',
+                          left: 0,
+                          right: 0,
+                          bottom: -2,
+                          height: 2.5,
+                          borderRadius: 2,
+                          background: '#F5A623',
+                        }}
+                      />
+                    )}
+                  </Link>
+                  {progHover && (
+                    <div
+                      className="esm-uni-drop"
+                      style={{
+                        position: 'absolute',
+                        top: 'calc(100% + 12px)',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        minWidth: 220,
+                        background: '#fff',
+                        border: '1px solid #E6E9F0',
+                        borderRadius: 18,
+                        boxShadow: '0 20px 48px rgba(15,29,51,0.14)',
+                        padding: '10px 8px',
+                        zIndex: 100,
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: -7,
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          width: 14,
+                          height: 7,
+                          overflow: 'hidden',
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: 12,
+                            height: 12,
+                            background: '#fff',
+                            border: '1px solid #E6E9F0',
+                            transform: 'rotate(45deg)',
+                            margin: '4px auto 0',
+                          }}
+                        />
+                      </div>
+                      {PROGRAMME_CATEGORIES.map((cat) => (
+                        <Link
+                          key={cat.href}
+                          href={cat.href}
+                          onClick={() => setProgHover(false)}
+                          className="esm-uni-item"
+                          style={{
+                            display: 'block',
+                            padding: '10px 14px',
+                            borderRadius: 11,
+                            textDecoration: 'none',
+                            fontFamily: 'var(--font-dm-sans), sans-serif',
+                            fontWeight: 600,
+                            fontSize: 14,
+                            color: '#33405C',
+                            background: 'transparent',
+                            transition: 'background 0.12s',
+                          }}
+                        >
+                          {cat.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )
+            }
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                style={{
+                  position: 'relative',
+                  fontFamily: 'var(--font-dm-sans), sans-serif',
+                  fontWeight: 600,
+                  fontSize: 15,
+                  color: '#1B2A4A',
+                  padding: '6px 0',
+                  textDecoration: 'none',
+                }}
+              >
+                {item.label}
+                {isActive(item.href) && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      right: 0,
+                      bottom: -2,
+                      height: 2.5,
+                      borderRadius: 2,
+                      background: '#F5A623',
+                    }}
+                  />
+                )}
+              </Link>
+            )
+          })}
 
           {/* Universities mega-dropdown trigger */}
           {SHOW_UNIVERSITIES && (
@@ -341,25 +467,86 @@ export default function HeaderClient({ universities }: { universities: Universit
               gap: 4,
             }}
           >
-            {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                style={{
-                  textAlign: 'left',
-                  fontFamily: 'var(--font-dm-sans), sans-serif',
-                  fontWeight: 600,
-                  fontSize: 17,
-                  color: '#1B2A4A',
-                  padding: '13px 6px',
-                  borderBottom: '1px solid #F2F4F7',
-                  textDecoration: 'none',
-                }}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {nav.map((item) => {
+              if (item.href === '/programmes') {
+                return (
+                  <div key={item.href}>
+                    <button
+                      onClick={() => setMobileProgOpen(!mobileProgOpen)}
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        background: 'none',
+                        border: 'none',
+                        borderBottom: '1px solid #F2F4F7',
+                        cursor: 'pointer',
+                        fontFamily: 'var(--font-dm-sans), sans-serif',
+                        fontWeight: 600,
+                        fontSize: 17,
+                        color: '#1B2A4A',
+                        padding: '13px 6px',
+                        textAlign: 'left',
+                      }}
+                    >
+                      {item.label}
+                      <svg
+                        width="12"
+                        height="8"
+                        viewBox="0 0 12 8"
+                        fill="none"
+                        style={{ transition: 'transform 0.15s', transform: mobileProgOpen ? 'rotate(180deg)' : 'none', flexShrink: 0 }}
+                      >
+                        <path d="M1 1l5 5 5-5" stroke="#1B2A4A" strokeWidth="1.6" strokeLinecap="round" />
+                      </svg>
+                    </button>
+                    {mobileProgOpen && (
+                      <div style={{ paddingLeft: 8, paddingBottom: 6, borderBottom: '1px solid #F2F4F7' }}>
+                        {PROGRAMME_CATEGORIES.map((cat) => (
+                          <Link
+                            key={cat.href}
+                            href={cat.href}
+                            onClick={() => { setMobileOpen(false); setMobileProgOpen(false) }}
+                            style={{
+                              display: 'block',
+                              padding: '10px 6px',
+                              fontFamily: 'var(--font-dm-sans), sans-serif',
+                              fontWeight: 500,
+                              fontSize: 15,
+                              color: '#33405C',
+                              textDecoration: 'none',
+                              borderBottom: '1px solid #F8F9FB',
+                            }}
+                          >
+                            {cat.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              }
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  style={{
+                    textAlign: 'left',
+                    fontFamily: 'var(--font-dm-sans), sans-serif',
+                    fontWeight: 600,
+                    fontSize: 17,
+                    color: '#1B2A4A',
+                    padding: '13px 6px',
+                    borderBottom: '1px solid #F2F4F7',
+                    textDecoration: 'none',
+                  }}
+                >
+                  {item.label}
+                </Link>
+              )
+            })}
 
             {/* Universities accordion — mobile */}
             {SHOW_UNIVERSITIES && (

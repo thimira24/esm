@@ -2,9 +2,10 @@ import Link from 'next/link'
 import { getProgrammeCategories, getSiteSettings } from '@/sanity/queries'
 
 const CATEGORY_LABELS: Record<string, string> = {
-  mba: 'MBA Programmes',
   undergraduate: 'Undergraduate',
-  postgraduate: 'Postgraduate',
+  pgd: 'Postgraduate Diploma',
+  masters: 'Master Programs',
+  'teacher-education': 'Teacher Education',
 }
 
 // Social icons (24×24, solid glyphs). Add a URL in Site Settings → an icon
@@ -138,9 +139,20 @@ export default async function Footer() {
             <div style={{ fontFamily: 'var(--font-montserrat), sans-serif', fontWeight: 700, fontSize: 12, letterSpacing: '0.8px', textTransform: 'uppercase', color: '#7E8AA3', marginBottom: 13 }}>
               Get in touch
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 9, fontSize: 14, color: '#9AA6BE' }}>
-              <span style={{ whiteSpace: 'nowrap' }}>UAE · {contact.website}</span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, fontSize: 14, color: '#9AA6BE' }}>
               <span style={{ whiteSpace: 'nowrap' }}>{contact.email}</span>
+              {contact.address && (
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: 11, letterSpacing: '0.5px', textTransform: 'uppercase', color: '#7E8AA3', marginBottom: 4 }}>UAE Office</div>
+                  <div style={{ lineHeight: 1.6 }}>{contact.address}</div>
+                </div>
+              )}
+              {contact.address2 && (
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: 11, letterSpacing: '0.5px', textTransform: 'uppercase', color: '#7E8AA3', marginBottom: 4 }}>Sri Lanka Office</div>
+                  <div style={{ lineHeight: 1.6 }}>{contact.address2}</div>
+                </div>
+              )}
             </div>
           </div>
         </div>

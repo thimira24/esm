@@ -34,23 +34,26 @@ export default function ProgrammesGrid({ programmes, universities: universitiesP
 
   return (
     <section style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(40px, 5vw, 64px) 0' }}>
-      {/* Filter bar: category chips (left) + university dropdown (right) */}
+      {/* Filter bar */}
       <div
         style={{
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: 16,
+          gap: 12,
           marginBottom: 38,
+          padding: '16px 20px',
+          background: '#F8F9FB',
+          borderRadius: 16,
+          border: '1px solid #E6E9F0',
         }}
       >
         {/* Category pill buttons */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, flex: 1 }}>
           {categories.map((cat) => {
             const active = catFilter === cat
-            const catLabels: Record<string, string> = { mba: 'MBA', undergraduate: 'Undergraduate', postgraduate: 'Postgraduate', technology: 'Technology' }
-          const label = cat === 'all' ? 'All Programmes' : (catLabels[cat] ?? cat)
+            const catLabels: Record<string, string> = { undergraduate: 'Undergraduate', pgd: 'Postgraduate Diploma', masters: 'Master Programs', 'teacher-education': 'Teacher Education' }
+          const label = cat === 'all' ? 'All' : (catLabels[cat] ?? cat)
             return (
               <button
                 key={cat}
@@ -58,15 +61,16 @@ export default function ProgrammesGrid({ programmes, universities: universitiesP
                 style={{
                   fontFamily: 'var(--font-dm-sans), sans-serif',
                   fontWeight: 600,
-                  fontSize: 14.5,
-                  padding: '11px 20px',
+                  fontSize: 13.5,
+                  padding: '9px 18px',
                   borderRadius: 100,
                   cursor: 'pointer',
                   border: active ? '1.5px solid #1B2A4A' : '1.5px solid #D5DBE6',
                   background: active ? '#1B2A4A' : '#fff',
                   color: active ? '#fff' : '#48536B',
-                  boxShadow: active ? '0 8px 20px rgba(27,42,74,0.25)' : 'none',
+                  boxShadow: active ? '0 4px 12px rgba(27,42,74,0.2)' : 'none',
                   transition: 'all 0.15s',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 {label}
@@ -75,14 +79,17 @@ export default function ProgrammesGrid({ programmes, universities: universitiesP
           })}
         </div>
 
-        {/* University dropdown — right side */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+        {/* Divider */}
+        <div style={{ width: 1, height: 28, background: '#D5DBE6', flexShrink: 0 }} />
+
+        {/* University dropdown */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
           <label
             htmlFor="uni-filter"
             style={{
               fontFamily: 'var(--font-dm-sans), sans-serif',
               fontWeight: 600,
-              fontSize: 13.5,
+              fontSize: 13,
               color: '#5A647A',
               whiteSpace: 'nowrap',
             }}
@@ -96,19 +103,19 @@ export default function ProgrammesGrid({ programmes, universities: universitiesP
             style={{
               fontFamily: 'var(--font-dm-sans), sans-serif',
               fontWeight: 500,
-              fontSize: 14,
+              fontSize: 13.5,
               color: uniFilter === 'all' ? '#48536B' : '#1B2A4A',
               background: '#fff',
               border: uniFilter === 'all' ? '1.5px solid #D5DBE6' : '1.5px solid #1B2A4A',
               borderRadius: 10,
-              padding: '10px 36px 10px 14px',
+              padding: '9px 32px 9px 12px',
               cursor: 'pointer',
               outline: 'none',
               appearance: 'none',
               backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A647A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")`,
               backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'right 12px center',
-              minWidth: 200,
+              backgroundPosition: 'right 10px center',
+              minWidth: 170,
             }}
           >
             <option value="all">All Universities</option>
