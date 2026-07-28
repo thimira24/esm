@@ -44,12 +44,13 @@ export default async function HeroV1() {
       }}>
       <HeroBackground />
       <style>{`
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; min-height: 100vh; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
         .hero-content { padding: clamp(56px, 8vw, 104px) 0; }
+        .hero-image { position: relative; width: 100%; aspect-ratio: 3 / 4; max-height: 100vh; overflow: hidden; }
         @media (max-width: 768px) {
-          .hero-grid { grid-template-columns: 1fr; min-height: auto; }
+          .hero-grid { grid-template-columns: 1fr; }
           .hero-content { padding: 48px 24px 32px; }
-          .hero-grid > div:last-child { position: relative !important; min-height: 50vh !important; }
+          .hero-image { aspect-ratio: 4 / 3; max-height: 50vh; }
         }
       `}</style>
       <div
@@ -169,7 +170,7 @@ export default async function HeroV1() {
         {heroSlides && heroSlides.length > 0 ? (
           <HeroCarousel slides={heroSlides} />
         ) : (
-          <div style={{ position: 'relative', minHeight: '100vh' }}>
+          <div className="hero-image">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={h.imageUrl ?? '/hero-graduate.png'}

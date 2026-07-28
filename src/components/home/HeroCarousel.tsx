@@ -43,16 +43,12 @@ export default function HeroCarousel({ slides }: Props) {
       className="hero-carousel"
       style={{
         position: 'relative',
-        minHeight: '100vh',
+        width: '100%',
+        aspectRatio: '3 / 4',
+        maxHeight: '100vh',
         overflow: 'hidden',
       }}
     >
-      <style>{`
-        .hero-carousel { min-height: 100vh; }
-        @media (max-width: 768px) {
-          .hero-carousel { min-height: 50vh; }
-        }
-      `}</style>
       {/* Image */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img

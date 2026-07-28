@@ -127,11 +127,64 @@ export default function ProgrammesGrid({ programmes, universities: universitiesP
       </div>
 
       {/* Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
-        {filtered.map((p) => (
-          <ProgrammeCard key={p.id} programme={p} />
-        ))}
-      </div>
+      {filtered.length > 0 ? (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
+          {filtered.map((p) => (
+            <ProgrammeCard key={p.id} programme={p} />
+          ))}
+        </div>
+      ) : (
+        <div style={{
+          textAlign: 'center',
+          padding: 'clamp(48px, 6vw, 80px) 24px',
+          background: '#F8F9FB',
+          borderRadius: 20,
+          border: '1px solid #E6E9F0',
+        }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/illustrations/empty-search.png"
+            alt="No results"
+            style={{ width: 80, height: 80, objectFit: 'contain', marginBottom: 20, opacity: 0.6 }}
+            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+          />
+          <h3 style={{
+            fontFamily: 'var(--font-montserrat), sans-serif',
+            fontWeight: 700,
+            fontSize: '1.3rem',
+            color: '#1B2A4A',
+            margin: '0 0 8px',
+          }}>
+            No programmes found
+          </h3>
+          <p style={{
+            fontSize: '1rem',
+            color: '#5A647A',
+            margin: '0 0 24px',
+            maxWidth: '28em',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+          }}>
+            There are no programmes matching your current filters. Try adjusting your selection or browse all programmes.
+          </p>
+          <button
+            onClick={() => { setCatFilter('all'); setUniFilter('all') }}
+            style={{
+              fontFamily: 'var(--font-dm-sans), sans-serif',
+              fontWeight: 700,
+              fontSize: 15,
+              color: '#1B2A4A',
+              background: '#fff',
+              border: '1.5px solid #D5DBE6',
+              padding: '13px 28px',
+              borderRadius: 11,
+              cursor: 'pointer',
+            }}
+          >
+            Clear filters
+          </button>
+        </div>
+      )}
 
       {/* Bottom CTA */}
       <div
