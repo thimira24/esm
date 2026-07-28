@@ -59,7 +59,7 @@ export default async function TrustBar() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   marginRight: 'clamp(36px, 5vw, 68px)',
-                  height: 96,
+                  height: 120,
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -69,8 +69,8 @@ export default async function TrustBar() {
                   style={{
                     objectFit: 'contain',
                     objectPosition: 'center',
-                    maxHeight: 96,
-                    maxWidth: 190,
+                    maxHeight: 120,
+                    maxWidth: 240,
                     width: 'auto',
                     opacity: 0.85,
                   }}

@@ -41,13 +41,14 @@ export default async function HeroV1() {
       }}>
       <HeroBackground />
       <style>{`
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; height: 80vh; max-height: 800px; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 85vh; max-height: 1000px; }
         .hero-content { padding: clamp(24px, 4vw, 48px); display: flex; flex-direction: column; justify-content: center; }
         .hero-image { position: relative; width: 100%; height: 100%; overflow: hidden; margin: 0; padding: 0; }
         @media (max-width: 768px) {
-          .hero-grid { grid-template-columns: 1fr; height: auto; max-height: none; }
+          .hero-grid { grid-template-columns: 1fr; height: auto; }
           .hero-content { padding: 48px 24px 32px; }
-          .hero-image { height: 55vh; }
+          .hero-image { height: auto; aspect-ratio: 1 / 1; }
+          .hero-slide-img { object-fit: cover !important; object-position: center top !important; }
         }
       `}</style>
       <div
@@ -165,7 +166,9 @@ export default async function HeroV1() {
 
         {/* Right — image slider or single image */}
         {heroSlides && heroSlides.length > 0 ? (
-          <HeroCarousel slides={heroSlides} />
+          <div className="hero-image">
+            <HeroCarousel slides={heroSlides} />
+          </div>
         ) : (
           <div className="hero-image">
             {/* eslint-disable-next-line @next/next/no-img-element */}

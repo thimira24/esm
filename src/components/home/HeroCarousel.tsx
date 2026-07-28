@@ -57,6 +57,7 @@ export default function HeroCarousel({ slides }: Props) {
       <img
         src={s.imageUrl ?? '/hero-graduate.png'}
         alt={s.alt ?? ''}
+        className="hero-slide-img"
         style={{
           position: 'absolute',
           inset: 0,
