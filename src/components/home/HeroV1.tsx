@@ -38,19 +38,16 @@ export default async function HeroV1() {
         ].join(', '),
         overflow: 'hidden',
         position: 'relative',
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
       }}>
       <HeroBackground />
       <style>{`
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
-        .hero-content { padding: clamp(56px, 8vw, 104px) 0; }
-        .hero-image { position: relative; width: 100%; aspect-ratio: 3 / 4; max-height: 100vh; overflow: hidden; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; height: 80vh; max-height: 800px; }
+        .hero-content { padding: clamp(24px, 4vw, 48px); display: flex; flex-direction: column; justify-content: center; }
+        .hero-image { position: relative; width: 100%; height: 100%; overflow: hidden; margin: 0; padding: 0; }
         @media (max-width: 768px) {
-          .hero-grid { grid-template-columns: 1fr; }
+          .hero-grid { grid-template-columns: 1fr; height: auto; max-height: none; }
           .hero-content { padding: 48px 24px 32px; }
-          .hero-image { aspect-ratio: 4 / 3; max-height: 50vh; }
+          .hero-image { height: 55vh; }
         }
       `}</style>
       <div

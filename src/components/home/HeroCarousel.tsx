@@ -24,6 +24,10 @@ export default function HeroCarousel({ slides }: Props) {
     }, 300)
   }, [])
 
+  const prev = useCallback(() => {
+    goTo((active - 1 + slides.length) % slides.length)
+  }, [active, slides.length, goTo])
+
   const next = useCallback(() => {
     goTo((active + 1) % slides.length)
   }, [active, slides.length, goTo])
@@ -44,8 +48,7 @@ export default function HeroCarousel({ slides }: Props) {
       style={{
         position: 'relative',
         width: '100%',
-        aspectRatio: '3 / 4',
-        maxHeight: '100vh',
+        height: '100%',
         overflow: 'hidden',
       }}
     >
@@ -107,6 +110,64 @@ export default function HeroCarousel({ slides }: Props) {
             />
           ))}
         </div>
+      )}
+
+      {/* Arrows */}
+      {slides.length > 1 && (
+        <>
+          <button
+            onClick={prev}
+            aria-label="Previous slide"
+            style={{
+              position: 'absolute',
+              left: 16,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: 44,
+              height: 44,
+              borderRadius: '50%',
+              background: 'rgba(255,255,255,0.15)',
+              border: '1px solid rgba(255,255,255,0.25)',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backdropFilter: 'blur(8px)',
+              transition: 'background 0.2s',
+              zIndex: 2,
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18l-6-6 6-6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <button
+            onClick={next}
+            aria-label="Next slide"
+            style={{
+              position: 'absolute',
+              right: 16,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: 44,
+              height: 44,
+              borderRadius: '50%',
+              background: 'rgba(255,255,255,0.15)',
+              border: '1px solid rgba(255,255,255,0.25)',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backdropFilter: 'blur(8px)',
+              transition: 'background 0.2s',
+              zIndex: 2,
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M9 18l6-6-6-6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </>
       )}
     </div>
   )
