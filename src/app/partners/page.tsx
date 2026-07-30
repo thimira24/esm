@@ -1,6 +1,14 @@
 import Image from 'next/image'
 import { getPartners } from '@/sanity/queries'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
+import { pageMetadata } from '@/lib/seo'
+
+export const metadata = pageMetadata({
+  title: 'Our Partners',
+  description:
+    "ESM Business School's university partners, awarding organisations and professional bodies — the recognised UK institutions behind our accredited qualifications.",
+  path: '/partners',
+})
 
 export const revalidate = 60
 

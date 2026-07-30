@@ -1,6 +1,13 @@
 import { getLegalPage } from '@/sanity/queries'
 import { PortableText } from '@portabletext/react'
 import { portableTextComponents } from '@/components/shared/PortableTextComponents'
+import { pageMetadata } from '@/lib/seo'
+
+export const metadata = pageMetadata({
+  title: 'Privacy Policy',
+  description: 'How ESM Business School collects, uses and protects your personal information.',
+  path: '/privacy',
+})
 
 export const revalidate = 60
 

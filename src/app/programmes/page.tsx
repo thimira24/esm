@@ -2,6 +2,14 @@ import { Suspense } from 'react'
 import { getAllProgrammes, getPartners } from '@/sanity/queries'
 import ProgrammesGrid from '@/components/programmes/ProgrammesGrid'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
+import { pageMetadata } from '@/lib/seo'
+
+export const metadata = pageMetadata({
+  title: 'Programmes',
+  description:
+    "Browse ESM Business School's accredited British diplomas across business, technology and health & social care — each awarded by a recognised UK body and studied online or blended.",
+  path: '/programmes',
+})
 
 export const revalidate = 60 // re-fetch from Sanity at most once per minute
 

@@ -1,6 +1,13 @@
 import { getLegalPage } from '@/sanity/queries'
 import { PortableText } from '@portabletext/react'
 import { portableTextComponents } from '@/components/shared/PortableTextComponents'
+import { pageMetadata } from '@/lib/seo'
+
+export const metadata = pageMetadata({
+  title: 'Terms & Conditions',
+  description: 'The terms and conditions governing the use of the ESM Business School website and services.',
+  path: '/terms',
+})
 
 export const revalidate = 60
 

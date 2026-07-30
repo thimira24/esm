@@ -2,6 +2,14 @@ import EnquiryForm from '@/components/shared/EnquiryForm'
 import FAQAccordion from '@/components/shared/FAQAccordion'
 import ContactMap from '@/components/contact/ContactMap'
 import { getAllProgrammeTitles, getSiteSettings, getFaqs } from '@/sanity/queries'
+import { pageMetadata } from '@/lib/seo'
+
+export const metadata = pageMetadata({
+  title: 'Contact Us',
+  description:
+    'Get in touch with ESM Business School. Speak to an advisor about accredited British qualifications, admissions, fees and flexible online or blended study.',
+  path: '/contact',
+})
 
 export const revalidate = 60
 

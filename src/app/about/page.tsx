@@ -1,4 +1,12 @@
 import { getSiteSettings } from '@/sanity/queries'
+import { pageMetadata } from '@/lib/seo'
+
+export const metadata = pageMetadata({
+  title: 'About Us',
+  description:
+    'Discover ESM Business School — our mission, global presence, executive leadership and university partnerships delivering accredited British qualifications from the UAE.',
+  path: '/about',
+})
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 import SectionHeader from '@/components/shared/SectionHeader'
 import LeadershipMessage from '@/components/about/LeadershipMessage'

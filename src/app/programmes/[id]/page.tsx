@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -6,12 +7,32 @@ import ProgrammeCard from '@/components/programmes/ProgrammeCard'
 import GraduationGallery from '@/components/programmes/GraduationGallery'
 import FAQAccordion from '@/components/shared/FAQAccordion'
 import { CheckIcon, StarIcon, WhatsAppIcon, ClockIcon, MonitorIcon, AwardIcon, TagIcon } from '@/components/shared/icons'
+import { pageMetadata } from '@/lib/seo'
 
 export const revalidate = 60
 
 export async function generateStaticParams() {
   const programmes = await getAllProgrammes()
   return programmes.map((p) => ({ id: p.id }))
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  const programme = await getProgrammeById(id).catch(() => null)
+
+  if (!programme) {
+    return pageMetadata({ title: 'Programme', path: `/programmes/${id}` })
+  }
+
+  const description =
+    programme.blurb ||
+    `${programme.title} — an accredited ${programme.level} qualification awarded by ${programme.awarding}, delivered ${programme.mode.toLowerCase()} with ESM Business School.`
+
+  return pageMetadata({
+    title: programme.title,
+    description,
+    path: `/programmes/${id}`,
+  })
 }
 
 // UAE Dirham is pegged to USD at a fixed official rate (1 USD = 3.6725 AED).
