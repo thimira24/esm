@@ -9,9 +9,9 @@ import { pageMetadata } from '@/lib/seo'
 export const revalidate = 60
 
 export const metadata = pageMetadata({
-  title: 'New Zealand Chapter — Healthcare Education',
+  title: 'Healthcare Education in New Zealand',
   description:
-    'ESM New Zealand Chapter delivers internationally recognised, UK-awarded health & social care qualifications for New Zealand healthcare professionals — including the NZQA Level 8 Diploma. 100% online, flexible study.',
+    'ESM New Zealand Chapter delivers internationally recognised, UK-awarded health & social care qualifications for New Zealand healthcare professionals, including the NZQA Level 8 Diploma. 100% online, flexible study.',
   path: '/nz',
 })
 
@@ -140,7 +140,7 @@ export default async function NewZealandPage() {
               maxWidth: '44em',
             }}
           >
-            ESM — New Zealand Chapter is dedicated to advancing the healthcare workforce through
+            ESM New Zealand Chapter is dedicated to advancing the healthcare workforce through
             high-quality, internationally recognised education. Our programmes equip professionals with
             the knowledge, leadership, and practical skills needed to thrive in today’s evolving health
             and social care environment.
@@ -207,7 +207,7 @@ export default async function NewZealandPage() {
 
       {/* ── Why choose ───────────────────────────────────── */}
       <section style={{ width: 'min(1180px, 92%)', margin: '0 auto', padding: 'clamp(64px, 8vw, 104px) 0' }}>
-        <SectionHeader eyebrow="Why choose us" title="Why Choose ESM — New Zealand Chapter?" center />
+        <SectionHeader eyebrow="Why choose us" title="Why Choose ESM New Zealand Chapter?" center />
 
         <div
           style={{
@@ -408,7 +408,7 @@ export default async function NewZealandPage() {
         >
           {/* Left */}
           <div>
-            <SectionHeader eyebrow="Enquire now" title="Start Your Journey with ESM — New Zealand Chapter" />
+            <SectionHeader eyebrow="Enquire now" title="Start Your Journey with ESM New Zealand Chapter" />
             <p
               style={{
                 fontSize: 'clamp(1.02rem, 1.4vw, 1.15rem)',
@@ -477,7 +477,7 @@ export default async function NewZealandPage() {
           <EnquiryForm
             programmes={nzProgrammes}
             formspree={formspree}
-            subject="New enquiry — ESM New Zealand"
+            subject="New enquiry from ESM New Zealand"
             source="NZ Landing Page (/nz)"
           />
         </div>

@@ -3,4 +3,5 @@
 export const nav = [
   { label: 'About', href: '/about' },
   { label: 'Programmes', href: '/programmes' },
+  { label: 'New Zealand', href: '/nz' },
 ]
