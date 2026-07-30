@@ -42,7 +42,7 @@ export default async function AlumniMarquee() {
           animation: aluScroll 36s linear infinite; }
         .alu-marquee:hover .alu-track { animation-play-state: paused; }
         .alu-item { flex: 0 0 auto; display: flex; align-items: center; }
-        .alu-item img { height: clamp(40px, 5.5vw, 60px); width: auto; max-width: 210px; object-fit: contain;
+        .alu-item img { height: clamp(52px, 7vw, 78px); width: auto; max-width: 270px; object-fit: contain;
           opacity: 0.85; transition: opacity .25s; }
         .alu-item img:hover { opacity: 1; }
         @keyframes aluScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
