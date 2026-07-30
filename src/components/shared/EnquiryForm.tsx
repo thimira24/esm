@@ -29,9 +29,13 @@ const labelStyle: React.CSSProperties = {
 export default function EnquiryForm({
   programmes = [],
   formspree,
+  subject = 'New enquiry from ESM website',
+  source,
 }: {
   programmes?: { id: string; title: string; uniName: string }[]
   formspree?: string
+  subject?: string
+  source?: string
 }) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const formspreeUrl = formspree ?? ''
@@ -91,7 +95,8 @@ export default function EnquiryForm({
       ) : (
         <form onSubmit={handleSubmit}>
           {/* Formspree helpers — improve deliverability */}
-          <input type="hidden" name="_subject" value="New enquiry from ESM website" />
+          <input type="hidden" name="_subject" value={subject} />
+          {source && <input type="hidden" name="source" value={source} />}
           <input type="text" name="_gotcha" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
           <div
             style={{
