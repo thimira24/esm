@@ -15,6 +15,10 @@ export default function TestimonialCard({ quote, name, role, img }: TestimonialC
         borderRadius: 18,
         padding: '32px 30px',
         boxShadow: '0 1px 2px rgba(15,29,51,0.05)',
+        height: '100%',
+        boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       <div
@@ -36,7 +40,7 @@ export default function TestimonialCard({ quote, name, role, img }: TestimonialC
           display: 'flex',
           alignItems: 'center',
           gap: 13,
-          marginTop: 24,
+          marginTop: 'auto',
           paddingTop: 20,
           borderTop: '1px solid #F2F4F7',
         }}
