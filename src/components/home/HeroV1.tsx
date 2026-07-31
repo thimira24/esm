@@ -41,14 +41,15 @@ export default async function HeroV1() {
       }}>
       <HeroBackground />
       <style>{`
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 85vh; max-height: 1000px; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 85vh; min-height: 85dvh; max-height: 1000px; }
         .hero-content { padding: clamp(24px, 4vw, 48px); display: flex; flex-direction: column; justify-content: center; }
         .hero-image { position: relative; width: 100%; height: 100%; overflow: hidden; margin: 0; padding: 0; }
         @media (max-width: 768px) {
           .hero-grid { grid-template-columns: 1fr; min-height: auto; }
           .hero-content { padding: 48px 24px 32px; }
-          .hero-image { height: 85vh; }
-          .hero-slide-img { object-position: center center !important; }
+          .hero-image { width: 100%; height: auto; overflow: hidden; }
+          .hero-carousel { aspect-ratio: 16 / 9; }
+          .hero-slide-img { object-fit: cover !important; object-position: center center !important; }
         }
       `}</style>
       <div

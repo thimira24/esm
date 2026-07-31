@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 
 type Slide = {
   imageUrl: string | null
+  mobileImageUrl?: string | null
   alt?: string
 }
 
@@ -11,10 +12,23 @@ type Props = {
   slides: Slide[]
 }
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`)
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [breakpoint])
+  return isMobile
+}
+
 export default function HeroCarousel({ slides }: Props) {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
   const [fading, setFading] = useState(false)
+  const isMobile = useIsMobile()
 
   const goTo = useCallback((index: number) => {
     setFading(true)
@@ -39,6 +53,7 @@ export default function HeroCarousel({ slides }: Props) {
   }, [paused, next, slides.length])
 
   const s = slides[active]
+  const imgSrc = isMobile && s.mobileImageUrl ? s.mobileImageUrl : (s.imageUrl ?? '/hero-graduate.png')
 
   return (
     <div
@@ -55,7 +70,8 @@ export default function HeroCarousel({ slides }: Props) {
       {/* Image */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={s.imageUrl ?? '/hero-graduate.png'}
+        key={`${active}-${isMobile}`}
+        src={imgSrc}
         alt={s.alt ?? ''}
         className="hero-slide-img"
         style={{

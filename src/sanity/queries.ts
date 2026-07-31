@@ -107,7 +107,8 @@ export async function getSiteSettings() {
     },
     heroSlides[] {
       alt,
-      "imageUrl": image.asset->url
+      "imageUrl": image.asset->url,
+      "mobileImageUrl": mobileImage.asset->url
     },
     aboutIntro,
     globalPresence{ heading, countries[]{ name, "flag": flag.asset->url } },

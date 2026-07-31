@@ -65,7 +65,8 @@ export const siteSettings = defineType({
         defineArrayMember({
           type: 'object',
           fields: [
-            defineField({ name: 'image', title: 'Background image', type: 'image', options: { hotspot: true }, validation: (r) => r.required() }),
+            defineField({ name: 'image', title: 'Desktop image (portrait/tall)', type: 'image', options: { hotspot: true }, validation: (r) => r.required() }),
+            defineField({ name: 'mobileImage', title: 'Mobile image (landscape/16:9)', type: 'image', options: { hotspot: true }, description: 'Optional. Shown on mobile/tablet. Falls back to desktop image if empty.' }),
             defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
           ],
           preview: {
