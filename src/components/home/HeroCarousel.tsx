@@ -115,14 +115,15 @@ export default function HeroCarousel({ slides }: Props) {
               onClick={() => goTo(i)}
               aria-label={`Go to slide ${i + 1}`}
               style={{
-                width: i === active ? 24 : 8,
-                height: 8,
-                borderRadius: 4,
-                background: i === active ? '#F5A623' : 'rgba(255,255,255,0.5)',
+                width: i === active ? 26 : 10,
+                height: 10,
+                borderRadius: 5,
+                background: i === active ? '#F5A623' : 'rgba(255,255,255,0.85)',
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'all 0.3s',
                 padding: 0,
+                boxShadow: '0 1px 5px rgba(0,0,0,0.45)',
               }}
             />
           ))}
@@ -143,13 +144,14 @@ export default function HeroCarousel({ slides }: Props) {
               width: 44,
               height: 44,
               borderRadius: '50%',
-              background: 'rgba(255,255,255,0.15)',
-              border: '1px solid rgba(255,255,255,0.25)',
+              background: 'rgba(15,29,51,0.5)',
+              border: '1px solid rgba(255,255,255,0.45)',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               backdropFilter: 'blur(8px)',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.3)',
               transition: 'background 0.2s',
               zIndex: 2,
             }}
@@ -169,13 +171,14 @@ export default function HeroCarousel({ slides }: Props) {
               width: 44,
               height: 44,
               borderRadius: '50%',
-              background: 'rgba(255,255,255,0.15)',
-              border: '1px solid rgba(255,255,255,0.25)',
+              background: 'rgba(15,29,51,0.5)',
+              border: '1px solid rgba(255,255,255,0.45)',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               backdropFilter: 'blur(8px)',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.3)',
               transition: 'background 0.2s',
               zIndex: 2,
             }}
