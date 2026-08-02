@@ -194,6 +194,26 @@ export default function HeaderClient({ universities }: { universities: Universit
                           {cat.label}
                         </Link>
                       ))}
+                      <div style={{ borderTop: '1px solid #EEF1F6', margin: '8px 6px' }} />
+                      <Link
+                        href="/nz"
+                        onClick={() => setProgHover(false)}
+                        className="esm-uni-item"
+                        style={{
+                          display: 'block',
+                          padding: '10px 14px',
+                          borderRadius: 11,
+                          textDecoration: 'none',
+                          fontFamily: 'var(--font-dm-sans), sans-serif',
+                          fontWeight: 600,
+                          fontSize: 14,
+                          color: '#33405C',
+                          background: 'transparent',
+                          transition: 'background 0.12s',
+                        }}
+                      >
+                        New Zealand
+                      </Link>
                     </div>
                   )}
                 </div>
@@ -522,6 +542,23 @@ export default function HeaderClient({ universities }: { universities: Universit
                             {cat.label}
                           </Link>
                         ))}
+                        <Link
+                          href="/nz"
+                          onClick={() => { setMobileOpen(false); setMobileProgOpen(false) }}
+                          style={{
+                            display: 'block',
+                            padding: '10px 6px',
+                            marginTop: 4,
+                            borderTop: '1px solid #E6E9F0',
+                            fontFamily: 'var(--font-dm-sans), sans-serif',
+                            fontWeight: 500,
+                            fontSize: 15,
+                            color: '#33405C',
+                            textDecoration: 'none',
+                          }}
+                        >
+                          New Zealand
+                        </Link>
                       </div>
                     )}
                   </div>
