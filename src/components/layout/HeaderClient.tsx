@@ -212,7 +212,7 @@ export default function HeaderClient({ universities }: { universities: Universit
                           transition: 'background 0.12s',
                         }}
                       >
-                        New Zealand
+                        New Zealand Chapter
                       </Link>
                     </div>
                   )}
@@ -557,7 +557,7 @@ export default function HeaderClient({ universities }: { universities: Universit
                             textDecoration: 'none',
                           }}
                         >
-                          New Zealand
+                          New Zealand Chapter
                         </Link>
                       </div>
                     )}
