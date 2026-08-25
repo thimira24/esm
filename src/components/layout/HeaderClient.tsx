@@ -194,7 +194,6 @@ export default function HeaderClient({ universities }: { universities: Universit
                           {cat.label}
                         </Link>
                       ))}
-                      <div style={{ borderTop: '1px solid #EEF1F6', margin: '8px 6px' }} />
                       <Link
                         href="/nz"
                         onClick={() => setProgHover(false)}
@@ -548,8 +547,6 @@ export default function HeaderClient({ universities }: { universities: Universit
                           style={{
                             display: 'block',
                             padding: '10px 6px',
-                            marginTop: 4,
-                            borderTop: '1px solid #E6E9F0',
                             fontFamily: 'var(--font-dm-sans), sans-serif',
                             fontWeight: 500,
                             fontSize: 15,
