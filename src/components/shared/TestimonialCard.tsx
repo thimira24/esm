@@ -1,13 +1,11 @@
-import Image from 'next/image'
-
 interface TestimonialCardProps {
   quote: string
   name: string
   role: string
-  img: string
+  img?: string
 }
 
-export default function TestimonialCard({ quote, name, role, img }: TestimonialCardProps) {
+export default function TestimonialCard({ quote, name, role }: TestimonialCardProps) {
   return (
     <div
       style={{
@@ -37,21 +35,11 @@ export default function TestimonialCard({ quote, name, role, img }: TestimonialC
       </p>
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 13,
           marginTop: 'auto',
           paddingTop: 20,
           borderTop: '1px solid #F2F4F7',
         }}
       >
-        <Image
-          src={img}
-          alt={name}
-          width={46}
-          height={46}
-          style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
-        />
         <span>
           <span
             style={{
