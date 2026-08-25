@@ -89,6 +89,7 @@ export async function getSiteSettings() {
     heroMarquee{ label, logos[]{ name, "logo": logo.asset->url } },
     alumniAtWork{ eyebrow, title, subtitle, logos[]{ name, "logo": logo.asset->url } },
     testimonialsSection,
+    videoSection,
     facultySection,
     enquirySection,
     programmeLabels,

@@ -5,6 +5,7 @@ import StatsStrip from '@/components/home/StatsStrip'
 import FeaturedProgrammes from '@/components/home/FeaturedProgrammes'
 import AlumniMarquee from '@/components/home/AlumniMarquee'
 import Testimonials from '@/components/home/Testimonials'
+import VideoSection from '@/components/home/VideoSection'
 import FAQAccordion from '@/components/shared/FAQAccordion'
 import EnquiryBlock from '@/components/shared/EnquiryBlock'
 import { getFaqs } from '@/sanity/queries'
@@ -23,6 +24,7 @@ export default async function HomePage() {
       <FeaturedProgrammes />
       <AlumniMarquee />
       <Testimonials />
+      <VideoSection />
 
       {/* FAQ */}
       <section

@@ -357,6 +357,19 @@ export const siteSettings = defineType({
       ],
     }),
     defineField({
+      name: 'videoSection',
+      title: 'Home — Video (below Student success)',
+      description: 'A YouTube video embedded below the Student success section. Leave the URL empty to hide the whole section.',
+      type: 'object',
+      group: 'sections',
+      fields: [
+        defineField({ name: 'eyebrow', title: 'Eyebrow', type: 'string', description: 'Small label above the heading, e.g. "Watch"' }),
+        defineField({ name: 'title', title: 'Title', type: 'string', description: 'e.g. "See ESM in action"' }),
+        defineField({ name: 'subtitle', title: 'Subtitle', type: 'text', rows: 2 }),
+        defineField({ name: 'youtubeUrl', title: 'YouTube URL', type: 'url', description: 'Paste any YouTube link (watch, youtu.be, shorts or embed). Leave empty to hide the section.' }),
+      ],
+    }),
+    defineField({
       name: 'facultySection',
       title: 'About — “Our faculty” section',
       type: 'object',
