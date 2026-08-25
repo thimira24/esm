@@ -73,6 +73,12 @@ export default async function NewZealandPage() {
   const settings = await getSiteSettings().catch(() => null)
   const formspree: string | undefined = settings?.contact?.formspree
 
+  // NZ page images — Sanity-managed, falling back to the built-in defaults.
+  const nz = settings?.nzImages ?? {}
+  const heroImg: string = nz.hero || '/nz/hero.jpg'
+  const approachImg: string = nz.approach || '/nz/approach.jpg'
+  const programmeImg: string = nz.programme || '/nz/programme.jpg'
+
   // NZ-specific option for the enquiry form's programme dropdown.
   const nzProgrammes = [
     { id: 'nzqa-l8', title: 'NZQA Level 8 Diploma in Health & Social Care', uniName: 'UK Awarded' },
@@ -206,7 +212,7 @@ export default async function NewZealandPage() {
           {/* Hero banner image */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/nz/hero.jpg"
+            src={heroImg}
             alt="Healthcare professionals walking together in a hospital corridor"
             style={{
               width: '100%',
@@ -289,7 +295,7 @@ export default async function NewZealandPage() {
           {/* Image */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/nz/approach.jpg"
+            src={approachImg}
             alt="Smiling healthcare professionals"
             style={{
               width: '100%',
@@ -337,7 +343,7 @@ export default async function NewZealandPage() {
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/nz/programme.jpg"
+              src={programmeImg}
               alt="Healthcare professional writing on a medical chart"
               style={{
                 width: '100%',

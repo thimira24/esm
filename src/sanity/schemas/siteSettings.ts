@@ -370,6 +370,18 @@ export const siteSettings = defineType({
       ],
     }),
     defineField({
+      name: 'nzImages',
+      title: 'New Zealand page — images',
+      description: 'Photos on the /nz page. Leave any field empty to keep the built-in default image.',
+      type: 'object',
+      group: 'sections',
+      fields: [
+        defineField({ name: 'hero', title: 'Hero banner (wide)', type: 'image', options: { hotspot: true }, description: 'Large banner below the hero text. Best landscape, approx 1280×620.' }),
+        defineField({ name: 'approach', title: '“Our Educational Approach” image', type: 'image', options: { hotspot: true }, description: 'Shown beside the approach text on the navy band.' }),
+        defineField({ name: 'programme', title: 'Featured programme image', type: 'image', options: { hotspot: true }, description: 'Shown above the featured programme copy.' }),
+      ],
+    }),
+    defineField({
       name: 'facultySection',
       title: 'About — “Our faculty” section',
       type: 'object',
