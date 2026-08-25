@@ -202,6 +202,21 @@ export default async function NewZealandPage() {
               </span>
             ))}
           </div>
+
+          {/* Hero banner image */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/nz/hero.jpg"
+            alt="Healthcare professionals walking together in a hospital corridor"
+            style={{
+              width: '100%',
+              aspectRatio: '1280 / 620',
+              objectFit: 'cover',
+              borderRadius: 22,
+              marginTop: 44,
+              boxShadow: '0 24px 60px rgba(15,29,51,0.18)',
+            }}
+          />
         </div>
       </section>
 
@@ -262,27 +277,46 @@ export default async function NewZealandPage() {
       <section style={{ background: NAVY }}>
         <div
           style={{
-            width: 'min(820px, 92%)',
+            width: 'min(1100px, 92%)',
             margin: '0 auto',
             padding: 'clamp(64px, 8vw, 104px) 0',
-            textAlign: 'center',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: 'clamp(36px, 5vw, 60px)',
+            alignItems: 'center',
           }}
         >
-          <SectionHeader eyebrow="Our approach" title="Our Educational Approach" center light />
-          <p
+          {/* Image */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/nz/approach.jpg"
+            alt="Smiling healthcare professionals"
             style={{
-              fontSize: 'clamp(1.05rem, 1.5vw, 1.2rem)',
-              lineHeight: 1.7,
-              color: '#C4CCDD',
-              margin: '22px auto 0',
-              maxWidth: '46em',
+              width: '100%',
+              aspectRatio: '760 / 620',
+              objectFit: 'cover',
+              borderRadius: 20,
+              boxShadow: '0 24px 60px rgba(0,0,0,0.35)',
             }}
-          >
-            We believe healthcare education should be practical, accessible, and transformative. Our
-            programmes combine academic excellence with real-world application, empowering professionals
-            to improve patient outcomes, strengthen healthcare services, and become future leaders in the
-            health and social care sector.
-          </p>
+          />
+          {/* Copy */}
+          <div>
+            <SectionHeader eyebrow="Our approach" title="Our Educational Approach" light />
+            <p
+              style={{
+                fontSize: 'clamp(1.05rem, 1.5vw, 1.2rem)',
+                lineHeight: 1.7,
+                color: '#C4CCDD',
+                margin: '22px 0 0',
+                maxWidth: '38em',
+              }}
+            >
+              We believe healthcare education should be practical, accessible, and transformative. Our
+              programmes combine academic excellence with real-world application, empowering professionals
+              to improve patient outcomes, strengthen healthcare services, and become future leaders in the
+              health and social care sector.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -301,6 +335,20 @@ export default async function NewZealandPage() {
         >
           {/* Left — copy */}
           <div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/nz/programme.jpg"
+              alt="Healthcare professional writing on a medical chart"
+              style={{
+                width: '100%',
+                aspectRatio: '4 / 3',
+                objectFit: 'cover',
+                objectPosition: 'center top',
+                borderRadius: 18,
+                marginBottom: 28,
+                boxShadow: '0 16px 40px rgba(15,29,51,0.12)',
+              }}
+            />
             <SectionHeader eyebrow="Featured programme" title="NZQA Level 8 Diploma in Health & Social Care (UK)" />
             <p
               style={{
