@@ -77,7 +77,6 @@ export default async function NewZealandPage() {
   const nz = settings?.nzImages ?? {}
   const heroImg: string = nz.hero || '/nz/hero.jpg'
   const approachImg: string = nz.approach || '/nz/approach.jpg'
-  const programmeImg: string = nz.programme || '/nz/programme.jpg'
 
   // NZ-specific option for the enquiry form's programme dropdown.
   const nzProgrammes = [
@@ -341,20 +340,6 @@ export default async function NewZealandPage() {
         >
           {/* Left — copy */}
           <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={programmeImg}
-              alt="Healthcare professional writing on a medical chart"
-              style={{
-                width: '100%',
-                aspectRatio: '4 / 3',
-                objectFit: 'cover',
-                objectPosition: 'center top',
-                borderRadius: 18,
-                marginBottom: 28,
-                boxShadow: '0 16px 40px rgba(15,29,51,0.12)',
-              }}
-            />
             <SectionHeader eyebrow="Featured programme" title="NZQA Level 8 Diploma in Health & Social Care (UK)" />
             <p
               style={{

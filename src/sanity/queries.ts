@@ -90,7 +90,7 @@ export async function getSiteSettings() {
     alumniAtWork{ eyebrow, title, subtitle, logos[]{ name, "logo": logo.asset->url } },
     testimonialsSection,
     videoSection,
-    nzImages{ "hero": hero.asset->url, "approach": approach.asset->url, "programme": programme.asset->url },
+    nzImages{ "hero": hero.asset->url, "approach": approach.asset->url },
     facultySection,
     enquirySection,
     programmeLabels,
