@@ -336,7 +336,7 @@ export default async function NewZealandPage() {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: 'clamp(36px, 5vw, 60px)',
-            alignItems: 'center',
+            alignItems: 'start',
           }}
         >
           {/* Left — copy */}
@@ -413,7 +413,7 @@ export default async function NewZealandPage() {
             >
               Programme Highlights
             </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '18px 24px' }}>
               {HIGHLIGHTS.map((h) => (
                 <div key={h} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <span
